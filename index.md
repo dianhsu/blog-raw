@@ -1,5 +1,7 @@
 # dianhsu.github.io
 
+![avatar](http://cdn.dianhsu.top/image/avatar.jpg)
+
 --------------------------
 :joy::joy::joy::joy::joy::joy::joy::joy::joy::joy:
 
