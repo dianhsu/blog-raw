@@ -4,8 +4,10 @@
 :joy::joy::joy::joy::joy::joy::joy::joy::joy::joy:
 
 
-## [算法](./algorithm/index.html)
-
+## 目录
+- [算法](./algorithm/index.html)
+- [C++](./cplusplus/index.html)
+- [LeetCode](./leetcode/index.html)
 
 [![dianhsu's GitHub stats](https://github-readme-stats.vercel.app/api?username=dianhsu)](https://github.com/anuraghazra/github-readme-stats)
 
