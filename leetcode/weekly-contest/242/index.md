@@ -151,7 +151,7 @@ suffix.insert(prefixSum[i] - *suffix.rbegin());
 | :-------- | --- | --- | --- | --- | --- | --- | --- |
 | stones    | 7   | -6  | 5   | 10  | 5   | -2  | -6  |
 | prefixSum | 1   | 6   | 16  | 21  | 19  | 13  | -   |
-| ret       | -12 | -7  | 3   | 7   | 6   | 13  | -   |
+| ret       | -12 | -7  | 3   | 8   | 6   | 13  | -   |
 
 ```cpp
 class Solution {
