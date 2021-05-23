@@ -1,4 +1,7 @@
-# dianhsu.github.io
+# DianHsu
+- 主站：[https://dianhsu.top](https://dianhsu.top)
+
+- 镜像站：[https://dianhsu.github.io](dianhsu.github.io)
 
 ![avatar](http://cdn.dianhsu.top/image/avatar.jpg)
 
