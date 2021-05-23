@@ -5,7 +5,7 @@
 
 - 源码：[https://github.com/dianhsu.github.io](https://github.com/dianhsu.github.io)
 
-![avatar](http://cdn.dianhsu.top/image/avatar.jpg)
+@import "http://cdn.dianhsu.top/image/avatar.jpg" {width=300  title="my avatar" alt="my avatar"}
 
 --------------------------
 :joy::joy::joy::joy::joy::joy::joy::joy::joy::joy:
