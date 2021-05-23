@@ -3,8 +3,10 @@
 > 返回[:rocket:LeetCode目录](../../index.html)
 
 ---
-
+@import "/mystyle.less"
 [TOC]
+
+
 ### 到目标元素的最小距离
 遍历数组，找到和target相同的数，计算位置差的绝对值的最小值。
 ```cpp

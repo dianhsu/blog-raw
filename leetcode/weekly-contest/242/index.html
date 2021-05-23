@@ -268,6 +268,18 @@ pre[data-line] .line-highlight[data-end]:after {
 &#x8FD4;&#x56DE;<a href="../../index.html">&#x1F680;LeetCode&#x76EE;&#x5F55;</a></p>
 </blockquote>
 <hr>
+<style>@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://cn-gapis.0cdn.cn/g-fonts/s/jetbrainsmono/v6/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPQ.ttf) format('truetype');
+}
+pre[class*="language-"],
+code[class*="language-"] {
+  font-family: "JetBrains Mono", "Liberation Mono", Menlo, Consolas, monospace;
+}
+</style>
 <ul>
 <li><a href="#%E7%AC%AC-242-%E5%9C%BA%E5%91%A8%E8%B5%9B">&#x7B2C; 242 &#x573A;&#x5468;&#x8D5B;</a>
 <ul>
@@ -280,7 +292,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 <h3 class="mume-header" id="%E5%93%AA%E7%A7%8D%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9B%B4%E9%95%BF">&#x54EA;&#x79CD;&#x8FDE;&#x7EED;&#x5B50;&#x5B57;&#x7B26;&#x4E32;&#x66F4;&#x957F;</h3>
 
-<p>&#x6570;&#x636E;&#x6BD4;&#x8F83;&#x5C0F;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;<code>stringstream</code>&#x5206;&#x5272;&#x5B57;&#x7B26;&#x4E32;</p>
+<p>&#x6570;&#x636E;&#x6BD4;&#x8F83;&#x5C0F;&#x1F913;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;<code>stringstream</code>&#x5206;&#x5272;&#x5B57;&#x7B26;&#x4E32;</p>
 <p>&#x5206;&#x5272;&#x7684;&#x539F;&#x7406;&#x662F;&#x8FD9;&#x6837;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x8981;&#x7EDF;&#x8BA1;1&#x7684;&#x8FDE;&#x7EED;&#x5B57;&#x7B26;&#x7684;&#x6700;&#x5927;&#x957F;&#x5EA6;&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;<code>101010010101</code>&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7A7A;&#x683C;&#x6765;&#x66FF;&#x6362;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x7684;<code>0</code>&#xFF0C;&#x5C31;&#x5F97;&#x5230;&#x4E86;&#x4E00;&#x4E2A;<code>1 1 1 1 1 1</code>&#x8FD9;&#x6837;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x7528;&#x6D41;&#x8BFB;&#x5165;&#xFF0C;&#x7136;&#x540E;&#x4F9D;&#x6B21;&#x8BFB;&#x51FA;&#x5230;<code>string</code>&#x7C7B;&#x578B;&#x4E2D;&#xFF0C;&#x76F4;&#x63A5;&#x6BD4;&#x8F83;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;</p>
 <pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
@@ -487,7 +499,7 @@ suffix<span class="token punctuation">.</span><span class="token function">inser
         <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> stones<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span><span class="token punctuation">{</span>
             prefixSum<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> prefixSum<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> stones<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-        set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> suffix<span class="token punctuation">;</span>
+        set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> suffix2<span class="token punctuation">;</span>
         <span class="token keyword">int</span> ret <span class="token operator">=</span> prefixSum<span class="token punctuation">[</span>stones<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         suffix<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>prefixSum<span class="token punctuation">[</span>stones<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 

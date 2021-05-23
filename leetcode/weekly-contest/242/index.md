@@ -5,11 +5,13 @@
 
 ---
 
+@import "/mystyle.less"
+
 [TOC]
 
 ### 哪种连续子字符串更长
 
-数据比较小，我们可以用`stringstream`分割字符串
+数据比较小:nerd_face:，我们可以用`stringstream`分割字符串
 
 分割的原理是这样，比如我们要统计1的连续字符的最大长度。对于这样一个字符串`101010010101`，我们使用空格来替换字符串中的`0`，就得到了一个`1 1 1 1 1 1`这样的字符串。用流读入，然后依次读出到`string`类型中，直接比较字符串的长度就可以了
 ```cpp
@@ -164,7 +166,7 @@ public:
         for(int i = 1; i < stones.size() - 1; ++i){
             prefixSum[i] = prefixSum[i - 1] + stones[i + 1];
         }
-        set<int> suffix;
+        set<int> suffix2;
         int ret = prefixSum[stones.size() - 2];
         suffix.insert(prefixSum[stones.size() - 2]);
 

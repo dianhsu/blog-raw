@@ -1,6 +1,8 @@
 # 算法 {ignore=True}
 > 返回[首页](../index.html)
+
 -----------------------------------
+@import "/mystyle.less"
 [TOC]
 
 ## 数据结构

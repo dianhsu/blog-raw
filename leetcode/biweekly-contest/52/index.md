@@ -3,6 +3,7 @@
 > 返回[:rocket:LeetCode目录](../../index.html)
 
 ---
+@import "/mystyle.less"
 
 [TOC]
 

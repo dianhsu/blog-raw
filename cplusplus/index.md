@@ -4,6 +4,7 @@ toc:
   depth_to: 2
   ordered: false
 ---
+@import "/mystyle.less"
 
 # C++ {ignore=True}
 > 返回[首页](../index.html)
