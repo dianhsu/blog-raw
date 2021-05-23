@@ -3,7 +3,7 @@
 
 - 镜像站：[https://dianhsu.github.io](https://dianhsu.github.io)
 
-- 源码：[https://github.com/dianhsu.github.io](https://github.com/dianhsu.github.io)
+- 源码：[https://github.com/dianhsu/dianhsu.github.io](https://github.com/dianhsu/dianhsu.github.io)
 
 @import "http://cdn.dianhsu.top/image/avatar.jpg" {width=300  title="my avatar" alt="my avatar"}
 
