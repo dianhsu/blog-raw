@@ -16,6 +16,8 @@
 - :apple:[C++](./cplusplus/index.html)
 - :dog:[LeetCode](./leetcode/index.html)
 - :o:[操作系统](./operation_system/index.html)
+- :fire:[杂项](./misc/index.html)
+
 
 ## GitHub Stats
 [![dianhsu's GitHub stats](https://github-readme-stats.vercel.app/api?username=dianhsu)](https://github.com/anuraghazra/github-readme-stats)
