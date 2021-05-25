@@ -1,3 +1,6 @@
+---
+title: 首页 - dianhsu.top
+---
 # DianHsu
 - 主站：[https://dianhsu.top](https://dianhsu.top)
 

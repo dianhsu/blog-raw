@@ -1,3 +1,7 @@
+---
+title: 第242场周赛 - dianhsu.top
+---
+
 ## 第 242 场周赛
 > 返回[:house:首页](../../../index.html)
 > 返回[:rocket:LeetCode目录](../../index.html)

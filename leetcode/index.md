@@ -1,3 +1,7 @@
+---
+title: LeetCode - dianhsu.top
+
+---
 # LeetCode {ignore=True}
 > 返回[:house:首页](../index.html)
 

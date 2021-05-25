@@ -1,4 +1,5 @@
 ---
+title: 杂项 - dianhsu.top
 toc:
   depth_from: 1
   depth_to: 4

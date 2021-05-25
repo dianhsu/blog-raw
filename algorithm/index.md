@@ -1,3 +1,7 @@
+---
+title: 算法 - dianhsu.top
+---
+
 # 算法 {ignore=True}
 > 返回[首页](../index.html)
 
