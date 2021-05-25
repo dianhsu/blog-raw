@@ -282,6 +282,7 @@ code[class*="language-"] {
 <ul>
 <li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2">&#x5B57;&#x7B26;&#x4E32;</a>
 <ul>
+<li><a href="#kmp%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D">KMP&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;</a></li>
 <li><a href="#manacher">Manacher</a></li>
 </ul>
 </li>
@@ -305,7 +306,63 @@ code[class*="language-"] {
 </ul>
 <h2 class="mume-header" id="%E5%AD%97%E7%AC%A6%E4%B8%B2">&#x5B57;&#x7B26;&#x4E32;</h2>
 
-<h3 class="mume-header" id="manacher">Manacher</h3>
+<h3 class="mume-header" id="kmp%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D">KMP&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;</h3>
+
+<pre data-role="codeBlock" data-info="cpp code_block=true class=&quot;line-numbers&quot;" class="language-cpp line-numbers"><span class="token comment">/**
+ * @brief KMP&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;
+ * @author dianhsu
+ * @date 2021/05/25
+ * */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">KMP</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">/**
+     * @brief &#x7EDF;&#x8BA1;&#x76EE;&#x6807;&#x4E32;&#x4E2D;&#x6709;&#x591A;&#x5C11;&#x4E2A;&#x6A21;&#x5F0F;&#x4E32;
+     * @param target &#x76EE;&#x6807;&#x5B57;&#x7B26;&#x4E32;
+     * @param pattern &#x6A21;&#x5F0F;&#x5B57;&#x7B26;&#x4E32;
+     * */</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">solve</span><span class="token punctuation">(</span>string<span class="token operator">&amp;</span> target<span class="token punctuation">,</span> string<span class="token operator">&amp;</span> pattern<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> idxTarget <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> idxPattern <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">next</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token function">_prefix</span><span class="token punctuation">(</span>pattern<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>idxTarget <span class="token operator">&lt;</span> target<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>idxPattern <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">and</span> pattern<span class="token punctuation">[</span>idxPattern<span class="token punctuation">]</span> <span class="token operator">!=</span> target<span class="token punctuation">[</span>idxTarget<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                idxPattern <span class="token operator">=</span> next<span class="token punctuation">[</span>idxPattern<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token operator">++</span>idxTarget<span class="token punctuation">;</span> <span class="token operator">++</span>idxPattern<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>idxPattern <span class="token operator">&gt;=</span> pattern<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token operator">++</span>ans<span class="token punctuation">;</span>
+                idxPattern <span class="token operator">=</span> next<span class="token punctuation">[</span>idxPattern<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">_prefix</span><span class="token punctuation">(</span><span class="token keyword">const</span> string<span class="token operator">&amp;</span> pattern<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">ret</span><span class="token punctuation">(</span>pattern<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> pattern<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">and</span> pattern<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> pattern<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> j <span class="token operator">=</span> ret<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>pattern<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> pattern<span class="token punctuation">[</span><span class="token operator">++</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                ret<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ret<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                ret<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    string target <span class="token operator">=</span> <span class="token string">&quot;aaaaaa&quot;</span><span class="token punctuation">;</span>
+    string pattern <span class="token operator">=</span> <span class="token string">&quot;aa&quot;</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token class-name">KMP</span><span class="token operator">::</span><span class="token function">solve</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> pattern<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="manacher">Manacher</h3>
 
 <pre data-role="codeBlock" data-info="cpp code_block=true class=&quot;line-numbers&quot;" class="language-cpp line-numbers"><span class="token comment">/*
  * @brief Manacher&#x7B97;&#x6CD5;&#xFF0C;&#x6C42;&#x6700;&#x957F;&#x56DE;&#x6587;&#x5B57;&#x4E32;

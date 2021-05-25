@@ -9,6 +9,9 @@ title: 算法 - dianhsu.top
 @import "/mystyle.less"
 [TOC]
 ## 字符串
+### KMP字符串匹配
+
+@import "my_string/KMP.cpp" {code_block=true class="line-numbers"}
 
 ### Manacher
 
