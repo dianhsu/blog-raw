@@ -25,6 +25,14 @@
 
 @import "my_data_structure/SegmentTree.cpp" {code_block=true class="line-numbers"}
 
+### AVL树
+
+附上运行效果一张
+
+@import "my_data_structure/AVL.mmd" {as="mermaid"}
+
+@import "my_data_structure/AVL.cpp" {code_block=true class="line-numbers"}
+
 ## 图论
 ### Dijkstra
 
