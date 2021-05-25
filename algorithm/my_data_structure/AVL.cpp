@@ -106,7 +106,7 @@ public:
      * @ref https://mermaid-js.github.io/mermaid-live-editor
      * */
     friend std::ostream &operator<<(std::ostream &os, AVL &avl) {
-        os << "graph TD" << std::endl;
+        os << "graph LR" << std::endl;
         std::string name = "Node1";
         if (avl.root != nullptr) {
             avl._generate(os, avl.root, name);
@@ -275,7 +275,7 @@ private:
 
 int main() {
     auto avl = new AVL<int>();
-    int n = 40;
+    int n = 20;
     std::random_device rd{};
     std::mt19937 gen{rd()};
     std::normal_distribution<> d{100, 100};
@@ -283,7 +283,7 @@ int main() {
     std::vector<int> vec;
     for (int i = 0; i < n; ++i) {
         vec.push_back((int) std::round(d(gen)));
-        vec.push_back(i);
+        //vec.push_back(i);
     }
     for (auto it : vec) {
         avl->insert(it);
