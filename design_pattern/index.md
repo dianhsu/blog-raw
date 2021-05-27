@@ -8,7 +8,7 @@ toc:
 @import "/mystyle.less"
 
 # 设计模式 {ignore=True}
-> 返回[首页](../index.html)
+> 返回:house:[首页](../index.html)
 
 ---------------------------
 

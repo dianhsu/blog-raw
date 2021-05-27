@@ -8,7 +8,7 @@ toc:
 @import "/mystyle.less"
 
 # C++ {ignore=True}
-> 返回[首页](../index.html)
+> 返回:house:[首页](../index.html)
 
 ---------------------------
 [TOC]
