@@ -392,7 +392,7 @@ graph LR
 ### :fire:请阐述物联网的层次结构模型
 > 参考：[计算机网络高级编程（第2版）](https://item.jd.com/11768206.html) 第606页
 
-@import "http://cdn.dianhsu.top/img/20210527193200.png" {width=500, title="物联网层次结构模型" alt="物联网层次结构模型"}
+@import "http://cdn.dianhsu.top/img/20210527194424.png" {title="物联网层次结构模型" alt="物联网层次结构模型"}
 
 > 参考：[物联网的层次结构如何划分？_百度知道](https://zhidao.baidu.com/question/475079093.html)
 
