@@ -3,24 +3,16 @@ title: 算法 - dianhsu.top
 ---
 
 # 算法 {ignore=True}
-> 返回[首页](../index.html)
+> 返回:house:[首页](../index.html)
 
 -----------------------------------
 @import "/mystyle.less"
+
 [TOC]
-## 字符串
-### KMP字符串匹配
 
-@import "my_string/KMP.cpp" {code_block=true class="line-numbers"}
+- [字符串](./my_string/index.html)
+- [数学](./my_math/index.html)
 
-### Manacher
-
-@import "my_string/manacher.cpp" {code_block=true class="line-numbers"}
-
-## 数学
-
-### 乘法逆元
-@import "my_math/modular_multiplicative_inverse.cpp" {code_block=true class="line-numbers"}
 
 ## 数据结构
 
