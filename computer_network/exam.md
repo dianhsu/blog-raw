@@ -414,7 +414,7 @@ graph LR
 
 202.115.28.202和202.115.28.135需要设置路由器才能通信。
 
-@import "http://cdn.dianhsu.top/img/20210528150645.png" {width=500, title="网络连接示意图" alt="网络连接示意图"}
+@import "http://cdn.dianhsu.top/img/20210528170827.png" {width=500, title="网络连接示意图" alt="网络连接示意图"}
 
 ## :rocket:综述题
 
