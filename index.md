@@ -3,17 +3,15 @@ title: 首页 - dianhsu.top
 ---
 @import "/mystyle.less"
 # DianHsu
+
+本博客由[MPE](https://shd101wyy.github.io/markdown-preview-enhanced/#/)和[GitHub Actions](https://github.com/features/actions)强力驱动。
+
 - 主站：[https://dianhsu.top](https://dianhsu.top)
+- 博客源码：[https://github.com/dianhsu/blog-raw](https://github.com/dianhsu/blog-raw)
 
-- 镜像站：[https://dianhsu.github.io](https://dianhsu.github.io)
-
-- 源码：[https://github.com/dianhsu/dianhsu.github.io](https://github.com/dianhsu/dianhsu.github.io)
-
-@import "http://cdn.dianhsu.top/image/avatar.jpg" {width=300  title="my avatar" alt="my avatar"}
+@import "http://cdn.dianhsu.top/image/avatar.jpg" {width=500  title="my avatar" alt="my avatar"}
 
 --------------------------
-:joy::joy::joy::joy::joy::joy::joy::joy::joy::joy:
-
 
 ## 目录
 
@@ -29,8 +27,9 @@ title: 首页 - dianhsu.top
 ## GitHub Stats
 [![dianhsu's GitHub stats](https://github-readme-stats.vercel.app/api?username=dianhsu)](https://github.com/anuraghazra/github-readme-stats)
 
+
 ## 相关链接
-- 讨论区: [https://github.com/dianhsu/dianhsu.github.io/issues](https://github.com/dianhsu/dianhsu.github.io/issues)
+- 讨论区: [https://github.com/dianhsu/blog-raw/issues](https://github.com/dianhsu/blog-raw/issues)
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
 - LeetCode: [https://leetcode-cn.com/u/dianhsu/](https://leetcode-cn.com/u/dianhsu/)
