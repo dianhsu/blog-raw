@@ -30,19 +30,18 @@ jobs:
           node-version: '14'
       - name: install markdown-renderer
         run: |
-          git clone https://github.com/dianhsu/markdown-renderer.git build
-          cd build
+          git clone https://github.com/dianhsu/markdown-renderer.git
+          cd markdown-renderer
           npm install . 
           npm run build
           npm install -g
           cd ..
-          rm -rf build
       - name: find markdown files
         run: |
-          tree -f -i -P "*\.md" --noreport | grep .md 
+          tree -f -i -P "*\.md" -I "markdown-renderer" --noreport | grep .md 
       - name: generate html
         run: |
-          tree -f -i -P "*\.md" --noreport | grep .md | xargs -I {} markdown-renderer -i {}
+          tree -f -i -P "*\.md" -I "markdown-renderer" --noreport | grep .md | xargs -I {} markdown-renderer -i {}
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2
         env:
