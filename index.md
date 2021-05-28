@@ -29,7 +29,7 @@ title: 首页 - dianhsu.top
 
 
 ## 相关链接
-- 讨论区: [https://github.com/dianhsu/blog-raw/issues](https://github.com/dianhsu/blog-raw/issues)
+- 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
 - LeetCode: [https://leetcode-cn.com/u/dianhsu/](https://leetcode-cn.com/u/dianhsu/)

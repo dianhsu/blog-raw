@@ -11,7 +11,7 @@ toc:
 
 持续更新中。。。。。。。。。。
 
-欢迎来这里讨论：[https://github.com/dianhsu/blog-raw/issues](https://github.com/dianhsu/blog-raw/issues)
+欢迎来这里讨论：[https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
 
 此页面的链接是：[https://dianhsu.top/computer_network/exam.html](https://dianhsu.top/computer_network/exam.html)
 
