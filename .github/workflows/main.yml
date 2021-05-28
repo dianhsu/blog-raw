@@ -51,4 +51,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: "/markdown-renderer/, /.github/"
+          EXCLUDE: "/markdown-renderer/, /.github/, /.git/"
