@@ -1,6 +1,7 @@
 ---
 title: 首页 - dianhsu.top
 ---
+@import "/mystyle.less"
 # DianHsu
 - 主站：[https://dianhsu.top](https://dianhsu.top)
 

@@ -2,8 +2,10 @@
 title: LeetCode - dianhsu.top
 
 ---
+@import "/mystyle.less"
 # LeetCode {ignore=True}
 > 返回[:house:首页](../index.html)
+
 
 
 ---------------------

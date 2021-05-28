@@ -1,14 +1,14 @@
 ---
 title: 数学 - 算法 - dianhsu.top
 ---
-
+@import "/mystyle.less"
 ## 数学 {ignore=True}
 > 返回:house:[首页](../../index.html)
 > 返回:rocket:[算法](../index.html)
 
 
 -----------------------------------
-@import "/mystyle.less"
+
 
 [TOC]
 

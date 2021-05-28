@@ -1,7 +1,7 @@
 ---
 title: 操作系统 - dianhsu.top
 ---
-
+@import "/mystyle.less"
 # 操作系统
 > 返回[:house:首页](../index.html)
 
