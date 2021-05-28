@@ -372,8 +372,9 @@ graph LR
 
 ***根据[RFC950](https://datatracker.ietf.org/doc/html/rfc950)文档第六页，子网号不能用全0或者全1***
 > It is useful to preserve and extend the interpretation of these special addresses in subnetted networks. This means the values of all zeros and all ones in the subnet field should not be assigned to actual (physical) subnets.
-> 
-> In the example above, the 6-bit wide subnet field may have any value except 0 and 63.
+
+根据2021年05月28日[聊天消息](http://cdn.dianhsu.top/img/20210528152557.png)，后面的计算是在允许子网号全0或者全1的情况下计算的。
+
 
 | 子网  | 地址范围         | 子网掩码      | 可用地址范围                    |
 | ----- | ---------------- | ------------- | ------------------------------- |
