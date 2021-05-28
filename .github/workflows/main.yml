@@ -29,8 +29,13 @@ jobs:
         with:
           node-version: '14'
       - run: |
-          git clone https://github.com/dianhsu/markdown-renderer.git && cd markdown-renderer && npm install . && npm run build && npm install -g
-          markdown-renderer
+          git clone https://github.com/dianhsu/markdown-renderer.git
+          cd markdown-renderer
+          npm install . 
+          npm run build
+          npm install -g
+          cd ..
+          tree -f -i -P "*\.md" --noreport | grep .md | xargs -I {} markdown-renderer {}
 #       - name: Deploy to Server
 #         uses: easingthemes/ssh-deploy@v2
 #         env:
