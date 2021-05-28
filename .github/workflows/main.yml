@@ -35,7 +35,7 @@ jobs:
           npm run build
           npm install -g
           cd ..
-          tree -f -i -P "*\.md" --noreport | grep .md | xargs -I {} markdown-renderer -i {}
+          tree -f -i -P "*\.md" -I "markdown-renderer" --noreport | grep .md | xargs -I {} markdown-renderer -i {}
 #       - name: Deploy to Server
 #         uses: easingthemes/ssh-deploy@v2
 #         env:
