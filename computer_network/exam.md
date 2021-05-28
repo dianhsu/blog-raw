@@ -21,8 +21,7 @@ toc:
 ## :rocket:简答题
 
 ### :fire:什么是网络编码？它的核心思想是什么？与传统的多播路由有何区别？
-> 参考1: [网络编码_百度百科](https://baike.baidu.com/item/网络编码/2654145)
-> 参考2: [Network_Information_Flow](http://www.cs.cornell.edu/courses/cs783/2007fa/papers/acly.pdf)
+> 参考1: [网络编码_百度百科](https://baike.baidu.com/item/网络编码/2654145)  参考2: [Network_Information_Flow](http://www.cs.cornell.edu/courses/cs783/2007fa/papers/acly.pdf)
 
 网络编码是一种融合了路由和编码的信息交换技术，它的核心思想是在网络中的各个节点上对各条信道上收到的信息进行线性或者非线性的处理，然后转发给下游节点，中间节点扮演着编码器或信号处理器的角色。
 
