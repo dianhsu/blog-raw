@@ -37,12 +37,20 @@ toc:
 - **独一性**：每个RFID标签都是独一无二的，通过RFID标签与产品的一一对应关系，可以清楚的跟踪每一件产品的后续流通情况。
 - **简易性**：RFID标签结构简单，识别速率高、所需读取设备简单。尤其是随着NFC技术在智能手机上逐渐普及，每个用户的手机都将成为最简单的RFID阅读器。
 
-### :fire:什么是Hadoop？它的核心架构是什么？:corn:
+### :fire:什么是Hadoop？它的核心架构是什么？
 > 参考1：[Hadoop_百度百科](https://baike.baidu.com/item/Hadoop)
 
 Hadoop是一个由Apache基金会所开发的分布式系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。
 
+**核心架构**
+
 Hadoop 由许多元素构成。其最底部是 Hadoop Distributed File System（HDFS），它存储 Hadoop 集群中所有存储节点上的文件。HDFS的上一层是MapReduce 引擎，该引擎由 JobTrackers 和 TaskTrackers 组成。通过对Hadoop分布式计算平台最核心的分布式文件系统HDFS、MapReduce处理过程，以及数据仓库工具Hive和分布式数据库Hbase的介绍，基本涵盖了Hadoop分布式平台的所有技术核心。
+
+- HDFS
+- NameNode
+- DataNode
+- 文件操作
+- Linux 集群
 
 ### :fire:简述软件定义网络的体系结构
 > 参考：[软件定义网络_百度百科](https://baike.baidu.com/item/软件定义网络)
