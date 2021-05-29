@@ -73,7 +73,7 @@ public:
         return ret;
     }
     int minSpeedOnTime(vector<int>& dist, double hour) {
-        if((double)dist.size() - 1 > hour){
+        if((double)dist.size() - 1 >= hour){
             return -1;
         }
         int low = 1;
