@@ -34,7 +34,7 @@ title: LeetCode - dianhsu.top
 | 6   | `180/4306` | 🌞[第240场周赛](https://leetcode-cn.com/contest/weekly-contest-240)    | `13`  | `1:26:15`   | ✅     | ✅     | ❌     | ✅     |
 | 7   | `52/2930`  | 🌛[第52场双周赛](https://leetcode-cn.com/contest/biweekly-contest-52/) | `18`  | `1:03:04`   | ✅     | ✅     | ✅     | ✅     |
 | 8   | `321/4490` | 🌞[第241场周赛](https://leetcode-cn.com/contest/weekly-contest-241)    | `12`  | `0:31:09`   | ✅     | ✅     | ✅     | ❌     |
-| 9   | `52/4305`  | 🌞[第242场周赛](https://leetcode-cn.com/contest/weekly-contest-242)    | `18`  | `1:00:08`   | ✅     | ✅     | ✅     | ✅     |
+| 9   | `109/4305`  | 🌞[第242场周赛](https://leetcode-cn.com/contest/weekly-contest-242)    | `14`  | `1:00:08`   | ✅     | ❌     | ✅     | ✅     |
 
 ## 硬广告
 欢迎加入我们的LeetCode交流群（QQ群：752399419），每周相约周赛
