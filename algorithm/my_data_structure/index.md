@@ -11,6 +11,21 @@ title: 数据结构 - 算法 - dianhsu.top
 
 [TOC]
 
+### 内部排序
+
+### 外部排序
+
+### `B+`树
+
+### `B-`树
+
+### 十字链表
+
+### 线索二叉树
+
+### 哈夫曼树
+
+
 ### 字典树
 
 @import "./TrieTree.cpp" {code_block=true class="line-numbers"}
