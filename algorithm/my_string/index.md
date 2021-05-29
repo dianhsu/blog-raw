@@ -3,8 +3,7 @@ title: 字符串 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 ## 字符串 {ignore=True}
-> 返回:house:[首页](../../index.html)
-> 返回:rocket:[算法](../index.html)
+> 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 
 -----------------------------------

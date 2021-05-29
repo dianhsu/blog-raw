@@ -1,14 +1,13 @@
 ---
 title: 第239场周赛 - dianhsu.top
 ---
+@import "/mystyle.less"
 
-
-## 第 239 场周赛
-> 返回[:house:首页](../../../index.html)
-> 返回[:rocket:LeetCode目录](../../index.html)
+## 第 239 场周赛 {ignore=True}
+> 返回[:house:首页](../../../index.html)，[:rocket:LeetCode目录](../../index.html)
 
 ---
-@import "/mystyle.less"
+
 [TOC]
 
 
