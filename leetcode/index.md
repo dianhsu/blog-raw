@@ -44,4 +44,4 @@ title: LeetCode - dianhsu.top
 ## 硬广告
 欢迎加入我们的LeetCode交流群（QQ群：752399419），每周相约周赛
 
-@import "http://cdn.dianhsu.top/vscode/2021-05-22-22-56-17.png" {height=500}
+@import "https://cdn.dianhsu.top/vscode/2021-05-22-22-56-17.png" {height=500}

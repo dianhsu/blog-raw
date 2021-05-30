@@ -9,7 +9,7 @@ title: 首页 - dianhsu.top
 - 主站：[https://dianhsu.top](https://dianhsu.top)
 - 博客源码：[https://github.com/dianhsu/blog-raw](https://github.com/dianhsu/blog-raw)
 
-@import "http://cdn.dianhsu.top/image/avatar.jpg" {title="my avatar" alt="my avatar"}
+@import "https://cdn.dianhsu.top/image/avatar.jpg" {title="my avatar" alt="my avatar"}
 
 --------------------------
 
