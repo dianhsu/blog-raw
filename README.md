@@ -1,5 +1,5 @@
 # dianhsu的开源博客
 
-![rsync workflow](https://github.com/dianhsu/dianhsu.github.io/actions/workflows/main.yml/badge.svg)
+[![CI](https://github.com/dianhsu/blog-raw/actions/workflows/main.yml/badge.svg)](https://github.com/dianhsu/blog-raw/actions/workflows/main.yml)
 
 使用 [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced/#/) 生成
