@@ -69,7 +69,7 @@ title: 算法 - dianhsu.top
     - 指数型母函数
   - Polya计数
   - 快速傅里叶（FFT）
-  - [康托展开](./oj/hdu_1043.html)
+  - [康托展开](./my_math/contar.html)
 - 计算几何
   - 误差处理
   - 点与向量
