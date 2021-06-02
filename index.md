@@ -23,6 +23,8 @@ title: 首页 - dianhsu.top
 - :globe_with_meridians:[计算机网络](./computer_network/exam.html)
 - :computer:计算机组成原理
 - :fire:[杂项](./misc/index.html)
+- :question:[工具](./tool/index.html)
+
 
 ## GitHub Stats
 [![dianhsu's GitHub stats](https://github-readme-stats.vercel.app/api?username=dianhsu)](https://github.com/anuraghazra/github-readme-stats)
