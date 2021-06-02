@@ -1,3 +1,13 @@
+@import "/mystyle.less"
+
+## Dijkstra
+
+> 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
+
+---
+
+
+```cpp
 /**
  * @brief 单源最短路径
  * @ref http://poj.org/problem?id=2387
@@ -96,3 +106,4 @@ int main() {
 4 5 20
 1 5 100
 */
+```

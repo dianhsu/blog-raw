@@ -1,3 +1,11 @@
+@import "/mystyle.less"
+
+## 乘法逆元
+> 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
+
+---
+
+```cpp
 /**
  * @brief 乘法逆元
  * @date 2021/05/18
@@ -81,3 +89,4 @@ int main() {
     }
     return 0;
 }
+```

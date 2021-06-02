@@ -1,3 +1,12 @@
+@import "/mystyle.less"
+
+## KMP
+> 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
+
+---
+
+
+```cpp
 /**
  * @brief KMP字符串匹配
  * @author dianhsu
@@ -52,3 +61,4 @@ int main() {
     std::cout << KMP::solve(target, pattern) << std::endl;
     return 0;
 }
+```

@@ -1,3 +1,12 @@
+@import "/mystyle.less"
+
+## Manacher
+> 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
+
+---
+
+
+```cpp
 /*
  * @brief Manacher算法，求最长回文字串
  */
@@ -42,3 +51,4 @@ int main(){
     std::cout << Manacher::forward(str) << std::endl;
     return 0;
 }
+```

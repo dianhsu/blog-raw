@@ -50,7 +50,7 @@ title: 算法 - dianhsu.top
     - 多重集的组合
     - 大组合数取模
   - 常用公式与定理
-    - 二项式定理
+    - [二项式定理](./my_math/binomial_coefficients.html)
     - 常见恒等式
     - 鸽巢原理
     - 容斥原理
@@ -69,7 +69,7 @@ title: 算法 - dianhsu.top
     - 指数型母函数
   - Polya计数
   - 快速傅里叶（FFT）
-  - [康托展开](./my_math/contar.html)
+  - :balloon:[康托展开](./my_math/contar.html)
 - 计算几何
   - 误差处理
   - 点与向量
@@ -111,7 +111,7 @@ title: 算法 - dianhsu.top
   - 旋转卡壳
 - 图论
   - 最短路
-    - Dijkstra算法
+    - [Dijkstra算法](./my_graph/Dijkstra.html)
     - Bellman-Ford算法
     - Floyd算法
     - SPFA算法
@@ -149,17 +149,18 @@ title: 算法 - dianhsu.top
       - 种类并查集
       - 可持久并查集
     - 树状数组
-    - 线段树
+    - [线段树](./my_data_structure/SegmentTree.html)
       - ZKW线段树
       - 权值线段树
       - 主席树
     - 平衡树
+      - [AVL树](./my_data_structure/AVL.html)
       - Splay伸展树
       - Treap树堆
       - 替罪羊树
       - 珂朵莉树
       - KD树
-    - 字典树
+    - [字典树](./my_data_structure/TrieTree.html)
     - 舞蹈链
     - 树链剖分
     - LCT（动态森林）
@@ -171,7 +172,7 @@ title: 算法 - dianhsu.top
   - 扩展欧几里得
   - 线性同余方程
   - 中国剩余定理
-  - 乘法逆元
+  - [乘法逆元](./my_math/modular_multiplicative_inverse.html)
   - 二次同余方程
   - 唯一分解定理
   - 素数
@@ -186,10 +187,10 @@ title: 算法 - dianhsu.top
   - 离散对数
   - 偏序关系
 - 字符串
-  - manacher算法
+  - [manacher算法](./my_string/manacher.html)
   - 字符串hash
   - KMP算法
-    - 普通KMP算法
+    - [普通KMP算法](./my_string/KMP.html)
     - 拓展KMP算法
   - Trie字典树
     - [字典树](./my_data_structure/TrieTree.html)

@@ -1,3 +1,13 @@
+@import "/mystyle.less"
+
+## 线段树
+
+> 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
+
+---
+
+
+```cpp
 /**************************************************
  * @brief 线段树模板
  * @note 区间使用的是闭区间，结点是从1开始编号的。来自OI-Wiki
@@ -136,3 +146,4 @@ int main() {
     assert(tre.query(1, 2) == -5);
     return 0;
 }
+```

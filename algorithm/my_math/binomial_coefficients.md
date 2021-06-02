@@ -1,21 +1,11 @@
----
-title: 数学 - 算法 - dianhsu.top
----
 @import "/mystyle.less"
-## 数学 {ignore=True}
+
+## 二项式系数
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
+---
 
------------------------------------
-
-
-[TOC]
-
-### 乘法逆元
-@import "./modular_multiplicative_inverse.cpp" {code_block=true class="line-numbers"}
-
-### 二项式系数
-> reference: [https://cp-algorithms.com/combinatorics/binomial-coefficients.html](https://cp-algorithms.com/combinatorics/binomial-coefficients.html)
+> 参考: [https://cp-algorithms.com/combinatorics/binomial-coefficients.html](https://cp-algorithms.com/combinatorics/binomial-coefficients.html)
 
 二项式系数$C_n^k$是在不考虑顺序的情况下，在n个不同的物品中选择k个。
 
