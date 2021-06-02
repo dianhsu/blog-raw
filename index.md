@@ -20,7 +20,7 @@ title: 首页 - dianhsu.top
 - :balloon:[LeetCode](./leetcode/index.html)
 - :gear:[操作系统](./operation_system/index.html)
 - :airplane:[设计模式](./design_pattern/index.html)
-- :globe_with_meridians:[计算机网络](./computer_network/exam.html)
+- :globe_with_meridians:[计算机网络](./computer_network/index.html)
 - :computer:计算机组成原理
 - :fire:[杂项](./misc/index.html)
 - :question:[工具](./tool/index.html)
