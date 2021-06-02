@@ -192,7 +192,7 @@ title: 算法 - dianhsu.top
     - 普通KMP算法
     - 拓展KMP算法
   - Trie字典树
-    - 字典树
+    - [字典树](./my_data_structure/TrieTree.html)
     - 01字典树
   - 自动机
     - AC自动机
@@ -204,6 +204,8 @@ title: 算法 - dianhsu.top
   - 莫队算法
   - CDQ分治
   - 尺取法
+
+----
 
 欢迎加入我们的LeetCode交流群（QQ群：752399419），每周相约周赛
 

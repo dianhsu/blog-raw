@@ -1,5 +1,21 @@
+@import "/mystyle.less"
+
+## 字典树
+
+> 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
+
+---
+
+
+### 指针实现
+
+```cpp
 #include <bits/stdc++.h>
 
+/**
+ * @brief 字典树的节点
+ * 
+ * */
 template<int MAX_WIDTH>
 struct TrieTreeNode {
     int count;
@@ -29,6 +45,10 @@ struct TrieTreeNode {
     }
 };
 
+/**
+ * @brief 字典树的整体结构
+ * 
+ * */
 template<int MAX_WIDTH, char BASE_CHR>
 class TrieTree {
 public:
@@ -121,3 +141,4 @@ int main() {
     std::cout << "destruct" << std::endl;
     return 0;
 }
+```
