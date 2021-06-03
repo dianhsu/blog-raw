@@ -1,9 +1,16 @@
+---
+toc:
+    depth_from: 1
+    depth_to: 4
+---
 @import "/mystyle.less"
 
-## 康拓展开
+## 康拓展开 {ignore=True}
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
+[TOC]
 ---
+
 
 参考：[康拓展开_维基百科](https://zh.wikipedia.org/wiki/%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80)
 
