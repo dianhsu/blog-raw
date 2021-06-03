@@ -196,7 +196,7 @@ title: 算法 - dianhsu.top
     - [字典树](./my_data_structure/TrieTree.html)
     - 01字典树
   - 自动机
-    - AC自动机
+    - [AC自动机](./my_string/ac_automaton.html)
     - 回文自动机
     - 后缀自动机
   - 后缀数组
