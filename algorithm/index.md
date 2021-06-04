@@ -17,12 +17,12 @@ title: 算法 - dianhsu.top
   - 递归
 - 搜索
   - [深度优先搜索](./my_search/dfs.html)
-  - 广度优先搜索
-  - 双向搜索
+  - [广度优先搜索](./my_search/bfs.html)
+  - [双向搜索](./my_search/bidirectional_search.html)
   - 记忆化搜索
   - 启发式搜索
   - A*算法
-  - IDA*算法
+  - [IDA*算法](./my_search/iddfs.html)
 - 动态规划
   - 背包问题
   - 数位dp
