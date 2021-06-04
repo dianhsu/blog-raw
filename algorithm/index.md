@@ -1,9 +1,9 @@
 ---
-title: 算法 - dianhsu.top
+title: 经典算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-# 算法 {ignore=True}
+# 经典算法 {ignore=True}
 > 返回:house:[首页](../index.html)
 
 -----------------------------------
