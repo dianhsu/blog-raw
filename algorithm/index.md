@@ -26,7 +26,7 @@ title: 经典算法 - dianhsu.top
 - 动态规划
   - 背包问题
   - 数位dp
-  - 状态压缩dp
+  - [状态压缩dp](./my_dp/state_compression_dp.html)
   - 区间dp
   - 树形dp
   - 优化方法
