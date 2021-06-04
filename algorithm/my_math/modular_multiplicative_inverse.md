@@ -1,3 +1,7 @@
+---
+
+title: 乘法逆元 - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## 乘法逆元

@@ -1,3 +1,7 @@
+---
+
+title: Manacher - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## Manacher

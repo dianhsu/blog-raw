@@ -1,3 +1,7 @@
+---
+
+title: AVL树 - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## AVL 树

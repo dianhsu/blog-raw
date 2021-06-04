@@ -1,3 +1,7 @@
+---
+
+title: 字典树 - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## 字典树

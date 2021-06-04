@@ -1,3 +1,7 @@
+---
+
+title: 线段树 - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## 线段树

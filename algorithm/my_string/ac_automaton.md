@@ -1,3 +1,7 @@
+---
+
+title: AC自动机 - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## AC 自动机

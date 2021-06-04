@@ -1,3 +1,7 @@
+---
+
+title: KMP - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## KMP

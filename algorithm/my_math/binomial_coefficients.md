@@ -1,3 +1,7 @@
+---
+
+title: 二项式系数 - 算法 - dianhsu.top
+---
 @import "/mystyle.less"
 
 ## 二项式系数
