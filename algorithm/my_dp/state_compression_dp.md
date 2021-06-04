@@ -20,6 +20,7 @@ title: 状态压缩动态规划 - 算法 - dianhsu.top
 状态压缩动态规划通常有个特点，初看数据范围很小，又要考虑状态转移，实则状态的存储很占用空间，这样多半可以考虑用 $2^n$ 的形式进行状态存储。
 
 #### Tips
+> 参考：[https://cp-algorithms.com/algebra/all-submasks.html#toc-tgt-0](https://cp-algorithms.com/algebra/all-submasks.html#toc-tgt-0)
 
 如何遍历当前状态的所有子状态呢？
 
