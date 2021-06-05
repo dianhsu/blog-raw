@@ -188,7 +188,7 @@ title: 经典算法 - dianhsu.top
   - 偏序关系
 - 字符串
   - [manacher算法](./my_string/manacher.html)
-  - 字符串hash
+  - [字符串hash](./my_string/string_hash.html)
   - KMP算法
     - [普通KMP算法](./my_string/KMP.html)
     - 拓展KMP算法
