@@ -38,10 +38,10 @@ jobs:
           cd ..
       - name: find markdown files
         run: |
-          tree -f -i -P "*\.md" -I "markdown-renderer" --noreport | grep .md 
+          python3 listfiles.py
       - name: generate html
         run: |
-          tree -f -i -P "*\.md" -I "markdown-renderer" --noreport | grep .md | xargs -I {} markdown-renderer -i {}
+          python3 listfiles.py | xargs -I {} markdown-renderer -i {}
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2
         env:
