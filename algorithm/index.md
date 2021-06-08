@@ -56,7 +56,7 @@ title: 经典算法 - dianhsu.top
     - 容斥原理
     - 帕斯卡恒等式
     - 卢卡斯定理
-    - 错排问题
+    - [错排问题](./my_math/derangement.html)
   - 常见数列
     - 斐波那契数列
     - 卡特兰数列
