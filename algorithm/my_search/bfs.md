@@ -22,3 +22,5 @@ title: 广度优先搜索 - 算法 - dianhsu.top
 @import "../oj/POJ_2251.md"
 
 @import "../oj/HDU_2102.md"
+
+@import "../oj/HDU_1067.md"

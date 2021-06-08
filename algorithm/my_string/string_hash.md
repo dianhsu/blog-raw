@@ -1,5 +1,7 @@
 ---
-
+toc:
+    depth_from: 1
+    depth_to: 4
 title: 字符串哈希 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
@@ -198,3 +200,7 @@ unsigned int ELFHash(char *str)
     return (hash & 0x7FFFFFFF);
 }
 ```
+
+### 例题
+
+@import "../oj/HDU_1067.md"
