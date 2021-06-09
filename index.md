@@ -37,4 +37,5 @@ title: 首页 - dianhsu.top
 - LeetCode: [https://leetcode-cn.com/u/dianhsu/](https://leetcode-cn.com/u/dianhsu/)
 - Codeforces:
   - ![xudian](http://cfrating.ihcr.top/?user=xudian)
+  - ![dianhsu](http://cfrating.ihcr.top/?user=dianhsu)
   - ![HLD](http://cfrating.ihcr.top/?user=HLD)
