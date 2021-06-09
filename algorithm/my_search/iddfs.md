@@ -23,3 +23,5 @@ IDDFS 第一次访问节点的累积顺序是广度优先的。
 ### 例题
 
 @import "../oj/HDU_3567.md"
+
+@import "../oj/HDU_1560.md"
