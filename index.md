@@ -36,6 +36,6 @@ title: 首页 - dianhsu.top
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
 - LeetCode: [https://leetcode-cn.com/u/dianhsu/](https://leetcode-cn.com/u/dianhsu/)
 - Codeforces:
-  - ![xudian](http://cfrating.ihcr.top/?user=xudian)
-  - ![dianhsu](http://cfrating.ihcr.top/?user=dianhsu)
-  - ![HLD](http://cfrating.ihcr.top/?user=HLD)
+  - ![xudian](https://cfrating.ihcr.top/?user=xudian)
+  - ![dianhsu](https://cfrating.ihcr.top/?user=dianhsu)
+  - ![HLD](https://cfrating.ihcr.top/?user=HLD)
