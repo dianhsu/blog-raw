@@ -50,8 +50,9 @@ printers = conn.getPrinters()
 printer = None
 for key in printers:
     printer = key
-print(printer)
-
+if printer is None:
+    print('亲，你的打印机呢')
+    exit(-1)
 # 上传文件
 tmp_dir = tempfile.TemporaryDirectory().name
 os.makedirs(tmp_dir, exist_ok=True)
