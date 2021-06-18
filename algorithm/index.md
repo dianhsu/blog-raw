@@ -21,7 +21,7 @@ title: 经典算法 - dianhsu.top
   - [双向搜索](./my_search/bidirectional_search.html)
   - 记忆化搜索
   - 启发式搜索
-  - A*算法
+  - [A*算法](./my_search/astar.html)
   - [IDA*算法](./my_search/iddfs.html)
 - 动态规划
   - 背包问题
