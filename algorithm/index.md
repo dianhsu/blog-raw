@@ -187,6 +187,7 @@ title: 经典算法 - dianhsu.top
   - 原根
   - 离散对数
   - 偏序关系
+  - [博弈](./my_math/game_theory.html)
 - 字符串
   - [manacher算法](./my_string/manacher.html)
   - [字符串hash](./my_string/string_hash.html)
