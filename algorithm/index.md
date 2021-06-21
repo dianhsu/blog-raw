@@ -24,13 +24,14 @@ title: 经典算法 - dianhsu.top
   - [A*算法](./my_search/astar.html)
   - [IDA*算法](./my_search/iddfs.html)
 - 动态规划
+  - [基础动态规划](./my_dp/dynamic_programming.html)
   - 背包问题
   - 数位dp
   - [状态压缩dp](./my_dp/state_compression_dp.html)
   - 区间dp
   - 树形dp
   - 优化方法
-    - 滚动数组
+    - 滚动数组：因为动态规划没有后效性，故用两个状态集交替保存前一状态和当前状态。
     - 二分优化
     - 矩阵优化
     - 斜率优化
