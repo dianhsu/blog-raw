@@ -52,7 +52,7 @@ public:
         if(cal(finishTime) < cal(startTime)){
             t2 += 24 * 4;
         }
-        return t2 - t1;
+        return max(0, t2 - t1);
     }
 };
 ```
