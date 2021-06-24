@@ -6,7 +6,7 @@ title: Fibonacci数列 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-## Fibonacci数列 {ignore=True}
+## Fibonacci数列
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 [TOC]

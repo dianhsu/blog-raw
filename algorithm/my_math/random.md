@@ -7,7 +7,7 @@ title: 随机数 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-## 随机数 {ignore=True}
+## 随机数
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 [TOC]

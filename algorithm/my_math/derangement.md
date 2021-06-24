@@ -6,7 +6,7 @@ title: 错排问题 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-## 错排问题 {ignore=True}
+## 错排问题
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 [TOC]

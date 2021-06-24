@@ -6,7 +6,7 @@ title: 动态规划 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-## 动态规划 {ignore=True}
+## 动态规划
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 [TOC]

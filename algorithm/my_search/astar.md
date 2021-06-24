@@ -6,7 +6,7 @@ title: A* - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-## A\* {ignore=True}
+## A\*
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 [TOC]

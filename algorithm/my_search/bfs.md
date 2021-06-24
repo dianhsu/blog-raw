@@ -6,7 +6,7 @@ title: 广度优先搜索 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-## 广度优先搜索 {ignore=True}
+## 广度优先搜索
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 [TOC]

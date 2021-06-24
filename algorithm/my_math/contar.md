@@ -6,7 +6,7 @@ title: 康拓展开 - 算法 - dianhsu.top
 ---
 @import "/mystyle.less"
 
-## 康拓展开 {ignore=True}
+## 康拓展开
 > 返回:house:[首页](../../index.html)，:rocket:[算法](../index.html)
 
 [TOC]
