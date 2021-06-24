@@ -51,16 +51,11 @@ struct AVLNode {
     AVLNode<T> *rightChild;
     int height;
 
-    AVLNode(T data) {
-        this->data = data;
-        this->height = 1;
-        this->leftChild = nullptr;
-        this->rightChild = nullptr;
-    }
+    AVLNode(T data): data(data), height(1), leftChild(nullptr), rightChild(nullptr) { }
 
     ~AVLNode() {
-        delete this->leftChild;
-        delete this->rightChild;
+        delete leftChild;
+        delete rightChild;
     }
 };
 
@@ -81,7 +76,7 @@ public:
      * @note 如果发现这个树中已经有这个值存在了，就不会进行任何操作
      * */
     void insert(T val) {
-        this->_insert(&root, val);
+        _insert(&root, val);
     }
 
     /**
