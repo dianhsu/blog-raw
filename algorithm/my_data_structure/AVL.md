@@ -59,16 +59,9 @@ struct AVLNode {
     }
 
     ~AVLNode() {
-        if (leftChild != nullptr) {
-            delete this->leftChild;
-            this->leftChild = nullptr;
-        }
-        if (rightChild != nullptr) {
-            delete this->rightChild;
-            this->rightChild = nullptr;
-        }
+        delete this->leftChild;
+        delete this->rightChild;
     }
-
 };
 
 template<class T>
