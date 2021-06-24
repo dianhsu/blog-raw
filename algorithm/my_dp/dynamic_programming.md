@@ -24,3 +24,5 @@ title: 动态规划 - 算法 - dianhsu.top
 ### 例题
 
 @import "../oj/POJ_1458.md"
+
+@import "../oj/POJ_3666.md"
