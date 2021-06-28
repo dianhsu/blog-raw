@@ -187,6 +187,7 @@ title: 经典算法 - dianhsu.top
       - 珂朵莉树
       - KD树
     - [字典树](./my_data_structure/TrieTree.html)
+    - [树上倍增](./my_data_structure/BinaryLifting.html)
     - 舞蹈链
     - 树链剖分
     - LCT（动态森林）
