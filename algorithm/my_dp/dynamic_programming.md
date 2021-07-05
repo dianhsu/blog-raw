@@ -28,3 +28,5 @@ title: 动态规划 - 算法 - dianhsu.top
 @import "../oj/POJ_1661.md"
 
 @import "../oj/POJ_3666.md"
+
+@import "../oj/CF_1542D.md"
