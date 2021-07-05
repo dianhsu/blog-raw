@@ -29,6 +29,7 @@ title: LeetCode - dianhsu.top
 - 🕥[第246场周赛](./weekly-contest/246.html)
 - 🕥[第55场双周赛](./biweekly-contest/55.html)
 - 🕥[第247场周赛](./weekly-contest/247.html)
+- 🕥[第248场周赛](./weekly-contest/248.html)
 
 
 ## 统计
