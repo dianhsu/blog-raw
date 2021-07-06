@@ -15,20 +15,21 @@ title: LeetCode - dianhsu.top
 - 🕥第50场双周赛
 - 🕥第237场周赛
 - 🕥第238场周赛
-- 🕥[第51场双周赛](./biweekly-contest/51/index.html)
-- 🕥[第239场周赛](./weekly-contest/239/index.html)
-- 🕥[第240场周赛](./weekly-contest/240/index.html)
-- 🕥[第52场双周赛](./biweekly-contest/52/index.html)
-- 🕥[第241场周赛](./weekly-contest/241/index.html)
-- 🕥[第242场周赛](./weekly-contest/242/index.html)
-- 🕥[第53场双周赛](./biweekly-contest/53/index.html)
-- 🕥[第243场周赛](./weekly-contest/243/index.html)
-- 🕥[第244场周赛](./weekly-contest/244/index.html)
-- 🕥[第54场双周赛](./biweekly-contest/54/index.html)
-- 🕥[第245场周赛](./weekly-contest/245/index.html)
-- 🕥[第246场周赛](./weekly-contest/246/index.html)
-- 🕥[第55场双周赛](./biweekly-contest/55/index.html)
-- 🕥[第247场周赛](./weekly-contest/247/index.html)
+- 🕥[第51场双周赛](./biweekly-contest/51.html)
+- 🕥[第239场周赛](./weekly-contest/239.html)
+- 🕥[第240场周赛](./weekly-contest/240.html)
+- 🕥[第52场双周赛](./biweekly-contest/52.html)
+- 🕥[第241场周赛](./weekly-contest/241.html)
+- 🕥[第242场周赛](./weekly-contest/242.html)
+- 🕥[第53场双周赛](./biweekly-contest/53.html)
+- 🕥[第243场周赛](./weekly-contest/243.html)
+- 🕥[第244场周赛](./weekly-contest/244.html)
+- 🕥[第54场双周赛](./biweekly-contest/54.html)
+- 🕥[第245场周赛](./weekly-contest/245.html)
+- 🕥[第246场周赛](./weekly-contest/246.html)
+- 🕥[第55场双周赛](./biweekly-contest/55.html)
+- 🕥[第247场周赛](./weekly-contest/247.html)
+- 🕥[第248场周赛](./weekly-contest/248.html)
 
 
 ## 统计
@@ -52,6 +53,7 @@ title: LeetCode - dianhsu.top
 | 15   | `215/4135`  | 🌞[第246场周赛](https://leetcode-cn.com/contest/weekly-contest-246)    | `13` | `0:53:41` | ✅     | ❌     | ✅     | ✅     |
 | 16   | `826/3277`  | 🌛[第55场双周赛](https://leetcode-cn.com/contest/biweekly-contest-55/) | `12` | `1:27:23` | ✅     | ✅     | ✅     | ❌     |
 | 17   | `135/3980`  | 🌞[第247场周赛](https://leetcode-cn.com/contest/weekly-contest-247)    | `13` | `1:26:27` | ✅     | ✅     | ❌     | ✅     |
+| 18   | `204/4450`  | 🌞[第248场周赛](https://leetcode-cn.com/contest/weekly-contest-248)    | `11` | `0:18:50` | ✅     | ✅     | ✅     | ❌     |
 ## 硬广告
 欢迎加入我们的LeetCode交流群（QQ群：752399419），每周相约周赛
 
