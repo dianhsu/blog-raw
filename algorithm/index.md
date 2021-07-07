@@ -138,9 +138,9 @@ title: 经典算法 - dianhsu.top
 - 图论
   - 最短路
     - [Dijkstra算法](./my_graph/Dijkstra.html)
-    - Bellman-Ford算法
+    - [Bellman-Ford算法](./my_graph/Bellman_Ford.html)
     - Floyd算法
-    - SPFA算法
+    - [SPFA算法](./my_graph/SPFA.html)
     - 差分约束
   - 最小生成树
     - Prim算法
