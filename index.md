@@ -33,9 +33,9 @@ title: 首页 - dianhsu.top
 <a href="https://github.com/dianhsu"><img src="https://github-readme-stats.vercel.app/api?username=dianhsu&count_private=true" height="180" /></a> <a href="https://github.com/dianhsu"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=dianhsu&langs_count=8&hide=html,css&layout=compact" height="180" /></a>
 
 ## Codeforces
-- <a href="https://codeforces.com/profile/xudian"><img src="https://cfrating.ihcr.top/?user=xudian"></a>
-- <a href="https://codeforces.com/profile/dianhsu"><img src="https://cfrating.ihcr.top/?user=dianhsu"></a>
-- <a href="https://codeforces.com/profile/HLD"><img src="https://cfrating.ihcr.top/?user=HLD"></a>
+- <a href="https://codeforces.com/profile/xudian"><img src="https://fc.dianhsu.top/cf?user=xudian"></a>
+- <a href="https://codeforces.com/profile/dianhsu"><img src="https://fc.dianhsu.top/cf?user=dianhsu"></a>
+- <a href="https://codeforces.com/profile/HLD"><img src="https://fc.dianhsu.top/cf?user=HLD"></a>
 
 
 ## 相关链接
