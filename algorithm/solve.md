@@ -12,11 +12,8 @@ title: 一些题解 - dianhsu.top
 ## Codeforces
 
 @import "oj/CF_1534E.md"
-
 @import "oj/CF_1535E.md"
-
 @import "oj/CF_1537D.md"
-
 @import "oj/CF_1542D.md"
 
 ## HDU
@@ -38,5 +35,6 @@ title: 一些题解 - dianhsu.top
 @import "oj/POJ_1661.md"
 @import "oj/POJ_2251.md"
 @import "oj/POJ_2387.md"
+@import "oj/POJ_3169.md"
 @import "oj/POJ_3259.md"
 @import "oj/POJ_3666.md"

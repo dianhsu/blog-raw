@@ -141,7 +141,7 @@ title: 经典算法 - dianhsu.top
     - [Bellman-Ford算法](./my_graph/Bellman_Ford.html)
     - Floyd算法
     - [SPFA算法](./my_graph/SPFA.html)
-    - 差分约束
+    - [差分约束](./my_graph/diff-constraints.html)
   - 最小生成树
     - Prim算法
     - Kruskal算法
