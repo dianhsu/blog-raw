@@ -411,7 +411,7 @@ const 也可以和指针变量一起使用，这样可以限制指针变量本�
 
 #### static_cast
 
-将表达式转换为某种类型，语法是 \texttt{T t=static\_cast<T>(expression)}。
+将表达式转换为某种类型，语法是 `T t=static_cast<T>(expression)`。
 通常用于各种内置类型之间的隐式转换。
 
 @import "code/static_cast_demo.cpp"
