@@ -149,7 +149,7 @@ title: 经典算法 - dianhsu.top
     - 二分图判断
     - 匈牙利算法
     - KM算法
-  - 网络流
+  - [网络流](./my_graph/network_flow.html)
     - 最大流（Dicnic）
     - 最小费用流（SPFA费用流）
     - 有界网络流
