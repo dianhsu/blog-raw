@@ -106,3 +106,5 @@ public:
 ### 参考例题
 
 @import "../oj/HDU_3549.md"
+
+@import "../oj/HDU_3146.md"
