@@ -7,6 +7,7 @@ title: 经典算法 - dianhsu.top
 > 返回:house:[首页](../index.html)
 
 -----------------------------------
+> [算法模板](./template.html)
 
 - 基础算法
   - 构造
