@@ -491,6 +491,40 @@ int main() {
 }
 ```
 
+### 阶乘逆元（求组合数）
+
+```cpp
+const int maxn = 200200;
+const int MOD = 1e9 + 7;
+long long divInv[maxn], mulInv[maxn];
+
+ll qPow(ll b, ll k) {
+    if (k == 0) return 1;
+    long long ans = 1;
+    while (k) {
+        if (k & 1) ans = ans * b % MOD;
+        k >>= 1;
+        b = b * b % MOD;
+    }
+    return ans;
+}
+
+void init() {
+    divInv[0] = 1;
+    mulInv[0] = 1;
+    for (int i = 1; i <= 200000; ++i) {
+        mulInv[i] = (mulInv[i - 1] * i) % MOD;
+        divInv[i] = (divInv[i - 1] * qPow(i, MOD - 2)) % MOD;
+    }
+}
+ll C(int n, int m) {
+    if (m < 0) return 0;
+    if (m > n) return 0;
+    return  mulInv[n] * divInv[m] % MOD * divInv[n - m] % MOD;
+}
+
+```
+
 ### 康拓展开
 #### 正向
 
