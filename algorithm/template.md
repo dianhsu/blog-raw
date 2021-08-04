@@ -983,3 +983,29 @@ private:
 };
 
 ```
+
+### ST表（稀疏表）
+
+```cpp
+template<typename iter, typename BinOp>
+class SparseTable {
+    using T = typename remove_reference<decltype(*declval<iter>())>::type;
+    vector<vector<T>> arr;
+    BinOp binOp;
+public:
+    SparseTable(iter begin, iter end, BinOp binOp) : arr(1), binOp(binOp) {
+        int n = distance(begin, end);
+        arr.assign(32 - __builtin_clz(n), vector<T>(n));
+        arr[0].assign(begin, end);
+        for (int i = 1; i < arr.size(); ++i) {
+            for (int j = 0; j < n - (1 << i) + 1; ++j) {
+                arr[i][j] = binOp(arr[i - 1][j], arr[i - 1][j + (1 << (i - 1))]);
+            }
+        }
+    }
+    T query(int lPos, int rPos) {
+        int h = floor(log2(rPos - lPos + 1));
+        return binOp(arr[h][lPos], arr[h][rPos - (1 << h) + 1]);
+    }
+};
+```
