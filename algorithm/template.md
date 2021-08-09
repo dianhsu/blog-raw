@@ -1043,3 +1043,31 @@ public:
     }
 };
 ```
+
+### 树状数组
+
+```cpp
+template<typename T, int N>
+struct FenWick {
+    vector<T> arr;
+    FenWick(): arr(N + 1, 0) {}
+    void update(int pos, T val) {
+        for (; pos <= N;pos |= (pos + 1)) {
+            arr[pos] += val;
+        }
+    }
+    // 获取 [1, pos] 的和
+    T get(int pos) {
+        T ret = 0;
+        for (; pos > 0; --pos) {
+            ret += arr[pos];
+            pos &= (pos + 1);
+        }
+        return ret;
+    }
+    // 获取 [l, r] 的和
+    T query(int l, int r) {
+        return get(r) - get(l - 1);
+    }
+};
+```
