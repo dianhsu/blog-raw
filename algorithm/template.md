@@ -527,33 +527,38 @@ ll C(int n, int m) {
 
 ### 莫比乌斯函数（线性筛）
 ```cpp
+template<int N>
 class Mu {
 public:
-    Mu(int n) : muArr(n + 1, 0), vis(n + 1, 0) {
+    Mu() {
         muArr[1] = 1;
-        for (int i = 2; i <= n; ++i) {
+        cnt = 0;
+        for (int i = 2; i <= N; ++i) {
             if (!vis[i]) {
-                prime.push_back(i); muArr[i] = -1;
+                prime[cnt++] = i;
+                muArr[i] = -1;
             }
-            for (auto val : prime) {
-                if (val * i <= n) {
-                    vis[val * i] = 1;
-                    if (i % val == 0) break;
+            for (int j = 0; j < cnt; ++j) {
+                if (N / i >= prime[j]) {
+                    vis[prime[j] * i] = 1;
+                    if (i % prime[j] == 0) break;
                     else {
-                        muArr[i * val] = -muArr[i];
+                        muArr[i * prime[j]] = -muArr[i];
                     }
                 }
             }
+        }
+        prefix[0] = 0;
+        for(int i = 1; i <= N; ++i){
+            prefix[i] = prefix[i - 1] + muArr[i];
         }
     }
     int& operator[] (int i) {
         return muArr[i];
     }
-    size_t size() {
-        return muArr.size();
-    }
 private:
-    vector<int> prime, muArr, vis;
+    int muArr[N + 1], prime[N + 1], vis[N + 1], prefix[N + 1];
+    int cnt;
 };
 ```
 
