@@ -13,6 +13,30 @@ toc:
 ---------------------------
 
 [TOC]
+## 拒绝QQ拦截外部链接
+
+```javascript
+// ==UserScript==
+// @name        拒绝拦截外部链接 - qq.com
+// @namespace   Violentmonkey Scripts
+// @match       https://c.pc.qq.com/middlem.html
+// @grant       none
+// @version     1.0
+// @author      dianhsu
+// @description 2021/8/29 下午6:46:14
+// ==/UserScript==
+
+(function(){
+  'use strict';
+  
+  //console.log(window.location.href)
+  let searchParams = new URLSearchParams(window.location.search);
+  let reqUrl = searchParams.get("pfurl");
+  if(!!reqUrl){
+      window.location.href = reqUrl;
+  }
+})();
+```
 
 ## Linux
 
@@ -92,3 +116,4 @@ else:
     conn.printFile(printer, tmp_path, pdf_path, {})
 
 ```
+
