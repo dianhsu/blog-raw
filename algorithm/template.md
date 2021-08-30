@@ -606,39 +606,46 @@ ll C(int n, int m) {
 
 ### 莫比乌斯函数（线性筛）
 ```cpp
-template<int N>
+template<int N, typename T = int>
 class Mu {
 public:
-    Mu() {
+    Mu() : muArr(N + 1), pref(N + 1) {
+        bitset<N + 1> notPrime;
         muArr[1] = 1;
-        cnt = 0;
         for (int i = 2; i <= N; ++i) {
-            if (!vis[i]) {
-                prime[cnt++] = i;
+            if (!notPrime[i]) {
+                prime.push_back(i);
                 muArr[i] = -1;
             }
-            for (int j = 0; j < cnt; ++j) {
-                if (N / i >= prime[j]) {
-                    vis[prime[j] * i] = 1;
-                    if (i % prime[j] == 0) break;
-                    else {
-                        muArr[i * prime[j]] = -muArr[i];
+            for (auto it : prime) {
+                if (N / i >= it) {
+                    notPrime[it * i] = 1;
+                    if (i % it == 0) {
+                        break;
+                    } else {
+                        muArr[i * it] = -muArr[i];
                     }
+                } else {
+                    break;
                 }
             }
         }
-        prefix[0] = 0;
-        for(int i = 1; i <= N; ++i){
-            prefix[i] = prefix[i - 1] + muArr[i];
+        pref[0] = 0;
+        for (int i = 1; i <= N; ++i) {
+            pref[i] = pref[i - 1] + muArr[i];
         }
     }
-    int& operator[] (int i) {
+
+    T& operator[](int i) {
         return muArr[i];
     }
+
+    vector<T> pref;
+    vector<T> prime;
 private:
-    int muArr[N + 1], prime[N + 1], vis[N + 1], prefix[N + 1];
-    int cnt;
+    vector<T> muArr;
 };
+
 ```
 
 ### 康拓展开
