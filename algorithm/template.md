@@ -418,7 +418,7 @@ bool isPrime(int x){
 #### 埃拉托斯特尼筛法
 ```cpp
 template<int N>
-vector<int> Eratosthenes() {
+vector<int> SieveOfEratosthenes() {
     vector<int> prime;
     bitset<N + 1> notPrime;
     notPrime[0] = notPrime[1] = 1;
@@ -436,10 +436,10 @@ vector<int> Eratosthenes() {
 }
 
 ```
-#### 线性筛
+#### 线性筛（欧式筛）
 ```cpp
 template<int N>
-vector<int> LinearFilter() {
+vector<int> SieveOfEuler() {
     vector<int> prime;
     bitset<N + 1> notPrime;
     for (int i = 2; i <= N; ++i) {
