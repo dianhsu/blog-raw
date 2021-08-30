@@ -401,9 +401,88 @@ public:
 ## 数论
 
 ### 素数筛
+#### 单个正整数判断是不是质数
+```cpp
+bool isPrime(int x){
+    if(x <= 1) return false;
+    int cur = 2;
+    while(cur * cur <= x){
+        if(x % cur != 0){
+            return false;
+        }
+        ++cur;
+    }
+    return true;
+}
+```
+#### 埃拉托斯特尼筛法
+```cpp
+template<int N>
+vector<int> Eratosthenes() {
+    vector<int> prime;
+    bitset<N + 1> notPrime;
+    notPrime[0] = notPrime[1] = 1;
+    for (int i = 2; i <= N; ++i) {
+        if (!notPrime[i]) {
+            prime.push_back(i);
+            if ((long long) i * i <= N) {
+                for (int j = i * i; j <= N; j += i) {
+                    notPrime[j] = 1;
+                }
+            }
+        }
+    }
+    return prime;
+}
 
+```
+#### 线性筛
+```cpp
+template<int N>
+vector<int> LinearFilter() {
+    vector<int> prime;
+    bitset<N + 1> notPrime;
+    for (int i = 2; i <= N; ++i) {
+        if (!notPrime[i]) {
+            prime.push_back(i);
+        }
+        for (auto it : prime) {
+            if ((long long) it * i <= N) {
+                notPrime[it * i] = 1;
+                if (i % it == 0) {
+                    break;
+                }
+            }
+        }
+    }
+    return prime;
+}
+```
+
+#### 奇数筛
+```cpp
+template<int N>
+vector<int> OddFilter() {
+    if (N < 2) return {};
+    vector<int> prime{2};
+    bitset<N + 1> notPrime;
+    notPrime[0] = notPrime[1] = 1;
+    for (int i = 3; i * i <= N; i += 2) {
+        if (!notPrime[i]) {
+            for (int j = i; j * i <= N; j += 2) {
+                notPrime[j * i] = 1;
+            }
+        }
+    }
+    for (int i = 3; i <= N; i += 2) {
+        if (!notPrime[i]) {
+            prime.push_back(i);
+        }
+    }
+    return prime;
+}
+```
 ### 乘法逆元
-
 #### 扩展欧几里得算法
 ```cpp
 
