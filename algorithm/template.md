@@ -1245,7 +1245,103 @@ private:
 };
 
 ```
+这种写法感觉会更方便一些
+```cpp
+// Luogu P3373
+template<typename T = int>
+inline T read() {
+    T ret;
+    cin >> ret;
+    return ret;
+}
 
+template<class Fun>
+class Y_combinator {
+private:
+    Fun fun_;
+public:
+    template<class F>
+    Y_combinator(F&& fun) : fun_(static_cast<F&&>(fun)) {}
+    template<class... Args>
+    decltype(auto) operator () (Args&&...args) const {
+        return fun_(*this, static_cast<Args&&>(args)...);
+    }
+};
+template<class T> Y_combinator(T)->Y_combinator<T>;
+
+#define MID ((l + r) >> 1)
+#define LEFT (cur << 1)
+#define RIGHT ((cur << 1) | 1)
+
+int main(int argc, char* argv[]) {
+    fastIO();
+    int n, m;
+    cin >> n >> m;
+    vector<ll> arr{0};
+    for (int i = 0; i < n; ++i) {
+        arr.push_back(read<ll>());
+    }
+    vector<ll> lazy((n << 2) + 10);
+    vector<ll> node((n << 2) + 10);
+    Y_combinator(
+        [&](auto&& build, int cur, int l, int r) -> void {
+            if (l == r) {
+                node[cur] = arr[l];
+            } else {
+                build(LEFT, l, MID);
+                build(RIGHT, MID + 1, r);
+                node[cur] = node[LEFT] + node[RIGHT];
+            }
+        }
+    )(1, 1, n);
+    auto&& lazyUpdate = [&](int cur, int l, int r) -> void {
+        if (lazy[cur] != 0) {
+            node[LEFT] += lazy[cur] * (MID - l + 1);
+            node[RIGHT] += lazy[cur] * (r - MID);
+            lazy[LEFT] += lazy[cur];
+            lazy[RIGHT] += lazy[cur];
+            lazy[cur] = 0;
+        }
+    };
+    auto&& update = Y_combinator(
+        [&](auto&& update, int cur, int l, int r, int s, int e, ll v) {
+            if (s > r or e < l) return;
+            if (s <= l and r <= e) {
+                node[cur] += (r - l + 1) * v;
+                lazy[cur] += v;
+            } else {
+                lazyUpdate(cur, l, r);
+                update(LEFT, l, MID, s, e, v);
+                update(RIGHT, MID + 1, r, s, e, v);
+                node[cur] = node[LEFT] + node[RIGHT];
+            }
+        }
+    );
+    auto&& query = Y_combinator(
+        [&](auto&& query, int cur, int l, int r, int s, int e)->ll {
+            if (s > r or e < l) return 0;
+            if (s <= l and e >= r) {
+                return node[cur];
+            }
+            lazyUpdate(cur, l, r);
+            ll ret = query(LEFT, l, MID, s, e);
+            ret += query(RIGHT, MID + 1, r, s, e);
+            return ret;
+        }
+    );
+    while (m--) {
+        int q, x, y, k;
+        cin >> q >> x >> y;
+        if (q == 1) {
+            cin >> k;
+            update(1, 1, n, x, y, k);
+        } else {
+            cout << query(1, 1, n, x, y) << endl;
+        }
+    }
+    return 0;
+}
+```
 ### ST表（稀疏表）
 
 ```cpp
