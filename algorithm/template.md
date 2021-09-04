@@ -398,8 +398,113 @@ public:
 
 ```
 
-## 数论
+## 数学
+### 矩阵快速幂
+```cpp
+typedef long long ll;
 
+template<typename T, int N, int M_MOD = 1000000007>
+struct Matrix {
+    array<array<T, N>, N> arr;
+
+    explicit Matrix(const array<array<T, N>, N>& prr) {
+        arr = prr;
+    }
+
+    Matrix() {
+        for (auto &it: arr) {
+            it.fill(0);
+        }
+    }
+
+    array<T, N> &operator[](int idx) {
+        return arr[idx];
+    }
+
+    Matrix<T, N> &operator+=(Matrix<T, N> &brr) {
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                arr[i][j] = (arr[i][j] + brr[i][j]) % M_MOD;
+            }
+        }
+        return *this;
+    }
+
+    friend bool operator<<(ostream &ots, Matrix<T, N> &mat) {
+        ots << "============Matrix=============" << endl;
+        for (int i = 0; i < N; ++i) {
+            ots << "[";
+            for (int j = 0; j < N; ++j) {
+                if (j) ots << ", ";
+                ots << mat[i][j];
+            }
+            ots << "]" << endl;
+        }
+        ots << "==============================" << endl;
+        return true;
+    }
+
+    friend Matrix<T, N> operator*(Matrix<T, N> &a, Matrix<T, N> &b) {
+        Matrix<T, N> multi;
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                multi[i][j] = 0;
+                for (int k = 0; k < N; ++k) {
+                    multi[i][j] = (multi[i][j] + a[i][k] * b[k][j]) % M_MOD;
+                }
+            }
+        }
+        return multi;
+    }
+
+    friend array<T, N> operator*(array<T, N> &a, Matrix<T, N> &b) {
+        array<T, N> ret{0, 0};
+        for (int i = 0; i < N; ++i) {
+            for (int k = 0; k < N; ++k) {
+                ret[i] = (ret[i] + a[k] * b[k][i]) % M_MOD;
+            }
+        }
+        return ret;
+    }
+};
+
+template<int N, typename T = ll>
+class MatrixPower {
+public:
+    explicit MatrixPower(Matrix<T, N> &mat) {
+        radix.push_back(mat);
+        for (int i = 1; i < 63; ++i) {
+            radix.push_back(radix.back() * radix.back());
+        }
+    }
+
+    Matrix<T, N> get(ll x) {
+        Matrix<T, N> ret;
+        for (int i = 0; i < N; ++i) ret[i][i] = 1;
+        for (int i = 0; i < 63; ++i) {
+            if (x & (1ll << i)) {
+                ret = ret * radix[i];
+            }
+        }
+        return ret;
+    }
+
+private:
+    vector<Matrix<T, N>> radix;
+};
+
+class Solution {
+public:
+    int fib(int n) {
+        array<array<ll, 2>, 2> x{array<ll, 2>{1, 1}, array<ll, 2>{1, 0}};
+        Matrix<ll, 2> it(x);
+        MatrixPower<2> mp2(it);
+        auto &&res = mp2.get(n);
+        array<ll, 2> base{1, 0};
+        return (base * res).back();
+    }
+};
+```
 ### 素数筛
 #### 单个正整数判断是不是质数
 ```cpp
