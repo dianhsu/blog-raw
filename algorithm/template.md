@@ -399,6 +399,8 @@ public:
 ```
 
 ## 数学
+
+
 ### 矩阵快速幂
 ```cpp
 typedef long long ll;
@@ -900,7 +902,7 @@ public:
      * @ref https://mermaid-js.github.io/mermaid-live-editor
      * */
     friend std::ostream &operator<<(std::ostream &os, AVL &avl) {
-        os << "graph LR" << std::endl;
+        os << "graph #LR" << std::endl;
         std::string name = "Node1";
         if (avl.root != nullptr) {
             avl._generate(os, avl.root, name);
@@ -1394,4 +1396,39 @@ struct FenWick {
         return get(r) - get(l - 1);
     }
 };
+```
+
+## 其他
+### 读入
+```cpp
+template<typename T = int>
+inline T fastRead() {
+    T x = 0, w = 1; char c = getchar();
+    while (c < '0' || c>'9') { if (c == '-') w = -1; c = getchar(); }
+    while (c <= '9' && c >= '0') { x = (x << 1) + (x << 3) + c - '0'; c = getchar(); }
+    return w == 1 ? x : -x;
+}
+template<typename T = int>
+inline T read() {
+    T ret;
+    cin >> ret;
+    return ret;
+}
+```
+### Y combinator (C++17)
+
+```cpp
+template<class Fun>
+class Y_combinator {
+private:
+    Fun fun_;
+public:
+    template<class F>
+    Y_combinator(F&& fun) : fun_(static_cast<F&&>(fun)) {}
+    template<class... Args>
+    decltype(auto) operator () (Args&&...args) const {
+        return fun_(*this, static_cast<Args&&>(args)...);
+    }
+};
+template<class T> Y_combinator(T)->Y_combinator<T>;
 ```
