@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>dianhsu的paste站</title>
+</head>
+
+<body>
+    <pre id='content'></pre>
+    <script>
+        let searchParams = new URLSearchParams(window.location.search);
+        let reqUrl = searchParams.get("code");
+        fetch(`http://cdn.paste.dianhsu.top/${reqUrl}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                console.log(myJson);
+                let ret = myJson['content'];
+                ret = ret.replaceAll("<", "&lt;");
+                ret = ret.replaceAll(">", "&gt;");
+                console.log(ret);
+                document.getElementById('content').innerHTML = ret;
+            });
+    </script>
+</body>
+
+</html>
