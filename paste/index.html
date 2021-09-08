@@ -54,6 +54,9 @@
         <input type="button" value='Paste!' onclick="handlePasteClick()">
     </form>
     <script>
+        if (window.location.protocol.startsWith('https:')) {
+            window.location.href = window.location.href.replace('https://', 'http://')
+        }
         function handlePasteClick() {
             let user = document.getElementById('user').value;
             let lang = document.getElementById('lang').value;

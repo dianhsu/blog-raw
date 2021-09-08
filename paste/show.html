@@ -7,6 +7,9 @@
 <body>
     <pre id='content'></pre>
     <script>
+        if (window.location.protocol.startsWith('https:')) {
+            window.location.href = window.location.href.replace('https://', 'http://')
+        }
         let searchParams = new URLSearchParams(window.location.search);
         let reqUrl = searchParams.get("code");
         fetch(`http://cdn.paste.dianhsu.top/${reqUrl}`)
