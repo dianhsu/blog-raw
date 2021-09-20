@@ -682,7 +682,7 @@ int main() {
 ```cpp
 const int maxn = 200200;
 const int MOD = 1e9 + 7;
-long long divInv[maxn], mulInv[maxn];
+long long divInv[maxn + 1], mulInv[maxn + 1];
 
 ll qPow(ll b, ll k) {
     if (k == 0) return 1;
@@ -698,9 +698,12 @@ ll qPow(ll b, ll k) {
 void init() {
     divInv[0] = 1;
     mulInv[0] = 1;
-    for (int i = 1; i <= 200000; ++i) {
+    for (int i = 1; i <= maxn; ++i) {
         mulInv[i] = (mulInv[i - 1] * i) % MOD;
-        divInv[i] = (divInv[i - 1] * qPow(i, MOD - 2)) % MOD;
+    }
+    divInv[maxn] = qPow(mulInv[maxn], MOD - 2) % MOD;
+    for(int i = maxn - 1; i > 0; --i){
+        divInv[i] = divInv[i + 1] * (i + 1) % MOD;
     }
 }
 ll C(int n, int m) {
