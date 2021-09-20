@@ -249,6 +249,48 @@ unsigned int ELFHash(char *str)
 ```
 
 
+### 后缀数组
+> https://leetcode-cn.com/problems/longest-common-subpath/solution/chou-zhui-shu-zu-mo-ban-ha-xi-mo-ban-by-b05na/
+```cpp
+template<class T = string, int range = 128>
+struct SuffixArray {
+    T s;
+    int n, bucketRange;
+    int sa[range], second[range], bucket[range], mem[range], rk_mem[range + 1], rk2_mem[range + 1], height[range], * rk, * rk2;
+    SuffixArray(const T& _s) :s(_s), n(s.size()), bucketRange(range) {
+        rk = rk_mem;
+        rk2 = rk2_mem;
+        rk[n] = rk2[n] = -1;
+        memset(bucket, 0, sizeof(bucket));
+        for (int i = 0;i < n;i++)bucket[rk[i] = s[i]]++;
+        for (int i = 1;i < bucketRange;i++)bucket[i] += bucket[i - 1];
+        for (int i = 0;i < n;i++)sa[--bucket[rk[i]]] = i;
+        for (int w = 1;;w <<= 1) {
+            int j = 0;
+            for (int i = n - w;i < n;i++)second[j++] = i;
+            for (int i = 0;i < n;i++)if (sa[i] >= w)second[j++] = sa[i] - w;
+            memset(bucket, 0, sizeof(bucket));
+            for (int i = 0;i < n;i++)bucket[mem[i] = rk[second[i]]]++;
+            for (int i = 1;i < bucketRange;i++)bucket[i] += bucket[i - 1];
+            for (int i = n - 1;i >= 0;i--)sa[--bucket[mem[i]]] = second[i];
+            bucketRange = 0;
+            for (int i = 0;i < n;i++) {
+                rk2[sa[i]] = !i || (rk[sa[i]] == rk[sa[i - 1]] && rk[sa[i] + w] == rk[sa[i - 1] + w]) ? bucketRange : ++bucketRange;
+            }
+            swap(rk, rk2);
+            if (++bucketRange == n)break;
+        }
+    }
+    void getHeight() {
+        memset(height, 0xff, sizeof(height));
+        for (int i = 0, h = 0;i < n;i++) {
+            if (h)h--;
+            if (rk[i])while (sa[rk[i] - 1] + h < n && s[i + h] == s[sa[rk[i] - 1] + h])h++;
+            height[rk[i]] = h;
+        }
+    }
+};
+```
 ## 图论
 
 ### 最短路
@@ -1372,7 +1414,22 @@ public:
     }
 };
 ```
-
+```python
+import math
+class SparseTable:
+    def __init__(self, val, func):
+        self.arr = [val, ]
+        n = int(math.ceil(math.log2(len(val))))
+        for i in range(n):
+            tmp = [0] * len(val)
+            for j in range(len(val) - (1 << (i + 1)) + 1):
+                tmp[j] = func(self.arr[i][j], self.arr[i][j + (1 << i)])
+            self.arr.append(tmp)
+        self.func = func
+    def query(self, lp, rp):
+        h = int(math.floor(math.log2(rp - lp + 1)))
+        return self.func(self.arr[h][lp], self.arr[h][rp - (1 << h) + 1])
+```
 ### 树状数组
 
 ```cpp
