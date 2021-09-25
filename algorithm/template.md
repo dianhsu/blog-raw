@@ -250,46 +250,30 @@ unsigned int ELFHash(char *str)
 
 
 ### 后缀数组
-> https://leetcode-cn.com/problems/longest-common-subpath/solution/chou-zhui-shu-zu-mo-ban-ha-xi-mo-ban-by-b05na/
 ```cpp
-template<class T = string, int range = 128>
-struct SuffixArray {
-    T s;
-    int n, bucketRange;
-    int sa[range], second[range], bucket[range], mem[range], rk_mem[range + 1], rk2_mem[range + 1], height[range], * rk, * rk2;
-    SuffixArray(const T& _s) :s(_s), n(s.size()), bucketRange(range) {
-        rk = rk_mem;
-        rk2 = rk2_mem;
-        rk[n] = rk2[n] = -1;
-        memset(bucket, 0, sizeof(bucket));
-        for (int i = 0;i < n;i++)bucket[rk[i] = s[i]]++;
-        for (int i = 1;i < bucketRange;i++)bucket[i] += bucket[i - 1];
-        for (int i = 0;i < n;i++)sa[--bucket[rk[i]]] = i;
-        for (int w = 1;;w <<= 1) {
-            int j = 0;
-            for (int i = n - w;i < n;i++)second[j++] = i;
-            for (int i = 0;i < n;i++)if (sa[i] >= w)second[j++] = sa[i] - w;
-            memset(bucket, 0, sizeof(bucket));
-            for (int i = 0;i < n;i++)bucket[mem[i] = rk[second[i]]]++;
-            for (int i = 1;i < bucketRange;i++)bucket[i] += bucket[i - 1];
-            for (int i = n - 1;i >= 0;i--)sa[--bucket[mem[i]]] = second[i];
-            bucketRange = 0;
-            for (int i = 0;i < n;i++) {
-                rk2[sa[i]] = !i || (rk[sa[i]] == rk[sa[i - 1]] && rk[sa[i] + w] == rk[sa[i - 1] + w]) ? bucketRange : ++bucketRange;
+
+vector<int> getSA(const string &s) {
+    int n = s.length() + 1;
+    vector<int> rk(n << 1), oldRk(n << 1), sa(n);
+    for (int i = 0; i < n; ++i) {
+        rk[i] = s[i];
+        sa[i] = i;
+    }
+    for (int w = 1; w < n; w <<= 1) {
+        sort(all(sa), [&](int x, int y) {
+            return rk[x] == rk[y] ? rk[x + w] < rk[y + w] : rk[x] < rk[y];
+        });
+        oldRk = rk;
+        for(int i = 1; i < n; ++i){
+            if(oldRk[sa[i]] == oldRk[sa[i - 1]] and oldRk[sa[i] + w] == oldRk[sa[i - 1] + w]){
+                rk[sa[i]] = rk[sa[i - 1]];
+            }else{
+                rk[sa[i]] = rk[sa[i - 1]] + 1;
             }
-            swap(rk, rk2);
-            if (++bucketRange == n)break;
         }
     }
-    void getHeight() {
-        memset(height, 0xff, sizeof(height));
-        for (int i = 0, h = 0;i < n;i++) {
-            if (h)h--;
-            if (rk[i])while (sa[rk[i] - 1] + h < n && s[i + h] == s[sa[rk[i] - 1] + h])h++;
-            height[rk[i]] = h;
-        }
-    }
-};
+    return sa;
+}
 ```
 ## 图论
 
