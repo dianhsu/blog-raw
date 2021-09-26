@@ -251,29 +251,46 @@ unsigned int ELFHash(char *str)
 
 ### 后缀数组
 ```cpp
+// 基数排序
+void radixSort(int n, int m, int w, vector<int>& sa, vector<int>& rk, vector<int>& bucket, vector<int>& idx) {
+    fill(all(bucket), 0);
+    for (int i = 0; i < n; ++i) idx[i] = sa[i];
+    for (int i = 0; i < n; ++i) ++bucket[rk[idx[i] + w]];
+    for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
 
-vector<int> getSA(const string &s) {
+    for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[idx[i] + w]]] = idx[i];
+    fill(all(bucket), 0);
+    for (int i = 0; i < n; ++i) idx[i] = sa[i];
+    for (int i = 0; i < n; ++i) ++bucket[rk[idx[i]]];
+    for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
+    for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[idx[i]]]] = idx[i];
+}
+vector<int> getSA(const string&& s) {
     int n = s.length() + 1;
-    vector<int> rk(n << 1), oldRk(n << 1), sa(n);
-    for (int i = 0; i < n; ++i) {
-        rk[i] = s[i];
-        sa[i] = i;
-    }
+    int m = max(300, n);
+    vector<int> sa(n);
+    vector rk(2, vector<int>(n << 1));
+    vector<int> bucket(m), idx(n);
+
+    for (int i = 0; i < n; ++i) ++bucket[rk[0][i] = s[i]];
+    for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
+    for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[0][i]]] = i;
+    int pre = 1;
+    int cur = 0;
     for (int w = 1; w < n; w <<= 1) {
-        sort(all(sa), [&](int x, int y) {
-            return rk[x] == rk[y] ? rk[x + w] < rk[y + w] : rk[x] < rk[y];
-        });
-        oldRk = rk;
-        for(int i = 1; i < n; ++i){
-            if(oldRk[sa[i]] == oldRk[sa[i - 1]] and oldRk[sa[i] + w] == oldRk[sa[i - 1] + w]){
-                rk[sa[i]] = rk[sa[i - 1]];
-            }else{
-                rk[sa[i]] = rk[sa[i - 1]] + 1;
+        swap(cur, pre);
+        radixSort(n, m, w, sa, rk[pre], bucket, idx);
+        for (int i = 1; i < n; ++i) {
+            if (rk[pre][sa[i]] == rk[pre][sa[i - 1]] and rk[pre][sa[i] + w] == rk[pre][sa[i - 1] + w]) {
+                rk[cur][sa[i]] = rk[cur][sa[i - 1]];
+            } else {
+                rk[cur][sa[i]] = rk[cur][sa[i - 1]] + 1;
             }
         }
     }
     return sa;
 }
+
 ```
 ## 图论
 
@@ -842,441 +859,9 @@ void ReverseContar(int contar_val, int* t){
 ```
 
 ## 数据结构
-### AVL树
-```cpp
 
-template<class T>
-struct AVLNode {
-    T data;
-    AVLNode<T> *leftChild;
-    AVLNode<T> *rightChild;
-    int height;
-    AVLNode(T data): data(data), height(1), leftChild(nullptr), rightChild(nullptr) { }
-    ~AVLNode() {
-        delete leftChild;
-        delete rightChild;
-    }
-};
-
-template<class T>
-class AVL {
-public:
-    AVL() {
-        root = nullptr;
-    }
-
-    ~AVL() {
-        delete root;
-    }
-
-    /**
-     * @brief 将结点插入到AVL树中
-     * @param val 需要插入的值
-     * @note 如果发现这个树中已经有这个值存在了，就不会进行任何操作
-     * */
-    void insert(T val) {
-        _insert(&root, val);
-    }
-
-    /**
-     * @brief 检查结点是否在AVL树中
-     * @param val 需要检查的值
-     * */
-    bool exist(T val) {
-        auto ptr = &root;
-        while (*ptr != nullptr) {
-            if (val == (*ptr)->data) {
-                return true;
-            } else if (val < (*ptr)->data) {
-                *ptr = (*ptr)->leftChild;
-            } else {
-                *ptr = (*ptr)->rightChild;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @brief 找到值为val的结点
-     * @param val 目标值
-     * @return 返回值为指向该结点的指针的地址
-     */
-    AVLNode<T> **find(T val) {
-        auto ptr = &root;
-        while ((*ptr) != nullptr) {
-            if (val == (*ptr)->data) {
-                break;
-            } else if (val < (*ptr)->data) {
-                *ptr = (*ptr)->leftChild;
-            } else {
-                *ptr = (*ptr)->rightChild;
-            }
-        }
-        return ptr;
-    }
-
-    /**
-     * @brief 删除结点
-     * @note 首先找到结点，然后将结点旋转到叶子结点，然后回溯检查树的平衡性
-     * @param val 需要删除的结点的值
-     * @note 这个地方需要递归寻找该值的结点，因为需要回溯更新平衡树
-     * */
-    void remove(T val) {
-        _remove(&root, val);
-    }
-
-    /**
-     * @brief 生成Mermaid图形
-     * @note 只是为了debug用的，可以将图形放到Mermaid中，方便观察二叉树的形状
-     * @ref https://mermaid-js.github.io/mermaid-live-editor
-     * */
-    friend std::ostream &operator<<(std::ostream &os, AVL &avl) {
-        os << "graph #LR" << std::endl;
-        std::string name = "Node1";
-        if (avl.root != nullptr) {
-            avl._generate(os, avl.root, name);
-        } else {
-            os << "  " << name << "[ nullptr ]" << std::endl;
-        }
-        return os;
-    }
-private:
-    void _remove(AVLNode<T> **ptr, T val) {
-        if (*ptr == nullptr) {
-            return;
-        }
-        if ((*ptr)->data == val) {
-            _rotateNodeToLeaf(ptr);
-        } else if ((*ptr)->data < val) {
-            _remove(&((*ptr)->rightChild), val);
-        } else {
-            _remove(&((*ptr)->leftChild), val);
-        }
-        // 完了之后回溯，重新平衡二叉树
-        _balance(ptr);
-        _updateHeight(*ptr);
-    }
-
-    /**
-     * @brief 将一个结点旋转到叶子结点
-     * @param ptr 将要被旋转至叶子的结点的指针的地址
-     * @note 旋转的时候，将当前结点旋转到高度比较小的一边。
-     */
-    void _rotateNodeToLeaf(AVLNode<T> **ptr) {
-        // 当前结点已经是叶子结点了
-        if ((*ptr)->leftChild == nullptr and (*ptr)->rightChild == nullptr) {
-            *ptr = nullptr;
-            return;
-        }
-        int leftHeight = (*ptr)->leftChild != nullptr ? (*ptr)->leftChild->height : 0;
-        int rightHeight = (*ptr)->rightChild != nullptr ? (*ptr)->rightChild->height : 0;
-        // 左边高度比较小，左旋
-        if (leftHeight <= rightHeight) {
-            _leftRotate(ptr);
-            _rotateNodeToLeaf(&((*ptr)->leftChild));
-        } else {
-            // 右旋
-            _rightRotate(ptr);
-            _rotateNodeToLeaf(&((*ptr)->rightChild));
-        }
-        _balance(ptr);
-        _updateHeight(*ptr);
-    }
-
-    /**
-     * @brief 生成Mermaid图形的步骤
-     *
-     * */
-    void _generate(std::ostream &os, AVLNode<T> *ptr, std::string &name) {
-        if (ptr->leftChild != nullptr) {
-            os << "  " << name << "[ " << ptr->data << " ] -- Left --> ";
-            name += '0';
-            os << name << "[ " << ptr->leftChild->data << " ]" << std::endl;
-            _generate(os, ptr->leftChild, name);
-            name.pop_back();
-        }
-        if (ptr->rightChild != nullptr) {
-            os << "  " << name << "[ " << ptr->data << " ] -- Right --> ";
-            name += '1';
-            os << name << "[ " << ptr->rightChild->data << " ]" << std::endl;
-            _generate(os, ptr->rightChild, name);
-            name.pop_back();
-        }
-    }
-
-    /**
-     * @brief 插入结点
-     *
-     * */
-    void _insert(AVLNode<T> **ptr, T val) {
-        if (*ptr == nullptr) {
-            *ptr = new AVLNode<T>(val);
-            return;
-        }
-        if (val < (*ptr)->data) {
-            _insert(&((*ptr)->leftChild), val);
-        } else if (val > (*ptr)->data) {
-            _insert(&((*ptr)->rightChild), val);
-        } else {
-            // 如果当前平衡二叉树中已经存在这个结点了，不做任何处理
-            return;
-        }
-        _balance(ptr);
-        _updateHeight(*ptr);
-    }
-
-    /**
-     * @brief 平衡结点
-     *
-     * */
-    void _balance(AVLNode<T> **ptr) {
-        if (*ptr == nullptr) return;
-        int leftHeight = (*ptr)->leftChild != nullptr ? (*ptr)->leftChild->height : 0;
-        int rightHeight = (*ptr)->rightChild != nullptr ? (*ptr)->rightChild->height : 0;
-        if (abs(leftHeight - rightHeight) <= 1) return;
-
-        if (leftHeight < rightHeight) {
-            auto rightElement = (*ptr)->rightChild;
-            int rightElementLeftHeight = rightElement->leftChild != nullptr ? rightElement->leftChild->height : 0;
-            int rightElementRightHeight = rightElement->rightChild != nullptr ? rightElement->rightChild->height : 0;
-            if (rightElementLeftHeight < rightElementRightHeight) {
-                // RR
-                _leftRotate(ptr);
-            } else {
-                // RL
-                _rightRotate(&((*ptr)->rightChild));
-                _leftRotate(ptr);
-            }
-        } else {
-            auto leftElement = (*ptr)->leftChild;
-            int leftElementLeftHeight = leftElement->leftChild != nullptr ? leftElement->leftChild->height : 0;
-            int leftElementRightHeight = leftElement->rightChild != nullptr ? leftElement->rightChild->height : 0;
-            if (leftElementLeftHeight > leftElementRightHeight) {
-                // LL
-                _rightRotate(ptr);
-            } else {
-                // LR
-                _leftRotate(&((*ptr)->leftChild));
-                _rightRotate(ptr);
-            }
-        }
-    }
-
-    /**
-     * @brief 右旋
-     *
-     * */
-    void _rightRotate(AVLNode<T> **ptr) {
-        auto tmp = (*ptr)->leftChild;
-        (*ptr)->leftChild = tmp->rightChild;
-        tmp->rightChild = *ptr;
-        _updateHeight(tmp);
-        _updateHeight(*ptr);
-        *ptr = tmp;
-    }
-
-    /**
-     * @brief 左旋
-     * */
-    void _leftRotate(AVLNode<T> **ptr) {
-        auto tmp = (*ptr)->rightChild;
-        (*ptr)->rightChild = tmp->leftChild;
-        tmp->leftChild = *ptr;
-        _updateHeight(tmp);
-        _updateHeight(*ptr);
-        *ptr = tmp;
-    }
-
-    void _updateHeight(AVLNode<T> *ptr) {
-        if (ptr == nullptr) return;
-        int leftHeight = ptr->leftChild != nullptr ? ptr->leftChild->height : 0;
-        int rightHeight = ptr->rightChild != nullptr ? ptr->rightChild->height : 0;
-        ptr->height = std::max(leftHeight, rightHeight) + 1;
-    }
-
-    AVLNode<T> *root;
-};
-
-```
 ### 线段树
-```cpp
-template<typename T>
-class SegmentTree {
-private:
-    /**
-     * @brief 建立一棵线段树的步骤
-     * @param lPosQ 建树区间的左端点
-     * @param rPosQ 建树区间的右端点
-     * @param pos 当前根的编号
-     * @param data 输入数据
-     * @param shift 输入数据和建树的序号匹配
-     * */
-    void buildStep(int lPosQ, int rPosQ, std::vector<T>& data, int shift, int pos) {
-        if (lPosQ == rPosQ) {
-            node[pos] = data[lPosQ + shift];
-            minVal[pos] = data[lPosQ + shift];
-            maxVal[pos] = data[lPosQ + shift];
-            return;
-        }
-        int mPosP = lPosQ + ((rPosQ - lPosQ) >> 1);
-        buildStep(lPosQ, mPosP, data, shift, pos << 1);
-        buildStep(mPosP + 1, rPosQ, data, shift, (pos << 1) | 1);
-        node[pos] = node[pos << 1] + node[(pos << 1) | 1];
-        minVal[pos] = min(minVal[pos << 1], minVal[(pos << 1) | 1]);
-        maxVal[pos] = max(maxVal[pos << 1], maxVal[(pos << 1) | 1]);
-    }
 
-    /**
-     * @brief 区间更新线段树
-     * @param lPosQ 被修改的区间的左端点
-     * @param rPosQ 被修改的区间的右端点
-     * @param diff 被修改的区间元素的变化量
-     * @param sPos 当前结点包含的区间的左端点
-     * @param ePos 当前结点包含的区间的右端点
-     * @param pos 当前结点的编号
-     * */
-    void updateStep(int lPosQ, int rPosQ, int diff, int sPos, int ePos, int pos) {
-        if (lPosQ > ePos or rPosQ < sPos) return;
-        if (lPosQ <= sPos and ePos <= rPosQ) {
-            node[pos] += (ePos - sPos + 1) * diff;
-            lazy[pos] += diff;
-            minVal[pos] += diff;
-            maxVal[pos] += diff;
-            return;
-        }
-        int mPos = sPos + ((ePos - sPos) >> 1);
-        lazyUpdate(pos, sPos, mPos, ePos);
-        updateStep(lPosQ, rPosQ, diff, sPos, mPos, pos << 1);
-        updateStep(lPosQ, rPosQ, diff, mPos + 1, ePos, (pos << 1) | 1);
-        node[pos] = node[pos << 1] + node[(pos << 1) | 1];
-        maxVal[pos] = max(maxVal[pos << 1], maxVal[(pos << 1) | 1]);
-        minVal[pos] = min(minVal[pos << 1], minVal[(pos << 1) | 1]);
-    }
-
-    /**
-     * @brief 区间求和的步骤
-     * @param lPosQ 查询区间左端点
-     * @param rPosQ 查询区间右端点
-     * @param sPos 当前结点包含的区间的左端点
-     * @param ePos 当前结点包含的区间的右端点
-     * @param pos 当前结点的编号
-     **/
-    T querySumStep(int lPosQ, int rPosQ, int sPos, int ePos, int pos = 1) {
-        if (lPosQ > ePos or rPosQ < sPos) return 0;
-        if (lPosQ <= sPos and ePos <= rPosQ) return node[pos];
-        int mPos = sPos + ((ePos - sPos) >> 1);
-        lazyUpdate(pos, sPos, mPos, ePos);
-        T sum = 0;
-        sum = querySumStep(lPosQ, rPosQ, sPos, mPos, pos << 1);
-        sum += querySumStep(lPosQ, rPosQ, mPos + 1, ePos, (pos << 1) | 1);
-        return sum;
-    }
-
-    T queryMinStep(int lPosQ, int rPosQ, int sPos, int ePos, int pos = 1) {
-        if (lPosQ > ePos or rPosQ < sPos) return MAX_VAL;
-        if (lPosQ <= sPos and ePos <= rPosQ) return minVal[pos];
-        int mPos = sPos + ((ePos - sPos) >> 1);
-        lazyUpdate(pos, sPos, mPos, ePos);
-        T ret = MAX_VAL;
-        ret = min(ret, queryMinStep(lPosQ, rPosQ, sPos, mPos, pos << 1));
-        ret = min(ret, queryMinStep(lPosQ, rPosQ, mPos + 1, ePos, (pos << 1) | 1));
-        return ret;
-    }
-
-    T queryMaxStep(int lPosQ, int rPosQ, int sPos, int ePos, int pos = 1) {
-        if (lPosQ > ePos or rPosQ < sPos) return MIN_VAL;
-        if (lPosQ <= sPos and ePos <= rPosQ) return maxVal[pos];
-        int mPos = sPos + ((ePos - sPos) >> 1);
-        lazyUpdate(pos, sPos, mPos, ePos);
-        T ret = MIN_VAL;
-        ret = max(ret, queryMaxStep(lPosQ, rPosQ, sPos, mPos, pos << 1));
-        ret = max(ret, queryMaxStep(lPosQ, rPosQ, mPos + 1, ePos, (pos << 1) | 1));
-        return ret;
-    }
-    /**
-     * @brief 懒更新
-     * @param pos 当前区间节点
-     * @param sPos 区间左端点
-     * @param ePos 区间右端点
-     * @param mPos 区间中间端点
-     * */
-    void lazyUpdate(int pos, int sPos, int mPos, int ePos) {
-        if (lazy[pos] == 0) return;
-        node[pos << 1] += lazy[pos] * (mPos - sPos + 1);
-        maxVal[pos << 1] += lazy[pos];
-        minVal[pos << 1] += lazy[pos];
-
-        node[(pos << 1) | 1] += lazy[pos] * (ePos - mPos);
-        minVal[(pos << 1) | 1] += lazy[pos];
-        maxVal[(pos << 1) | 1] += lazy[pos];
-
-        lazy[pos << 1] += lazy[pos];
-        lazy[(pos << 1) | 1] += lazy[pos];
-        lazy[pos] = 0;
-    }
-
-
-public:
-    explicit SegmentTree(int n) :
-        lPos(1), rPos(n), node(4 * n + 10), lazy(4 * n + 10), minVal(4 * n + 10), maxVal(4 * n + 10) {}
-
-    /**
-     * @brief 建立一棵线段树
-     * @param data 输入数据
-     * @param shift 调整偏移量使得数据和树匹配，因为树中的结点是从1开始计数
-     * */
-    void build(std::vector<T>& data, int shift) {
-        buildStep(lPos, rPos, data, shift, 1);
-    }
-
-    /**
-     * @brief 区间更新线段树
-     * @param diff 被修改的区间元素的变化量
-     * @param lPosQ 被修改的区间的左端点
-     * @param rPosQ 被修改的区间的右端点
-     *
-     * */
-    void update(int diff, int lPosQ, int rPosQ) {
-        updateStep(lPosQ, rPosQ, diff, lPos, rPos, 1);
-    }
-
-    /**
-     * @brief 区间求和
-     * @param lPosQ 当前结点包含的区间的左端点
-     * @param rPosQ 当前结点包含的区间的右端点
-     *
-     **/
-    T querySum(int lPosQ, int rPosQ) {
-        return querySumStep(lPosQ, rPosQ, lPos, rPos, 1);
-    }
-
-    /**
-     * @brief 区间最小值查询
-     * @param lPosQ 当前结点包含的区间的左端点
-     * @param rPosQ 当前结点包含的区间的右端点
-     **/
-    T queryMin(int lPosQ, int rPosQ) {
-        return queryMinStep(lPosQ, rPosQ, lPos, rPos, 1);
-    }
-
-    /**
-     * @brief 区间最大值查询
-     * @param lPosQ 当前结点包含的区间的左端点
-     * @param rPosQ 当前结点包含的区间的右端点
-     **/
-    T queryMax(int lPosQ, int rPosQ) {
-        return queryMaxStep(lPosQ, rPosQ, lPos, rPos, 1);
-    }
-
-private:
-    int lPos, rPos;
-    std::vector<T> node, lazy, minVal, maxVal;
-    const static T MAX_VAL = INT_MAX;
-    const static T MIN_VAL = INT_MIN;
-};
-
-```
-这种写法感觉会更方便一些
 ```cpp
 // Luogu P3373
 template<typename T = int>
