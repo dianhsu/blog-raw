@@ -16,11 +16,17 @@ toc:
 
 ## 创建型模式
 
-- 抽象工厂(Abstract Factory)
-- 建造者(Builder)
-- 工厂方法(Factory Method)
-- 原型(Prototype)
-- 单例(Singleton)
+### 工厂方法(Factory Method)
+> 定义一个用于创建产品的接口，由子类决定生产什么产品。
+
+
+### 单例(Signleton)
+
+### 原型(Prototype)
+
+### 抽象工厂(Abstract Factory)
+
+### 建造者(Builder)
 
 
 ## 结构型模式
@@ -53,3 +59,22 @@ toc:
 - 接口隔离原则
 - 迪米特法则
 - 开放-封闭原则
+
+
+### Test UML
+
+```puml
+@startuml
+abstract        抽象
+abstract class  抽象(等同abstract)
+annotation      注解
+circle          圆
+()              圆缩写形式
+class           类
+diamond         菱形
+<>              菱形写形式
+entity          实例
+enum            枚举
+interface       接口
+@enduml
+```
