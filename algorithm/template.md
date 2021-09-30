@@ -251,46 +251,60 @@ unsigned int ELFHash(char *str)
 
 ### 后缀数组
 ```cpp
-// 基数排序
-void radixSort(int n, int m, int w, vector<int>& sa, vector<int>& rk, vector<int>& bucket, vector<int>& idx) {
-    fill(all(bucket), 0);
-    for (int i = 0; i < n; ++i) idx[i] = sa[i];
-    for (int i = 0; i < n; ++i) ++bucket[rk[idx[i] + w]];
-    for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
+class SuffixArray {
+private:
+    void radixSort(int n, int m, int w, vector<int>& sa, vector<int>& rk, vector<int>& bucket, vector<int>& idx) {
+        fill(all(bucket), 0);
+        for (int i = 0; i < n; ++i) idx[i] = sa[i];
+        for (int i = 0; i < n; ++i) ++bucket[rk[idx[i] + w]];
+        for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
 
-    for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[idx[i] + w]]] = idx[i];
-    fill(all(bucket), 0);
-    for (int i = 0; i < n; ++i) idx[i] = sa[i];
-    for (int i = 0; i < n; ++i) ++bucket[rk[idx[i]]];
-    for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
-    for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[idx[i]]]] = idx[i];
-}
-vector<int> getSA(const string&& s) {
-    int n = s.length() + 1;
-    int m = max(300, n);
-    vector<int> sa(n);
-    vector rk(2, vector<int>(n << 1));
-    vector<int> bucket(m), idx(n);
+        for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[idx[i] + w]]] = idx[i];
+        fill(all(bucket), 0);
+        for (int i = 0; i < n; ++i) idx[i] = sa[i];
+        for (int i = 0; i < n; ++i) ++bucket[rk[idx[i]]];
+        for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
+        for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[idx[i]]]] = idx[i];
+    }
+public:
+    SuffixArray(const string& s) :
+        n(s.length() + 1),
+        m(max((int) s.length() + 1, 300)),
+        rk(2, vector<int>((s.length() + 1) << 1)),
+        bucket(max((int) s.length() + 1, 300)),
+        idx(s.length() + 1),
+        sa(s.length() + 1),
+        ht(s.length()) {
 
-    for (int i = 0; i < n; ++i) ++bucket[rk[0][i] = s[i]];
-    for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
-    for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[0][i]]] = i;
-    int pre = 1;
-    int cur = 0;
-    for (int w = 1; w < n; w <<= 1) {
-        swap(cur, pre);
-        radixSort(n, m, w, sa, rk[pre], bucket, idx);
-        for (int i = 1; i < n; ++i) {
-            if (rk[pre][sa[i]] == rk[pre][sa[i - 1]] and rk[pre][sa[i] + w] == rk[pre][sa[i - 1] + w]) {
-                rk[cur][sa[i]] = rk[cur][sa[i - 1]];
-            } else {
-                rk[cur][sa[i]] = rk[cur][sa[i - 1]] + 1;
+        for (int i = 0; i < n; ++i) ++bucket[rk[0][i] = s[i]];
+        for (int i = 1; i < m; ++i) bucket[i] += bucket[i - 1];
+        for (int i = n - 1; i >= 0; --i) sa[--bucket[rk[0][i]]] = i;
+        int pre = 1;
+        int cur = 0;
+        for (int w = 1; w < n; w <<= 1) {
+            swap(cur, pre);
+            radixSort(n, m, w, sa, rk[pre], bucket, idx);
+            for (int i = 1; i < n; ++i) {
+                if (rk[pre][sa[i]] == rk[pre][sa[i - 1]] and rk[pre][sa[i] + w] == rk[pre][sa[i - 1] + w]) {
+                    rk[cur][sa[i]] = rk[cur][sa[i - 1]];
+                } else {
+                    rk[cur][sa[i]] = rk[cur][sa[i - 1]] + 1;
+                }
             }
         }
+        for (int i = 0, k = 0; i < n - 1; ++i) {
+            if (k) --k;
+            while (s[i + k] == s[sa[rk[cur][i] - 1] + k]) ++k;
+            ht[rk[cur][i] - 1] = k;
+        }
     }
-    return sa;
-}
-
+    vector<int> sa;
+    vector<int> ht;
+private:
+    int n, m;
+    vector<vector<int>> rk;
+    vector<int> bucket, idx;
+};
 ```
 ## 图论
 
