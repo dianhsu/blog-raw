@@ -24,9 +24,8 @@ title: 首页 - dianhsu.top
 - :gear:[操作系统](./operation_system/index.html)
 - :airplane:[设计模式](./design_pattern/index.html)
 - :globe_with_meridians:[计算机网络](./computer_network/index.html)
-- :computer:计算机组成原理
 - :fire:[杂项](./misc/index.html)
-- :question:[工具](./tool/index.html)
+- :banana:[工具](./tool/index.html)
 
 ## Codeforces
 - <a href="https://codeforces.com/profile/xudian"><img src="https://fc.dianhsu.top/cf?user=xudian"></a>
