@@ -21,11 +21,10 @@ toc:
 ### 数据库完整性
 
 ### ACID
-- 原子性（Atomicity）
-- 一致性（Consistency）
-- 隔离性（Isolation）
-- 持久性（Durability）
-
+- 原子性（Atomicity）：事务必须以一个整体单元的形式进行工作，对于其数据的修改，要么全都执行，要么全都不知执行。如果只执行事务中多个操作的前半部分就出现错误，那么必须回滚所有的操作，让数据在逻辑上回滚到原先的状态。
+- 一致性（Consistency）：在事务完成时，比如是所有的数据都保持在一致状态。
+- 隔离性（Isolation）：事务查看数据时数据所处的状态，要么是另一并发事务修改它之前的状态，要么是另一事务修改它之后的状态，事务是不会查看中间状态的数据的。
+- 持久性（Durability）：事务完成之后，它对于系统的影响是永久性的。即使今后出现致命的系统故障（如机器重启，断电），数据也将一直保持。
 
 ### E-R模型
 
@@ -56,5 +55,19 @@ toc:
 ### 表级锁和行级锁
 
 #### 表级锁
+
+| 锁模式                 | 解释                                                                                                                                                                                               |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ACCESS SHARE           | 只与 ACCESS ELUSIVE 模式冲突。<br/> SELECT 命令将在所引用的表上加此类型的锁。通常情况下，任何只读取表而不修改表的查询都会请求这种锁模式。                                                          |
+| ROW SHARE              | 与 EXCLUSIVE 和 ACCESS EXCLUSIVE 锁模式冲突。<br/> SELECT FOR UPDATE 和 SELECT FOR SHARE命令会在目标表上加此类型的锁。                                                                             |
+| ROW EXCLUSIVE          | 与 SHARE、SHARE ROW EXCLUSIVE、EXCLUSIVE、ACCESS EXCLUSIVE 锁模式冲突。<br/>UPDATE、DELETE、INSERT命令会自动在锁修改的表上请求此类型的锁。通常情况下，修改表中数据的命令都是在在表上加此类型的锁。 |
+| SHARE UPDATE EXCLUSIVE | 与 SHARE UPDATE EXCLUSIVE                                                                                                                                                                          |
+| SHARE                  |                                                                                                                                                                                                    |
+| SHARE ROW EXCLUSIVE    |                                                                                                                                                                                                    |
+| EXCLUSIVE              |                                                                                                                                                                                                    |
+| ACCESS EXCLUSIVE       |                                                                                                                                                                                                    |
+
+#### 行级锁
+
 
 ## 问题
