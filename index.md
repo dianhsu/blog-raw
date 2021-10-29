@@ -39,3 +39,5 @@ title: 首页 - dianhsu.top
 - 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
+
+![](https://cdn.dianhsu.top/dianhsu_manim.gif)
