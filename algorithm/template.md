@@ -630,6 +630,8 @@ vector<int> SieveOfEuler() {
                 if (i % it == 0) {
                     break;
                 }
+            }else{
+                break;
             }
         }
     }
