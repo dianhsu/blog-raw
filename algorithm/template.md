@@ -455,6 +455,41 @@ public:
 
 ```
 
+### Tarjan
+> 解决关键边和关键点很好用
+
+```cpp
+const int maxn = 100100;
+int dfn[maxn], low[maxn];
+int tim;
+int vis[maxn];
+int sd[maxn];
+std::stack<int> st;
+vector<vector<int>> g;
+void tarjan(int cur){
+    dfn[cur] = low[cur] = ++tim; 
+    vis[cur] = 1;
+    st.push(cur);
+    for(auto& nex: g[cur]){
+        if(!dfn[nex]){
+            tarjan(nex);
+            low[cur] = min(low[cur], low[nex]);
+        }else if(vis[nex]){
+            low[cur] = min(low[cur], dfn[nex]);
+        }
+    }
+    if(dfn[cur] == low[cur]){
+        while(!st.empty()){
+            auto pos = st.top();
+            st.pop();
+            vis[pos] = 0;
+            sd[pos] = cur;
+            if(pos == cur) break;
+        }
+    }
+}
+
+```
 ## 数学
 
 ### 拓展欧几里得
