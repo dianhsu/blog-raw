@@ -1067,10 +1067,11 @@ class SparseTable:
 ### 树状数组
 
 ```cpp
-template<typename T, int N>
+template<typename T>
 struct FenWick {
+    int N;
     vector<T> arr;
-    FenWick(): arr(N + 1, 0) {}
+    FenWick(int sz): N(sz), arr(sz + 1, 0) {}
     void update(int pos, T val) {
         for (; pos <= N;pos |= (pos + 1)) {
             arr[pos] += val;
@@ -1125,4 +1126,51 @@ public:
     }
 };
 template<class T> Y_combinator(T)->Y_combinator<T>;
+```
+
+### 模数
+
+```cpp
+
+class ModNum{
+public:
+    int selfPow(int base, int p){
+        int ret = 1;
+        while(p){
+            if(p & 1) ret = (ret * 1ll * base) % MOD;
+            p >>= 1;
+            base = (ret * 1ll * base) % MOD;
+        }
+        return ret;
+    }
+    ModNum(): val(0) {}
+    ModNum(int tv): val(tv) {}
+    ModNum operator + (const ModNum& arg){ return ModNum((val * 1ll + arg.val) % MOD); }
+    ModNum operator - (const ModNum& arg){ return ModNum((val * 1ll + MOD - arg.val) % MOD); }
+    ModNum operator * (const ModNum& arg){ return ModNum((val * 1ll * arg.val) % MOD); }
+    ModNum operator / (const ModNum& arg){ return ModNum((val * 1ll * selfPow(arg.val, MOD - 2)) % MOD); }
+    ModNum& operator += (const ModNum& arg){
+        this->val = (this->val * 1ll + arg.val) % MOD;
+        return *this;
+    }
+    ModNum& operator -= (const ModNum& arg){
+        this->val = (this->val * 1ll + MOD - arg.val) % MOD;
+        return *this;
+    }
+    ModNum& operator *= (const ModNum& arg){
+        this->val = (this->val * 1ll * arg.val) % MOD;
+        return *this;
+    }
+    ModNum& operator /= (const ModNum& arg){
+        this->val = (this->val * 1ll * selfPow(arg.val, MOD - 2)) % MOD;
+        return *this;
+    }
+    friend ostream& operator << (ostream& ots, const ModNum& arg){
+        ots << arg.val;
+        return ots;
+    }
+private:
+    int val;
+};
+
 ```
