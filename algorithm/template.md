@@ -1128,13 +1128,12 @@ public:
 template<class T> Y_combinator(T)->Y_combinator<T>;
 ```
 
-### 模数
+### 模数(int)
 
 ```cpp
-
 class ModNum{
 public:
-    int selfPow(int base, int p){
+    static int selfPow(int base, int p){
         int ret = 1;
         while(p){
             if(p & 1) ret = (ret * 1ll * base) % MOD;
@@ -1149,6 +1148,10 @@ public:
     ModNum operator - (const ModNum& arg){ return ModNum((val * 1ll + MOD - arg.val) % MOD); }
     ModNum operator * (const ModNum& arg){ return ModNum((val * 1ll * arg.val) % MOD); }
     ModNum operator / (const ModNum& arg){ return ModNum((val * 1ll * selfPow(arg.val, MOD - 2)) % MOD); }
+    ModNum operator + (const int argv){ return ModNum((val * 1ll + argv) % MOD); }
+    ModNum operator - (const int argv){ return ModNum((val * 1ll + MOD - argv) % MOD); }
+    ModNum operator * (const int argv){ return ModNum((val * 1ll * argv) % MOD); }
+    ModNum operator / (const int argv){ return ModNum((val * 1ll * selfPow(argv, MOD - 2)) % MOD); }
     ModNum& operator += (const ModNum& arg){
         this->val = (this->val * 1ll + arg.val) % MOD;
         return *this;
@@ -1165,6 +1168,49 @@ public:
         this->val = (this->val * 1ll * selfPow(arg.val, MOD - 2)) % MOD;
         return *this;
     }
+    ModNum& operator += (const int argv){
+        this->val = (this->val * 1ll + argv) % MOD;
+        return *this;
+    }
+    ModNum& operator -= (const int argv){
+        this->val = (this->val * 1ll + MOD - argv) % MOD;
+        return *this;
+    }
+    ModNum& operator *= (const int argv){
+        this->val = (this->val * 1ll * argv) % MOD;
+        return *this;
+    }
+    ModNum& operator /= (const int argv){
+        this->val = (this->val * 1ll * selfPow(argv, MOD - 2)) % MOD;
+        return *this;
+    }
+    ModNum& operator = (const ModNum& arg){
+        this->val = arg.val % MOD;
+        return *this;
+    }
+    ModNum& operator = (const int argv){
+        this->val = argv % MOD;
+        return *this;
+    }
+    int get(){
+        return this->val;
+    }
+    friend ModNum operator + (const int argv, const ModNum& arg){
+        return ModNum((arg.val * 1ll + argv) % MOD);
+    }
+    friend ModNum operator - (const int argv, const ModNum& arg){
+        return ModNum((argv * 1ll + MOD - arg.val) % MOD);
+    }
+    friend ModNum operator * (const int argv, const ModNum& arg){
+        return ModNum((arg.val * 1ll * argv) % MOD);
+    }
+    friend ModNum operator / (const int argv, const ModNum& arg){
+        return ModNum((argv * 1ll * ModNum::selfPow(arg.val, MOD - 2))% MOD);
+    }
+    friend istream& operator >> (istream& its, ModNum& arg){
+        its >> arg.val;
+        return its;
+    }
     friend ostream& operator << (ostream& ots, const ModNum& arg){
         ots << arg.val;
         return ots;
@@ -1172,5 +1218,4 @@ public:
 private:
     int val;
 };
-
 ```
