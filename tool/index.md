@@ -13,6 +13,70 @@ toc:
 ---------------------------
 
 [TOC]
+
+## NeoVim配置
+
+### 安装NeoVim
+- Windows: 从[neovim github release](https://github.com/neovim/neovim/releases/)下载最新的安装包，解压之后将目录添加到PATH即可
+- Linux: 可以通过包管理工具下载NeoVim，例如：`sudo apt install neovim`（Ubuntu）
+- macOS: 可以通过HomeBrew工具安装NeoVim，`brew install neovim`。
+### 安装包管理工具
+我用的是[vim-plug](https://github.com/junegunn/vim-plug)，按照链接当中的方法，安装NeoVim的vim-plug。
+
+### NeoVim配置文件
+
+```vim
+set hlsearch
+set showmatch
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set number
+syntax on
+set noswapfile
+set backspace=indent,eol,start
+set smartindent
+
+set updatetime=300
+
+let g:formatdef_custom_cpp = '"clang-format -style={BaseOnStyle: Google, IndentWidth: 4} --verbose"'
+let g:formatters_cpp = ['custom_cpp']
+let c_no_curly_error = 1
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'bfrg/vim-cpp-modern'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+Plug 'Chiel92/vim-autoformat'
+
+call plug#end()
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+```
+
+### C++环境配置（LSP和Formatter支持）
+需要安装clangd和clang-format。
+Windows可以在[https://winlibs.com/#download-release](https://winlibs.com/#download-release)这里下载带clangd和llvm环境的gcc套件。
+Linux和macOS可以使用包管理工具安装环境。
+
 ## 拒绝QQ拦截外部链接
 
 ```javascript
