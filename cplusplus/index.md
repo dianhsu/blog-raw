@@ -2,7 +2,7 @@
 title: C++ - dianhsu.top
 toc:
   depth_from: 1
-  depth_to: 2
+  depth_to: 3
   ordered: false
 ---
 @import "/mystyle.less"
@@ -225,4 +225,3 @@ C++和C语言类似，一个C++程序从源码到执行文件，有四个过程�
     *(str+2) = 'b';
     //这两种操作方式都是合法的。
     ```
-    
