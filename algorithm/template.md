@@ -247,6 +247,69 @@ unsigned int ELFHash(char *str)
     return (hash & 0x7FFFFFFF);
 }
 ```
+### AC自动机(AC Automaton)
+
+提供插入、构建、查询三个方法。
+
+```cpp
+namespace Automaton {
+struct ACNode{
+    vector<int> nex;
+    int fail;
+    int cnt;
+    ACNode() : nex(26, 0), cnt(0), fail(0) { }
+};
+class AC{
+public:
+    AC(): nodes(1) { }
+    void insert(const string& arg){
+        int cur = 0;
+        for(auto& c: arg){
+            int to = c - 'a';
+            if(!nodes[cur].nex[to]){
+                nodes[cur].nex[to] = (int)nodes.size();
+                nodes.emplace_back();
+            }
+            cur = nodes[cur].nex[to];
+        }
+        nodes[cur].cnt++;
+    }
+    void build(){
+        queue<int> Q;
+        for(int i = 0; i < 26; ++i) {
+            if(nodes[0].nex[i]){
+                Q.push(nodes[0].nex[i]);
+            }
+        }
+        while(!Q.empty()){
+            int cur = Q.front();
+            Q.pop();
+            for(int i = 0; i < 26; ++i){
+                if(nodes[cur].nex[i]){
+                    nodes[nodes[cur].nex[i]].fail = nodes[nodes[cur].fail].nex[i];
+                    Q.push(nodes[cur].nex[i]);
+                }else{
+                    nodes[cur].nex[i] = nodes[nodes[cur].fail].nex[i];
+                }
+            }
+        }
+    }
+    int query(const string& arg){
+        int cur = 0, ans = 0;
+        for(auto& c: arg){
+            cur = nodes[cur].nex[c - 'a'];
+            for(int j = cur; j and nodes[j].cnt != -1; j = nodes[j].fail){
+                ans += nodes[j].cnt;
+                nodes[j].cnt = -1;
+            }
+        }
+        return ans;
+    }
+private:
+    vector<ACNode> nodes;
+};
+}
+```
 
 
 ### 后缀数组
