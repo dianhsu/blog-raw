@@ -36,6 +36,7 @@ title: 首页 - dianhsu.top
 - <a href="https://leetcode-cn.com/u/dianhsu/"><img src="https://fc.dianhsu.top/lc?user=dianhsu&loc=cn&req=rating"></a>
 
 ## 相关链接
+- BiliBili: [https://space.bilibili.com/25564781](https://space.bilibili.com/25564781)
 - 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
