@@ -28,15 +28,15 @@ title: 首页 - dianhsu.top
 - :banana:[工具](./tool/index.html)
 
 ## Codeforces
-- <a href="https://codeforces.com/profile/xudian"><img src="https://fc.dianhsu.top/cf?user=xudian"></a>
+- <a href="https://codeforces.com/profile/xdO_o"><img src="https://fc.dianhsu.top/cf?user=xdO_o"></a>
 - <a href="https://codeforces.com/profile/dianhsu"><img src="https://fc.dianhsu.top/cf?user=dianhsu"></a>
-- <a href="https://codeforces.com/profile/HLD"><img src="https://fc.dianhsu.top/cf?user=HLD"></a>
+- <a href="https://codeforces.com/profile/dianhsuX"><img src="https://fc.dianhsu.top/cf?user=dianhsuX"></a>
 
 ## LeetCode
 - <a href="https://leetcode-cn.com/u/dianhsu/"><img src="https://fc.dianhsu.top/lc?user=dianhsu&loc=cn&req=rating"></a>
 
 ## 相关链接
-
+- 哔哩哔哩: [https://space.bilibili.com/25564781](https://space.bilibili.com/25564781)
 - 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
