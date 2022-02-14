@@ -17,7 +17,7 @@ title: 首页 - dianhsu.top
 
 
 ## 目录
-
+- :floppy_disk:[简历](https://cdn.dianhsu.top/resume.pdf)
 - :apple:[C++](./cplusplus/index.html)
 - :rocket:[经典算法](./algorithm/index.html)
 - :balloon:[LeetCode](./leetcode/index.html)
@@ -36,6 +36,7 @@ title: 首页 - dianhsu.top
 - <a href="https://leetcode-cn.com/u/dianhsu/"><img src="https://fc.dianhsu.top/lc?user=dianhsu&loc=cn&req=rating"></a>
 
 ## 相关链接
+
 - 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
