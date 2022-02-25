@@ -1155,6 +1155,43 @@ struct FenWick {
     }
 };
 ```
+### 珂朵莉树
+```cpp
+namespace Chtholly{
+struct Node{
+    int l, r;
+    mutable int v;
+    Node(int il, int ir, int iv): l(il), r(ir), v(iv){}
+    bool operator < (const Node& arg) const{
+        return l < arg.l;
+    }
+};
+class Tree{
+protected:
+    auto split(int pos){
+        if(pos > _sz) return odt.end();
+        auto it = --odt.upper_bound(Node{pos, 0, 0});
+        if(it->l == pos) return it;
+        auto tmp = *it;
+        odt.erase(it);
+        odt.insert({tmp.l, pos - 1, tmp.v});
+        return odt.insert({pos, tmp.r, tmp.v}).first;
+    }  
+public:
+    Tree(int sz, int ini = 1): _sz(sz), odt({Node{1, sz, ini}}) {}
+    virtual void assign(int l, int r, int v){
+        auto itr = split(r + 1), itl = split(l);
+        // operations here
+        odt.erase(itl, itr);
+        odt.insert({l, r, v});
+    }
+protected:
+    int _sz;
+    set<Node> odt;
+};
+}
+
+```
 
 ## 其他
 ### 读入
