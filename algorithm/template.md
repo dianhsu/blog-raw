@@ -4,7 +4,7 @@ title: 模板 - dianhsu.top
 @import "/mystyle.less"
 
 # 模板 {ignore=True}
-> 返回:house:[首页](../index.html)
+> 返回:house:[首页](../index.html)，:rocket:[算法](../index.html)
 
 [TOC]
 
