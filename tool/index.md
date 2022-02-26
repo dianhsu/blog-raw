@@ -13,7 +13,40 @@ toc:
 ---------------------------
 
 [TOC]
+## Competitive Server
+> 需要安装flask
+支持[Competitive Companion](https://github.com/jmerle/competitive-companion)吊起，生成文件夹和测试文件
 
+然后可以用[cf-tool(rev.dianhsu)](https://github.com/dianhsu/cf-tool)在该目录下进行编译和运行
+
+备注：因为生成的文件和标题相同，考虑特殊字符会导致cf-tool错误，需要在编译命令中的文件名处加上引号
+
+```python
+from flask import Flask
+from flask import request
+
+import os
+
+app = Flask(__name__)
+BASE_DIR = '.'
+PORT = 10042
+
+@app.route("/", methods=['POST'])
+def handle():
+    tests = request.json['tests']
+    problem_dir = os.path.join(BASE_DIR, request.json['name'])
+    os.makedirs(problem_dir, exist_ok=True)
+    for idx, it in enumerate(tests):
+        with open(os.path.join(problem_dir, f'testI{idx + 1}.txt'), 'w') as f:
+            f.write(it['input'])
+        with open(os.path.join(problem_dir, f'testO{idx + 1}.txt'), 'w') as f:
+            f.write(it['output'])
+    return ""
+
+
+if __name__ == '__main__':
+    app.run(port=PORT, debug=False)
+```
 ## NeoVim配置
 
 ### 安装NeoVim
