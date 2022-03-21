@@ -778,31 +778,14 @@ private:
 ```
 
 #### 批量乘法逆元
-
+> MOD需要是质数
 ```cpp
-template<typename T>
-class LinearInverse {
-public:
-    /*
-     * @brief 批量求乘法逆元
-     */
-    static std::vector<T> build(int n, int p) {
-        std::vector<T> inv(n + 1, 1);
-        for (int i = 2; i <= n; ++i) {
-            inv[i] = (long long) (p - p / i) * inv[p % i] % p;
-        }
-        return inv;
+vector<int> LinearReverse(int n, int MOD){
+    std::vector<int> inv(n + 1, 1);
+    for (int i = 2; i <= n; ++i) {
+        inv[i] = (long long) (MOD - MOD / i) * inv[MOD % i] % MOD;
     }
-};
-int main() {
-    int a = 2, p = 1000000007;
-    std::cout << ExGcd<long long>::inv(a, p) << std::endl;
-    std::cout << QPow<long long>::inv(a, p) << std::endl;
-    auto vec = LinearInverse<long long>::build(10, p);
-    for(auto it: vec){
-        std::cout << it << std::endl;
-    }
-    return 0;
+    return inv;
 }
 ```
 
