@@ -571,109 +571,66 @@ T exgcd(T a, T b, T& x, T& y){
 }
 ```
 
-### 矩阵快速幂
+### 矩阵
+>  矩阵模板，搭配模数可以当成矩阵快速幂。
 ```cpp
-typedef long long ll;
-
-template<typename T, int N, int M_MOD = 1000000007>
-struct Matrix {
-    array<array<T, N>, N> arr;
-
-    explicit Matrix(const array<array<T, N>, N>& prr) {
-        arr = prr;
+template<typename T>
+struct Matrix{
+    std::vector<T> data;
+    int sz;
+    // 构造全0矩阵，或者斜对角填上自定义数字
+    Matrix(int sz, T v = 0): sz(sz), data(sz * sz, 0){
+        int cur = 0;
+        do{
+            data[cur] = v;
+            cur += sz + 1;
+        }while(cur < sz * sz);
     }
-
-    Matrix() {
-        for (auto &it: arr) {
-            it.fill(0);
+    //从vector中构造矩阵
+    Matrix(int sz, std::vector<T>& arg): sz(sz), data(sz * sz, 0){
+        assert(arg.size() >= sz * sz);
+        for(int i = 0; i < sz * sz; ++i) data[i] = arg[i];
+    }
+    //从vector中构造矩阵，右值
+    Matrix(int sz, std::vector<T>&& arg): sz(sz), data(sz * sz, 0){
+        assert(arg.size() >= sz * sz);
+        for(int i = 0; i < sz * sz; ++i) data[i] = arg[i];
+    }
+    Matrix operator + (const Matrix& arg){
+        assert(sz == arg.sz);
+        Matrix ret(sz);
+        for(int i = 0; i < sz * sz; ++i){
+            ret.data[i] = arg.data[i] + data[i];
         }
+        return ret;
     }
-
-    array<T, N> &operator[](int idx) {
-        return arr[idx];
-    }
-
-    Matrix<T, N> &operator+=(Matrix<T, N> &brr) {
-        for (int i = 0; i < N; ++i) {
-            for (int j = 0; j < N; ++j) {
-                arr[i][j] = (arr[i][j] + brr[i][j]) % M_MOD;
-            }
-        }
-        return *this;
-    }
-
-    friend bool operator<<(ostream &ots, Matrix<T, N> &mat) {
-        ots << "============Matrix=============" << endl;
-        for (int i = 0; i < N; ++i) {
-            ots << "[";
-            for (int j = 0; j < N; ++j) {
-                if (j) ots << ", ";
-                ots << mat[i][j];
-            }
-            ots << "]" << endl;
-        }
-        ots << "==============================" << endl;
-        return true;
-    }
-
-    friend Matrix<T, N> operator*(Matrix<T, N> &a, Matrix<T, N> &b) {
-        Matrix<T, N> multi;
-        for (int i = 0; i < N; ++i) {
-            for (int j = 0; j < N; ++j) {
-                multi[i][j] = 0;
-                for (int k = 0; k < N; ++k) {
-                    multi[i][j] = (multi[i][j] + a[i][k] * b[k][j]) % M_MOD;
+    Matrix operator * (const Matrix& arg){
+        assert(sz == arg.sz);
+        Matrix ret(sz);
+        for(int i = 0; i < sz; ++i){
+            for(int j = 0; j < sz; ++j){
+                for(int k = 0; k < sz; ++k){
+                    ret.data[i * sz + j] += data[i * sz + k] * arg.data[k * sz + j];
                 }
             }
         }
-        return multi;
-    }
-
-    friend array<T, N> operator*(array<T, N> &a, Matrix<T, N> &b) {
-        array<T, N> ret{0, 0};
-        for (int i = 0; i < N; ++i) {
-            for (int k = 0; k < N; ++k) {
-                ret[i] = (ret[i] + a[k] * b[k][i]) % M_MOD;
-            }
-        }
         return ret;
     }
-};
-
-template<int N, typename T = ll>
-class MatrixPower {
-public:
-    explicit MatrixPower(Matrix<T, N> &mat) {
-        radix.push_back(mat);
-        for (int i = 1; i < 63; ++i) {
-            radix.push_back(radix.back() * radix.back());
-        }
-    }
-
-    Matrix<T, N> get(ll x) {
-        Matrix<T, N> ret;
-        for (int i = 0; i < N; ++i) ret[i][i] = 1;
-        for (int i = 0; i < 63; ++i) {
-            if (x & (1ll << i)) {
-                ret = ret * radix[i];
-            }
-        }
+    Matrix operator - (const Matrix& arg){
+        assert(sz == arg.sz);
+        Matrix ret(sz);
+        for(int i = 0; i < sz * sz; ++i) ret.data[i] = data[i] - arg.data[i];
         return ret;
     }
-
-private:
-    vector<Matrix<T, N>> radix;
-};
-
-class Solution {
-public:
-    int fib(int n) {
-        array<array<ll, 2>, 2> x{array<ll, 2>{1, 1}, array<ll, 2>{1, 0}};
-        Matrix<ll, 2> it(x);
-        MatrixPower<2> mp2(it);
-        auto &&res = mp2.get(n);
-        array<ll, 2> base{1, 0};
-        return (base * res).back();
+    friend std::ostream & operator << (std::ostream& ots, const Matrix& arg){
+        for(int i = 0; i < arg.sz; ++i){
+            for(int j = 0; j < arg.sz; ++j){
+                if(j) ots << " ";
+                ots << arg.data[i * arg.sz + j];
+            }
+            if(i + 1 != arg.sz) ots << "\n";
+        }
+        return ots;
     }
 };
 ```
