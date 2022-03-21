@@ -427,95 +427,96 @@ public:
 
 #### Dinic
 ```cpp
-class Dinic {
-private:
-    const static int maxn = 1010;   // 节点数量
-    const static int maxm = 200100; // 二倍边的数量
-    const static int maxv = 0x3f3f3f3f; // 传说中的inf
-    int head[maxn];
-    int u[maxm], v[maxm], pre[maxm], cap[maxm], flow[maxm];
-    int edge_cnt;
-    int vis[maxn];
-    int dis[maxn];
-    bool _bfs(int st, int ed) {
-        memset(vis, 0, sizeof vis);
-        dis[st] = 0;
-        vis[st] = 1;
-        queue<int> Q;
-        Q.push(st);
-        while (!Q.empty()) {
-            int x = Q.front();
-            Q.pop();
-            for (int i = head[x]; i != -1; i = pre[i]) {
-                if (vis[v[i]] == 0 and cap[i] > flow[i]) {
-                    vis[v[i]] = 1;
-                    dis[v[i]] = dis[x] + 1;
-                    Q.push(v[i]);
+template<typename cap_t>
+class Dinic{
+public:
+    explicit Dinic(int n): node_cnt(n), g(n){}
+    int add_edge(int from, int to, cap_t cap){
+        int m = int(pos.size());
+        pos.emplace_back(from, int(g[from].size()));
+        int from_id = int(g[from].size());
+        int to_id = int(g[to].size());
+        if(from == to) to_id++;
+        g[from].push_back(PrivateEdge{to, to_id, cap});
+        g[to].push_back(PrivateEdge{from, from_id, 0});
+        return m;
+    }
+    struct Edge{
+        int from, to;
+        cap_t cap, flow;
+    };
+    Edge getEdge(int idx){
+        auto _e = g[pos[idx].first][pos[idx].second];
+        auto _re = g[_e.to][_e.rev];
+        return Edge{pos[idx].first, _e.to, _e.cap + _re.cap, _re.cap};
+    }
+    std::vector<Edge> getEdges(){
+        std::vector<Edge> result;
+        for(int i = 0; i < pos.size(); ++i){
+            result.push_back(getEdge(i));
+        }
+        return result;
+    }
+    cap_t flow(int st, int ed){
+        return flow(st, ed, std::numeric_limits<cap_t>::max());
+    }
+    cap_t flow(int st, int ed, cap_t flow_limit){
+        std::vector<int> level(node_cnt);
+        std::queue<int> que;
+        auto&& bfs = [&](){
+            std::fill(level.begin(), level.end(), -1);
+            level[st] = 0;
+            while(!que.empty()){
+                que.pop();
+            }
+            que.push(st);
+            while(!que.empty()){
+                int v = que.front();
+                que.pop();
+                for(PrivateEdge& e: g[v]){
+                    if(e.cap == 0 or level[e.to] >= 0) continue;
+                    level[e.to] = level[v] + 1;
+                    if(e.to == ed) continue;
+                    que.push(e.to);
                 }
             }
-        }
-        return vis[ed];
-    }
-    int _dfs(int cur, int val, int ed) {
-        if (cur == ed or val == 0) return val;
-        int ret = 0;
-        int tmp;
-        for (int i = head[cur]; i != -1; i = pre[i]) {
-            if (dis[v[i]] == dis[u[i]] + 1 and (tmp = _dfs(v[i], min(val, cap[i] - flow[i]), ed)) > 0) {
-                flow[i] += tmp;
-                flow[i ^ 1] -= tmp;
-                ret += tmp;
-                val -= tmp;
-                if (val == 0) break;
+        };
+        auto&& dfs = [&](auto&& self, int v, cap_t up){
+            if(v == st) return up;
+            cap_t res = 0;
+            int level_v = level[v];
+            for(int idx = 0; idx < int(g[v].size()); ++idx){
+                PrivateEdge& edge = g[v][idx];
+                if(level_v <= level[edge.to] or g[edge.to][edge.rev].cap == 0) continue;
+                cap_t delta = self(self, edge.to, std::min(up - res, g[edge.to][edge.rev].cap));
+                if(delta <= 0) continue;
+                g[v][idx].cap += delta;
+                g[edge.to][edge.rev].cap -= delta;
+                res += delta;
+                if(res == up) return res;
             }
+            level[v] = node_cnt;
+            return res;
+        };
+        cap_t ans = 0;
+        while (ans < flow_limit){
+            bfs();
+            if(level[ed] == -1) break;
+            cap_t delta = dfs(dfs, ed, flow_limit - ans);
+            if(!delta) break;
+            ans += delta;
         }
-        return ret;
+        return ans;
     }
-public:
-    /**
-     * @brief 初始化
-     *
-     * */
-    void init() {
-        edge_cnt = 0;
-        memset(head, -1, sizeof head);
-    }
-    /**
-     * @brief 添加边
-     * @param a 起点
-     * @param b 终点
-     * @param c 最大容量
-     * @note 链式前向星
-     * */
-    void add_edge(int a, int b, int c) {
-        u[edge_cnt] = a;
-        v[edge_cnt] = b;
-        cap[edge_cnt] = c;
-        flow[edge_cnt] = 0;
-        pre[edge_cnt] = head[a];
-        head[a] = edge_cnt++;
-
-        u[edge_cnt] = b;
-        v[edge_cnt] = a;
-        cap[edge_cnt] = 0;
-        flow[edge_cnt] = 0;
-        pre[edge_cnt] = head[b];
-        head[b] = edge_cnt++;
-    }
-    /**
-     * @brief 求最大流
-     * @param st 起点
-     * @param ed 终点
-     * */
-    int solve(int st, int ed) {
-        int ret = 0;
-        while (_bfs(st, ed)) {
-            ret += _dfs(st, maxv, ed);
-        }
-        return ret;
-    }
-}dinic;
-
+private:
+    struct PrivateEdge{
+        int to, rev;
+        cap_t cap;
+    };
+    int node_cnt;
+    std::vector<std::pair<int, int>> pos;
+    std::vector<std::vector<PrivateEdge>> g;
+};
 ```
 
 ### Tarjan
