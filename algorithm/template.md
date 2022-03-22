@@ -88,164 +88,72 @@ public:
 
 ```
 ### 字符串Hash
-#### BKDRHash算法
 ```cpp
-// BKDR Hash Function
-unsigned int BKDRHash(char *str)
-{
-    unsigned int seed = 131; // 31 131 1313 13131 131313 etc..
-    unsigned int hash = 0;
- 
-    while (*str)
-    {
-        hash = hash * seed + (*str++);
-    }
- 
-    return (hash & 0x7FFFFFFF);
-}
-```
-
-#### APHash算法
-```cpp
-// AP Hash Function
-unsigned int APHash(char *str)
-{
-    unsigned int hash = 0;
-    int i;
- 
-    for (i=0; *str; i++)
-    {
-        if ((i & 1) == 0)
-        {
-            hash ^= ((hash << 7) ^ (*str++) ^ (hash >> 3));
+class StringHash{
+public:
+    static unsigned BKDR(const std::string& str){
+        unsigned seed = 131; // 31 131 1313 13131 131313 etc..
+        unsigned hash = 0;
+        for(auto c: str){
+            hash = hash * seed + c;
         }
-        else
-        {
-            hash ^= (~((hash << 11) ^ (*str++) ^ (hash >> 5)));
+        return (hash & 0x7FFFFFFF);
+    }
+    static unsigned AP(const std::string& str){
+        unsigned hash = 0;
+        for(int i = 0; i < str.length(); ++i){
+            if(i & 1){
+                hash ^= (~((hash << 11) ^ str[i] ^ (hash >> 5)));
+            }else{
+                hash ^= ((hash << 7) ^ str[i] ^ (hash >> 3));
+            }
         }
+        return (hash & 0x7FFFFFFF);
     }
- 
-    return (hash & 0x7FFFFFFF);
-}
-```
-
-#### DJBHash算法
-```cpp
-// DJB Hash Function
-unsigned int DJBHash(char *str)
-{
-    unsigned int hash = 5381;
- 
-    while (*str)
-    {
-        hash += (hash << 5) + (*str++);
-    }
- 
-    return (hash & 0x7FFFFFFF);
-}
-```
-
-#### JSHash算法
-
-```cpp
-// JS Hash Function
-unsigned int JSHash(char *str)
-{
-    unsigned int hash = 1315423911;
- 
-    while (*str)
-    {
-        hash ^= ((hash << 5) + (*str++) + (hash >> 2));
-    }
- 
-    return (hash & 0x7FFFFFFF);
-}
-```
-
-#### RSHash算法
-
-```cpp
-// RS Hash Function
-unsigned int RSHash(char *str)
-{
-    unsigned int b = 378551;
-    unsigned int a = 63689;
-    unsigned int hash = 0;
- 
-    while (*str)
-    {
-        hash = hash * a + (*str++);
-        a *= b;
-    }
- 
-    return (hash & 0x7FFFFFFF);
-}
-```
-
-#### SDBMHash算法
-
-```cpp
-unsigned int SDBMHash(char *str)
-{
-    unsigned int hash = 0;
- 
-    while (*str)
-    {
-        // equivalent to: hash = 65599*hash + (*str++);
-        hash = (*str++) + (hash << 6) + (hash << 16) - hash;
-    }
- 
-    return (hash & 0x7FFFFFFF);
-}
-```
-
-#### PJWHash算法
-
-```cpp
-// P. J. Weinberger Hash Function
-unsigned int PJWHash(char *str)
-{
-    unsigned int BitsInUnignedInt = (unsigned int)(sizeof(unsigned int) * 8);
-    unsigned int ThreeQuarters    = (unsigned int)((BitsInUnignedInt  * 3) / 4);
-    unsigned int OneEighth        = (unsigned int)(BitsInUnignedInt / 8);
-    unsigned int HighBits         = (unsigned int)(0xFFFFFFFF) << (BitsInUnignedInt - OneEighth);
-    unsigned int hash             = 0;
-    unsigned int test             = 0;
- 
-    while (*str)
-    {
-        hash = (hash << OneEighth) + (*str++);
-        if ((test = hash & HighBits) != 0)
-        {
-            hash = ((hash ^ (test >> ThreeQuarters)) & (~HighBits));
+    static unsigned DJB(const std::string& str){
+        unsigned hash = 5381;
+        for(auto c: str){
+            hash += (hash << 5) + c;
         }
+        return (hash & 0x7FFFFFFF);
     }
- 
-    return (hash & 0x7FFFFFFF);
-}
-```
-
-#### ELFHash算法
-
-```cpp
-// ELF Hash Function
-unsigned int ELFHash(char *str)
-{
-    unsigned int hash = 0;
-    unsigned int x    = 0;
- 
-    while (*str)
-    {
-        hash = (hash << 4) + (*str++);
-        if ((x = hash & 0xF0000000L) != 0)
-        {
-            hash ^= (x >> 24);
-            hash &= ~x;
+    static unsigned JS(const std::string& str){
+        unsigned hash = 1315423911;
+        for(auto c: str) hash ^= ((hash << 5) + c + (hash >> 2));
+        return (hash & 0x7FFFFFFF);
+    }
+    static unsigned SDBM(const std::string& str){
+        unsigned hash = 0;
+        for(auto c: str) hash = c + (hash << 6) + (hash << 16) - hash;
+        return (hash & 0x7FFFFFFF);
+    }
+    static unsigned PJW(const std::string& str){
+        auto bits_in_unsigned_int = (unsigned)(sizeof(unsigned) * 8);
+        auto three_quarters = (unsigned)(bits_in_unsigned_int * 3 / 4);
+        auto one_eighth = (unsigned)(bits_in_unsigned_int / 8);
+        unsigned high_bits = (unsigned)(0xFFFFFFFF) << (bits_in_unsigned_int - one_eighth);
+        unsigned hash = 0;
+        unsigned test = 0;
+        for(auto c: str){
+            hash = (hash << one_eighth) + c;
+            if((test = hash & high_bits) != 0){
+                hash = (hash ^ (test >> three_quarters)) & (~high_bits);
+            }
         }
+        return (hash & 0x7FFFFFFF);
     }
- 
-    return (hash & 0x7FFFFFFF);
-}
+    static unsigned ELF(const std::string& str){
+        unsigned hash = 0, x = 0;
+        for(auto c: str){
+            hash = (hash << 4) + c;
+            if((x = hash & 0xF0000000ll) != 0){
+                hash ^= (x >> 24);
+                hash &= (~x);
+            }
+        }
+        return (hash & 0x7FFFFFFF);
+    }
+};
 ```
 ### AC自动机(AC Automaton)
 
