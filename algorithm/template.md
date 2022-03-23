@@ -935,7 +935,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 ```
-### ST表（稀疏表）
+### ST表（稀疏表）(C++17)
 
 ```cpp
 template<typename iter, typename BinOp>
@@ -960,22 +960,7 @@ public:
     }
 };
 ```
-```python
-import math
-class SparseTable:
-    def __init__(self, val, func):
-        self.arr = [val, ]
-        n = int(math.ceil(math.log2(len(val))))
-        for i in range(n):
-            tmp = [0] * len(val)
-            for j in range(len(val) - (1 << (i + 1)) + 1):
-                tmp[j] = func(self.arr[i][j], self.arr[i][j + (1 << i)])
-            self.arr.append(tmp)
-        self.func = func
-    def query(self, lp, rp):
-        h = int(math.floor(math.log2(rp - lp + 1)))
-        return self.func(self.arr[h][lp], self.arr[h][rp - (1 << h) + 1])
-```
+
 ### 树状数组
 
 ```cpp
