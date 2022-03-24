@@ -32,13 +32,14 @@ title: 首页 - dianhsu.top
 - <a href="https://codeforces.com/profile/dianhsu"><img src="https://fc.dianhsu.top/cf?user=dianhsu"></a>
 - <a href="https://codeforces.com/profile/dianhsuX"><img src="https://fc.dianhsu.top/cf?user=dianhsuX"></a>
 
-## LeetCode
-- <a href="https://leetcode-cn.com/u/dianhsu/"><img src="https://fc.dianhsu.top/lc?user=dianhsu&loc=cn&req=rating"></a>
+<!-- ## LeetCode -->
+<!-- - <a href="https://leetcode-cn.com/u/dianhsu/"><img src="https://fc.dianhsu.top/lc?user=dianhsu&loc=cn&req=rating"></a> -->
 
 ## 相关链接
 - 算法竞赛同好会(QQ Group): 836788039 
-- 哔哩哔哩: [https://space.bilibili.com/25564781](https://space.bilibili.com/25564781)
-- 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
+- 知乎: [dianhsu - 知乎](https://www.zhihu.com/people/missalgo)
+- 哔哩哔哩: [dianhsu的个人空间](https://space.bilibili.com/25564781)
+<!-- - 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions) -->
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
 - LinkedIn: [https://www.linkedin.com/in/dianhsu/](https://www.linkedin.com/in/dianhsu/)
 
