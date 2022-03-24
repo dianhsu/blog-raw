@@ -20,10 +20,10 @@ title: 首页 - dianhsu.top
 - :floppy_disk:[简历](https://cdn.dianhsu.top/resume.pdf)
 - :apple:[C++](./cplusplus/index.html)
 - :rocket:[经典算法](./algorithm/index.html)
-- :balloon:[LeetCode](./leetcode/index.html)
+<!-- - :balloon:[LeetCode](./leetcode/index.html) -->
 - :gear:[操作系统](./operation_system/index.html)
-- :airplane:[设计模式](./design_pattern/index.html)
-- :globe_with_meridians:[计算机网络](./computer_network/index.html)
+<!-- - :airplane:[设计模式](./design_pattern/index.html) -->
+<!-- - :globe_with_meridians:[计算机网络](./computer_network/index.html) -->
 - :fire:[杂项](./misc/index.html)
 - :banana:[工具](./tool/index.html)
 
@@ -36,6 +36,7 @@ title: 首页 - dianhsu.top
 - <a href="https://leetcode-cn.com/u/dianhsu/"><img src="https://fc.dianhsu.top/lc?user=dianhsu&loc=cn&req=rating"></a>
 
 ## 相关链接
+- 算法竞赛同好会(QQ Group): 836788039 
 - 哔哩哔哩: [https://space.bilibili.com/25564781](https://space.bilibili.com/25564781)
 - 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions)
 - GitHub: [https://github.com/dianhsu](https://github.com/dianhsu)
