@@ -474,10 +474,8 @@ T exgcd(T a, T b, T& x, T& y){
         y = 0;
         return a;
     }
-    T d = exgcd(b, a % b, x, y);
-    T tmp = x;
-    x = y;
-    y = tmp - a / b * y;
+    T d = exgcd(b, a % b, y, x);
+    y -= (a / b) * x;
     return d;
 }
 ```
