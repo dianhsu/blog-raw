@@ -19,7 +19,7 @@ title: 首页 - dianhsu.top
 ## 目录
 - :floppy_disk:[简历](https://cdn.dianhsu.top/resume.pdf)
 - :apple:[C++](./cplusplus/index.html)
-- :rocket:[算法模板](./algorithm/template/index.html)
+- :rocket:[算法模板](./algorithm/template.html)
 <!-- - :balloon:[LeetCode](./leetcode/index.html) -->
 - :gear:[操作系统](./operation_system/index.html)
 <!-- - :airplane:[设计模式](./design_pattern/index.html) -->
