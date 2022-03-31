@@ -478,6 +478,47 @@ T exgcd(T a, T b, T& x, T& y){
     return d;
 }
 ```
+### 欧拉函数
+#### 单个欧拉函数
+```cpp
+int euler_phi(int n) {
+  int ans = n;
+  for (int i = 2; i * i <= n; i++)
+    if (n % i == 0) {
+      ans = ans / i * (i - 1);
+      while (n % i == 0) n /= i;
+    }
+  if (n > 1) ans = ans / n * (n - 1);
+  return ans;
+}
+```
+#### 批量求欧拉函数（线性筛）
+```cpp
+vector<int> eularFunction(int n){
+    vector<int> isPrime(n + 1, 1), phi(n + 1, 0);
+    vector<int> prime;
+    int cnt = 0;
+    isPrime[1] = 0;
+    phi[1] = 1;
+    for(int i = 2; i <= n; ++i){
+        if(isPrime[i]){
+            prime.push_back(i);
+            phi[i] = i - 1;
+        }
+        for(auto it: prime){
+            if(i * it > n) break;
+            isPrime[i * it] = 0;
+            if(i % it){
+                phi[i * it] = phi[i] * phi[it];
+            }else{
+                phi[i * it] = phi[i] * it;
+                break;
+            }
+        }
+    }
+    return phi;
+}
+```
 
 ### 矩阵
 >  矩阵模板，搭配模数可以当成矩阵快速幂。
