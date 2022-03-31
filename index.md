@@ -17,15 +17,15 @@ title: 首页 - dianhsu.top
 
 
 ## 目录
-- :floppy_disk:[简历](https://cdn.dianhsu.top/resume.pdf)
-- :apple:[C++](./cplusplus/index.html)
-- :rocket:[算法模板](./algorithm/template.html)
+- :floppy_disk:&nbsp;&nbsp;[简历](https://cdn.dianhsu.top/resume.pdf)
+- :apple:&nbsp;&nbsp;[C++](./cplusplus/index.html)
+- :rocket:&nbsp;&nbsp;[算法模板](./algorithm/template.html)
 <!-- - :balloon:[LeetCode](./leetcode/index.html) -->
-- :gear:[操作系统](./operation_system/index.html)
+- :gear:&nbsp;&nbsp;[操作系统](./operation_system/index.html)
 <!-- - :airplane:[设计模式](./design_pattern/index.html) -->
 <!-- - :globe_with_meridians:[计算机网络](./computer_network/index.html) -->
-- :fire:[杂项](./misc/index.html)
-- :banana:[工具](./tool/index.html)
+- :fire:&nbsp;&nbsp;[杂项](./misc/index.html)
+- :banana:&nbsp;&nbsp;[工具](./tool/index.html)
 
 ## Codeforces
 - <a href="https://codeforces.com/profile/xdO_o"><img src="https://fc.dianhsu.top/cf?user=xdO_o"></a>
@@ -36,7 +36,7 @@ title: 首页 - dianhsu.top
 <!-- - <a href="https://leetcode-cn.com/u/dianhsu/"><img src="https://fc.dianhsu.top/lc?user=dianhsu&loc=cn&req=rating"></a> -->
 
 ## 相关链接
-- 算法竞赛同好会(QQ Group): 836788039 
+- 算法竞赛同好会(QQ Group): [836788039](https://cdn.dianhsu.top/image/qrcode_1648693362115.jpg)
 - 知乎: [dianhsu - 知乎](https://www.zhihu.com/people/missalgo)
 - 哔哩哔哩: [dianhsu的个人空间](https://space.bilibili.com/25564781)
 <!-- - 讨论区: [https://github.com/dianhsu/blog-raw/discussions](https://github.com/dianhsu/blog-raw/discussions) -->
