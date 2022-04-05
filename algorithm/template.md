@@ -1069,6 +1069,320 @@ protected:
 
 ```
 
+### Splay树
+> https://loj.ac/p/104
+```cpp
+#include <vector>
+#include <array>
+#include <iostream>
+#include <cassert>
+using namespace std;
+template<typename T>
+class SplayTree{
+public:
+    struct Node{
+        Node *parent{};
+        std::array<Node*, 2> child{};
+        T val;
+        // cnt: repeat of current element, sz: element count of child tree, sum: repeats of child tree
+        size_t cnt, sz, sum;
+        explicit Node(T value_arg): val(value_arg), cnt(1), sz(1), sum(1){}
+        bool side() const{
+            return parent->child[1] == this;
+        }
+        // maintain information of current element
+        void maintain(){
+            if(!this) return;
+            this->sum = this->cnt;
+            this->sz = 1;
+            if(this->child[0]) {
+                this->sum += this->child[0]->sum;
+                this->sz += this->child[0]->sz;
+            }
+            if(this->child[1]) {
+                this->sum += this->child[1]->sum;
+                this->sz += this->child[1]->sz;
+            }
+        }
+        // left rotate and right rotate
+        void rotate(){
+            const auto p = parent;
+            const bool i = side();
+            if(p->parent){
+                p->parent->attach(p->side(), this);
+            }else{
+                parent = nullptr;
+            }
+            p->attach(i, child[!i]);
+            attach(!i, p);
+            p->maintain();
+            maintain();
+        }
+        void splay(){
+            for(;parent;rotate()){
+                if(parent->parent){
+                    (side() == parent->side() ? parent: this)->rotate();
+                }
+            }
+        }
+        // attach node new_ as the node's side child
+        void attach(bool side, Node* const new_){
+            if(new_) new_->parent = this;
+            child[side] = new_;
+        }
+    };
+    struct iterator{
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = T;
+        using pointer = T*;
+        using reference = T&;
+        using difference_type = long long;
+    public:
+        Node* node;
+        void operator--(){ advance<false>();}
+        void operator++(){ advance<true>();}
+        const T& operator*(){return node->val;}
+        explicit iterator(Node* node_arg): node(node_arg){}
+        bool operator==(const iterator oth) const{
+            return node == oth.node;
+        }
+        bool operator != (const iterator oth) const{
+            return *this != oth;
+        }
+    private:
+        template<bool dir> void advance(){
+            if(node->child[dir]){
+                node = extremum<!dir>(node->child[dir]);
+                return;
+            }
+            for(;node->parent and node->side() == dir; node = node->parent);
+            node = node->parent;
+        }
+    };
+
+    template<bool i> static Node* extremum(Node* x){
+        assert(x);
+        for(;x->child[i]; x = x->child[i]);
+        return x;
+    }
+    Node* rt{};
+    explicit SplayTree()= default;
+    ~SplayTree(){ destroy(rt);}
+    void insert(const T& arg){
+        if(!rt){
+            rt = new Node(arg);
+            rt->maintain();
+            return;
+        }
+        Node* cur = rt, *f = nullptr;
+        while(true){
+            if(cur->val == arg){
+                cur->cnt++;
+                cur->maintain();
+                f->maintain();
+                cur->splay();
+                rt = cur;
+                break;
+            }
+            f = cur;
+            cur = cur->child[cur->val < arg];
+            if(!cur){
+                Node* tmp = new Node(arg);
+                f->child[f->val < arg] = tmp;
+                tmp->parent = f;
+                tmp->maintain();
+                f->maintain();
+                tmp->splay();
+                rt = tmp;
+                break;
+            }
+        }
+    }
+
+    // size, sum
+    std::pair<size_t, size_t> rank(const T& arg){
+        std::pair<size_t, size_t> res{0, 0};
+        Node* cur = rt;
+        while(cur){
+            if(arg < cur->val){
+                cur = cur->child[0];
+            }else{
+                if(cur->child[0]) {
+                    res.first += cur->child[0]->sz;
+                    res.second += cur->child[0]->sum;
+                }
+                res.first ++;
+                res.second += cur->cnt;
+                if(arg == cur->val){
+                    cur->splay();
+                    rt = cur;
+                    break;
+                }
+                cur = cur->child[1];
+            }
+        }
+        return res;
+    }
+    template<bool unique = false>
+    iterator kth(size_t k){
+        assert(k <= (rt != nullptr ? (unique ? rt->sz : rt->sum) : 0));
+        Node* cur = rt;
+        while(true){
+            if(cur->child[0] and k <= (unique ? cur->child[0]->sz : cur->child[0]->sum)){
+                cur = cur->child[0];
+            }else{
+                if(cur->child[0]) k -= (unique ? cur->child[0]->sz : cur->child[0]->sum);
+                if(k <= cur->cnt){
+                    cur->splay();
+                    rt = cur;
+                    return iterator{cur};
+                }
+                k -= (unique ? 1 : cur->cnt);
+                cur = cur->child[1];
+            }
+        }
+    }
+    static void destroy(Node* const node){
+        if(!node) return;
+        for(Node* const child: node->child){
+            destroy(child);
+        }
+        delete node;
+    }
+    bool empty() const{
+        return rt == nullptr;
+    }
+    size_t sum() const{
+        return (rt == nullptr ? 0 : rt->sum);
+    }
+    size_t size() const{
+        return (rt == nullptr ? 0 : rt->sz);
+    }
+
+    template<bool side = false>
+    iterator begin(){
+        return iterator{extremum<side>(rt)};
+    }
+    iterator rend(){
+        return iterator{nullptr};
+    }
+    iterator end(){
+        return iterator{nullptr};
+    }
+    iterator find(const T& key){
+        Node* cur = rt;
+        while(cur and key != cur->val){
+            const auto nex = cur->child[key > cur->val];
+            if(!nex) {
+                cur->splay();
+                rt = cur;
+            }
+            cur = nex;
+        }
+        return iterator{cur};
+    }
+    iterator lower_bound(const T& key){
+        Node* cur = rt;
+        Node* ret = nullptr;
+        while(cur){
+            if(cur->val > key){
+                ret = cur;
+                cur = cur->child[0];
+            }else if(cur->val == key){
+                ret = cur;
+                break;
+            }else{
+                cur = cur->child[1];
+            }
+        }
+        if(ret){
+            ret->splay();
+            rt = ret;
+        }
+        return iterator{ret};
+    }
+    Node* join(Node* const arg1, Node* const arg2){
+        if(!arg1){
+            arg2->parent = nullptr;
+            return arg2;
+        }
+        arg1->parent = nullptr;
+        Node* const mx = extremum<true>(arg1);
+        mx->splay();
+        rt = mx;
+        assert(mx->child[1] == nullptr);
+        mx->child[1] = arg2;
+        mx->parent = nullptr;
+        if(arg2) arg2->parent = mx;
+        mx->maintain();
+        return mx;
+    }
+    void erase(const iterator itr){
+        if(!itr.node) return;
+        Node* x = itr.node;
+        x->splay();
+        rt = x;
+        rt = join(x->child[0], x->child[1]);
+    }
+    void extract(const iterator itr){
+        if(!itr.node) return;
+        if(itr.node->cnt == 1) erase(itr);
+        else{
+            itr.node->cnt--;
+            itr.node->splay();
+            rt = itr.node;
+        }
+    }
+};
+typedef pair<int, int> PII;
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    SplayTree<int> st;
+    int n;
+    cin >> n;
+    while(n--){
+        int op;
+        cin >> op;
+        if(op == 1){
+            int tv;
+            cin >> tv;
+            st.insert(tv);
+        }else if(op == 2){
+            int tv;
+            cin >> tv;
+            st.extract(st.find(tv));
+        }else if(op == 3){
+            int tv;
+            cin >> tv;
+            auto itr = st.find(tv);
+            auto res = st.rank(tv);
+            cout << res.second - (itr.node->cnt) + 1 << endl;
+        }else if(op == 4){
+            int tv;
+            cin >> tv;
+            auto itr = st.kth(tv);
+            cout << itr.node->val << endl;
+        }else if(op == 5){
+            int tv;
+            cin >> tv;
+            auto itr = st.lower_bound(tv);
+            if(itr == st.end()) itr = st.begin<true>();
+            else --itr;
+            cout << itr.node->val << endl;
+        }else{
+            int tv;
+            cin >> tv;
+            auto itr = st.lower_bound(tv);
+            if(itr.node->val == tv) ++itr;
+            cout << itr.node->val << endl;
+        }
+    }
+    return 0;
+}
+```
 ## 其他
 ### 读入
 ```cpp
