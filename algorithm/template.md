@@ -464,126 +464,6 @@ void tarjan(int cur){
 ```
 ## 数学
 
-### 拓展欧几里得
-
-```cpp
-template<typename T>
-T exgcd(T a, T b, T& x, T& y){
-    if(b == 0){
-        x = 1;
-        y = 0;
-        return a;
-    }
-    T d = exgcd(b, a % b, y, x);
-    y -= (a / b) * x;
-    return d;
-}
-```
-### 欧拉函数
-#### 单个欧拉函数
-```cpp
-int euler_phi(int n) {
-  int ans = n;
-  for (int i = 2; i * i <= n; i++)
-    if (n % i == 0) {
-      ans = ans / i * (i - 1);
-      while (n % i == 0) n /= i;
-    }
-  if (n > 1) ans = ans / n * (n - 1);
-  return ans;
-}
-```
-#### 批量求欧拉函数（线性筛）
-```cpp
-vector<int> eularFunction(int n){
-    vector<int> isPrime(n + 1, 1), phi(n + 1, 0);
-    vector<int> prime;
-    int cnt = 0;
-    isPrime[1] = 0;
-    phi[1] = 1;
-    for(int i = 2; i <= n; ++i){
-        if(isPrime[i]){
-            prime.push_back(i);
-            phi[i] = i - 1;
-        }
-        for(auto it: prime){
-            if(i * it > n) break;
-            isPrime[i * it] = 0;
-            if(i % it){
-                phi[i * it] = phi[i] * phi[it];
-            }else{
-                phi[i * it] = phi[i] * it;
-                break;
-            }
-        }
-    }
-    return phi;
-}
-```
-
-### 矩阵
->  矩阵模板，搭配模数可以当成矩阵快速幂。
-```cpp
-template<typename T>
-struct Matrix{
-    std::vector<T> data;
-    int sz;
-    // 构造全0矩阵，或者斜对角填上自定义数字
-    Matrix(int sz, T v = 0): sz(sz), data(sz * sz, 0){
-        int cur = 0;
-        do{
-            data[cur] = v;
-            cur += sz + 1;
-        }while(cur < sz * sz);
-    }
-    //从vector中构造矩阵
-    Matrix(int sz, std::vector<T>& arg): sz(sz), data(sz * sz, 0){
-        assert(arg.size() >= sz * sz);
-        for(int i = 0; i < sz * sz; ++i) data[i] = arg[i];
-    }
-    //从vector中构造矩阵，右值
-    Matrix(int sz, std::vector<T>&& arg): sz(sz), data(sz * sz, 0){
-        assert(arg.size() >= sz * sz);
-        for(int i = 0; i < sz * sz; ++i) data[i] = arg[i];
-    }
-    Matrix operator + (const Matrix& arg){
-        assert(sz == arg.sz);
-        Matrix ret(sz);
-        for(int i = 0; i < sz * sz; ++i){
-            ret.data[i] = arg.data[i] + data[i];
-        }
-        return ret;
-    }
-    Matrix operator * (const Matrix& arg){
-        assert(sz == arg.sz);
-        Matrix ret(sz);
-        for(int i = 0; i < sz; ++i){
-            for(int j = 0; j < sz; ++j){
-                for(int k = 0; k < sz; ++k){
-                    ret.data[i * sz + j] += data[i * sz + k] * arg.data[k * sz + j];
-                }
-            }
-        }
-        return ret;
-    }
-    Matrix operator - (const Matrix& arg){
-        assert(sz == arg.sz);
-        Matrix ret(sz);
-        for(int i = 0; i < sz * sz; ++i) ret.data[i] = data[i] - arg.data[i];
-        return ret;
-    }
-    friend std::ostream & operator << (std::ostream& ots, const Matrix& arg){
-        for(int i = 0; i < arg.sz; ++i){
-            for(int j = 0; j < arg.sz; ++j){
-                if(j) ots << " ";
-                ots << arg.data[i * arg.sz + j];
-            }
-            if(i + 1 != arg.sz) ots << "\n";
-        }
-        return ots;
-    }
-};
-```
 ### 素数筛
 #### 单个正整数判断是不是质数
 ```cpp
@@ -668,6 +548,158 @@ vector<int> OddFilter() {
     return prime;
 }
 ```
+
+### 拓展欧几里得
+
+```cpp
+template<typename T>
+T exgcd(T a, T b, T& x, T& y){
+    if(b == 0){
+        x = 1;
+        y = 0;
+        return a;
+    }
+    T d = exgcd(b, a % b, y, x);
+    y -= (a / b) * x;
+    return d;
+}
+```
+### 欧拉函数
+#### 单个欧拉函数
+```cpp
+int euler_phi(int n) {
+  int ans = n;
+  for (int i = 2; i * i <= n; i++)
+    if (n % i == 0) {
+      ans = ans / i * (i - 1);
+      while (n % i == 0) n /= i;
+    }
+  if (n > 1) ans = ans / n * (n - 1);
+  return ans;
+}
+```
+#### 批量求欧拉函数（线性筛）
+```cpp
+vector<int> eularFunction(int n){
+    vector<int> isPrime(n + 1, 1), phi(n + 1, 0);
+    vector<int> prime;
+    int cnt = 0;
+    isPrime[1] = 0;
+    phi[1] = 1;
+    for(int i = 2; i <= n; ++i){
+        if(isPrime[i]){
+            prime.push_back(i);
+            phi[i] = i - 1;
+        }
+        for(auto it: prime){
+            if(i * it > n) break;
+            isPrime[i * it] = 0;
+            if(i % it){
+                phi[i * it] = phi[i] * phi[it];
+            }else{
+                phi[i * it] = phi[i] * it;
+                break;
+            }
+        }
+    }
+    return phi;
+}
+```
+#### 筛法求约数个数（线性筛）
+```cpp
+vector<int> SieveOfEuler(int n){
+    vector<int> ret(n + 1, 0); //约数个数
+    vector<int> vis(n + 1, 0); //是否访问标记
+    vector<int> prime; // 质数表
+    vector<int> num(n + 1, 0); // 最小质数因子出现次数
+    ret[1] = 1;
+    for(int i = 2; i <= n; ++i){
+        if(!vis[i]){
+            vis[i] = 1;
+            prime.push_back(i);
+            ret[i] = 2;
+            num[i] = 1;
+        }
+        for(auto& it: prime){
+            if(n / it < i) break;
+            vis[it * i] = 1;
+            if(i % it == 0){
+                num[i * it] = num[i] + 1;
+                ret[i * it] = ret[i] / num[i * it] * (num[i * it] + 1);
+                break;
+            }else{
+                num[i * it] = 1;
+                ret[i * it] = ret[i] * 2;
+            }
+        }
+    }
+    return ret;
+}
+```
+### 矩阵
+>  矩阵模板，搭配模数可以当成矩阵快速幂。
+```cpp
+template<typename T>
+struct Matrix{
+    std::vector<T> data;
+    int sz;
+    // 构造全0矩阵，或者斜对角填上自定义数字
+    Matrix(int sz, T v = 0): sz(sz), data(sz * sz, 0){
+        int cur = 0;
+        do{
+            data[cur] = v;
+            cur += sz + 1;
+        }while(cur < sz * sz);
+    }
+    //从vector中构造矩阵
+    Matrix(int sz, std::vector<T>& arg): sz(sz), data(sz * sz, 0){
+        assert(arg.size() >= sz * sz);
+        for(int i = 0; i < sz * sz; ++i) data[i] = arg[i];
+    }
+    //从vector中构造矩阵，右值
+    Matrix(int sz, std::vector<T>&& arg): sz(sz), data(sz * sz, 0){
+        assert(arg.size() >= sz * sz);
+        for(int i = 0; i < sz * sz; ++i) data[i] = arg[i];
+    }
+    Matrix operator + (const Matrix& arg){
+        assert(sz == arg.sz);
+        Matrix ret(sz);
+        for(int i = 0; i < sz * sz; ++i){
+            ret.data[i] = arg.data[i] + data[i];
+        }
+        return ret;
+    }
+    Matrix operator * (const Matrix& arg){
+        assert(sz == arg.sz);
+        Matrix ret(sz);
+        for(int i = 0; i < sz; ++i){
+            for(int j = 0; j < sz; ++j){
+                for(int k = 0; k < sz; ++k){
+                    ret.data[i * sz + j] += data[i * sz + k] * arg.data[k * sz + j];
+                }
+            }
+        }
+        return ret;
+    }
+    Matrix operator - (const Matrix& arg){
+        assert(sz == arg.sz);
+        Matrix ret(sz);
+        for(int i = 0; i < sz * sz; ++i) ret.data[i] = data[i] - arg.data[i];
+        return ret;
+    }
+    friend std::ostream & operator << (std::ostream& ots, const Matrix& arg){
+        for(int i = 0; i < arg.sz; ++i){
+            for(int j = 0; j < arg.sz; ++j){
+                if(j) ots << " ";
+                ots << arg.data[i * arg.sz + j];
+            }
+            if(i + 1 != arg.sz) ots << "\n";
+        }
+        return ots;
+    }
+};
+```
+
 ### 乘法逆元
 #### 扩展欧几里得算法
 ```cpp
@@ -1383,6 +1415,259 @@ int main(){
     return 0;
 }
 ```
+### AVL树
+```cpp
+/**
+ * @brief AVL 树
+ * @author dianhsu
+ * @date 2021/05/25
+ * @ref https://zh.wikipedia.org/wiki/AVL树
+ * */
+#include <bits/stdc++.h>
+
+template<class T>
+struct AVLNode {
+    T data;
+    AVLNode<T> *leftChild;
+    AVLNode<T> *rightChild;
+    int height;
+
+    AVLNode(T data): data(data), height(1), leftChild(nullptr), rightChild(nullptr) { }
+
+    ~AVLNode() {
+        delete leftChild;
+        delete rightChild;
+    }
+};
+
+template<class T>
+class AVL {
+public:
+    AVL() {
+        root = nullptr;
+    }
+
+    ~AVL() {
+        delete root;
+    }
+
+    /**
+     * @brief 将结点插入到AVL树中
+     * @param val 需要插入的值
+     * @note 如果发现这个树中已经有这个值存在了，就不会进行任何操作
+     * */
+    void insert(T val) {
+        _insert(&root, val);
+    }
+
+    /**
+     * @brief 检查结点是否在AVL树中
+     * @param val 需要检查的值
+     * */
+    bool exist(T val) {
+        auto ptr = &root;
+        while (*ptr != nullptr) {
+            if (val == (*ptr)->data) {
+                return true;
+            } else if (val < (*ptr)->data) {
+                *ptr = (*ptr)->leftChild;
+            } else {
+                *ptr = (*ptr)->rightChild;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @brief 找到值为val的结点
+     * @param val 目标值
+     * @return 返回值为指向该结点的指针的地址
+     */
+    AVLNode<T> **find(T val) {
+        auto ptr = &root;
+        while ((*ptr) != nullptr) {
+            if (val == (*ptr)->data) {
+                break;
+            } else if (val < (*ptr)->data) {
+                *ptr = (*ptr)->leftChild;
+            } else {
+                *ptr = (*ptr)->rightChild;
+            }
+        }
+        return ptr;
+    }
+
+    /**
+     * @brief 删除结点
+     * @note 首先找到结点，然后将结点旋转到叶子结点，然后回溯检查树的平衡性
+     * @param val 需要删除的结点的值
+     * @note 这个地方需要递归寻找该值的结点，因为需要回溯更新平衡树
+     * */
+    void remove(T val) {
+        _remove(&root, val);
+    }
+
+
+private:
+    void _remove(AVLNode<T> **ptr, T val) {
+        if (*ptr == nullptr) {
+            return;
+        }
+        if ((*ptr)->data == val) {
+            _rotateNodeToLeaf(ptr);
+        } else if ((*ptr)->data < val) {
+            _remove(&((*ptr)->rightChild), val);
+        } else {
+            _remove(&((*ptr)->leftChild), val);
+        }
+        // 完了之后回溯，重新平衡二叉树
+        _balance(ptr);
+        _updateHeight(*ptr);
+    }
+
+    /**
+     * @brief 将一个结点旋转到叶子结点
+     * @param ptr 将要被旋转至叶子的结点的指针的地址
+     * @note 旋转的时候，将当前结点旋转到高度比较小的一边。
+     */
+    void _rotateNodeToLeaf(AVLNode<T> **ptr) {
+        // 当前结点已经是叶子结点了
+        if ((*ptr)->leftChild == nullptr and (*ptr)->rightChild == nullptr) {
+            *ptr = nullptr;
+            return;
+        }
+        int leftHeight = (*ptr)->leftChild != nullptr ? (*ptr)->leftChild->height : 0;
+        int rightHeight = (*ptr)->rightChild != nullptr ? (*ptr)->rightChild->height : 0;
+        // 左边高度比较小，左旋
+        if (leftHeight <= rightHeight) {
+            _leftRotate(ptr);
+            _rotateNodeToLeaf(&((*ptr)->leftChild));
+        } else {
+            // 右旋
+            _rightRotate(ptr);
+            _rotateNodeToLeaf(&((*ptr)->rightChild));
+        }
+        _balance(ptr);
+        _updateHeight(*ptr);
+    }
+
+    /**
+     * @brief 插入结点
+     *
+     * */
+    void _insert(AVLNode<T> **ptr, T val) {
+        if (*ptr == nullptr) {
+            *ptr = new AVLNode<T>(val);
+            return;
+        }
+        if (val < (*ptr)->data) {
+            _insert(&((*ptr)->leftChild), val);
+        } else if (val > (*ptr)->data) {
+            _insert(&((*ptr)->rightChild), val);
+        } else {
+            // 如果当前平衡二叉树中已经存在这个结点了，不做任何处理
+            return;
+        }
+        _balance(ptr);
+        _updateHeight(*ptr);
+    }
+
+    /**
+     * @brief 平衡结点
+     *
+     * */
+    void _balance(AVLNode<T> **ptr) {
+        if (*ptr == nullptr) return;
+        int leftHeight = (*ptr)->leftChild != nullptr ? (*ptr)->leftChild->height : 0;
+        int rightHeight = (*ptr)->rightChild != nullptr ? (*ptr)->rightChild->height : 0;
+        if (abs(leftHeight - rightHeight) <= 1) return;
+
+        if (leftHeight < rightHeight) {
+            auto rightElement = (*ptr)->rightChild;
+            int rightElementLeftHeight = rightElement->leftChild != nullptr ? rightElement->leftChild->height : 0;
+            int rightElementRightHeight = rightElement->rightChild != nullptr ? rightElement->rightChild->height : 0;
+            if (rightElementLeftHeight < rightElementRightHeight) {
+                // RR
+                _leftRotate(ptr);
+            } else {
+                // RL
+                _rightRotate(&((*ptr)->rightChild));
+                _leftRotate(ptr);
+            }
+        } else {
+            auto leftElement = (*ptr)->leftChild;
+            int leftElementLeftHeight = leftElement->leftChild != nullptr ? leftElement->leftChild->height : 0;
+            int leftElementRightHeight = leftElement->rightChild != nullptr ? leftElement->rightChild->height : 0;
+            if (leftElementLeftHeight > leftElementRightHeight) {
+                // LL
+                _rightRotate(ptr);
+            } else {
+                // LR
+                _leftRotate(&((*ptr)->leftChild));
+                _rightRotate(ptr);
+            }
+        }
+    }
+
+    /**
+     * @brief 右旋
+     *
+     * */
+    void _rightRotate(AVLNode<T> **ptr) {
+        auto tmp = (*ptr)->leftChild;
+        (*ptr)->leftChild = tmp->rightChild;
+        tmp->rightChild = *ptr;
+        _updateHeight(tmp);
+        _updateHeight(*ptr);
+        *ptr = tmp;
+    }
+
+    /**
+     * @brief 左旋
+     * */
+    void _leftRotate(AVLNode<T> **ptr) {
+        auto tmp = (*ptr)->rightChild;
+        (*ptr)->rightChild = tmp->leftChild;
+        tmp->leftChild = *ptr;
+        _updateHeight(tmp);
+        _updateHeight(*ptr);
+        *ptr = tmp;
+    }
+
+    void _updateHeight(AVLNode<T> *ptr) {
+        if (ptr == nullptr) return;
+        int leftHeight = ptr->leftChild != nullptr ? ptr->leftChild->height : 0;
+        int rightHeight = ptr->rightChild != nullptr ? ptr->rightChild->height : 0;
+        ptr->height = std::max(leftHeight, rightHeight) + 1;
+    }
+
+    AVLNode<T> *root;
+};
+
+int main() {
+    auto avl = new AVL<int>();
+    int n = 20;
+    std::random_device rd{};
+    std::mt19937 gen{rd()};
+    std::normal_distribution<> d{100, 100};
+    std::uniform_int_distribution<int> u(0, INT_MAX >> 1);
+    std::vector<int> vec;
+    for (int i = 0; i < n; ++i) {
+        vec.push_back((int) std::round(d(gen)));
+        //vec.push_back(i);
+    }
+    for (auto it : vec) {
+        avl->insert(it);
+    }
+    avl->remove(15);
+    avl->remove(32);
+    avl->remove(31);
+    std::cout << *avl << std::endl;
+    delete avl;
+    return 0;
+}
+```
+
 ## 其他
 ### 读入
 ```cpp
