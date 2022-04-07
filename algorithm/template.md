@@ -999,6 +999,50 @@ void ReverseContar(int contar_val, int* t){
 }
 ```
 
+### 快速傅立叶变换
+```cpp
+template<typename T>
+void butterflyDiagram(vector<complex<T>>& vec){
+    assert(__builtin_popcount(vec.size()) == 1);
+    vector<int> rev(vec.size());
+    for(int i = 0; i < vec.size(); ++i){
+        rev[i] = rev[i >> 1] >> 1;
+        if(i & 1){
+            rev[i] |= (vec.size() >> 1);
+        }
+    }
+    for(int i = 0; i < vec.size(); ++i){
+        if(i < rev[i]){
+            swap(vec[i], vec[rev[i]]);
+        }
+    }
+}
+// on == 1 时是 DFT，on == -1 时是 IDFT
+template<typename T>
+void fft(vector<complex<T>>& vec, int on){
+    assert(__builtin_popcount(vec.size()) == 1);
+    butterflyDiagram(vec);
+    for(int h = 1; h < vec.size(); h <<= 1){
+        complex<T> wn(cos(M_PI / h), sin(on * M_PI / h));
+        for(int j = 0; j < vec.size(); j += h * 2){
+            complex<T> w(1, 0);
+            for(int k = j; k < j + h; ++k){
+                assert(k < vec.size() and h + k < vec.size());
+                auto u = vec[k];
+                auto t = w * vec[k + h];
+                vec[k] = u + t;
+                vec[k + h] = u - t;
+                w *= wn;
+            }
+        }
+    }
+    if(on == -1){
+        for(auto& it: vec){
+            it.real(it.real() / vec.size());
+        }
+    }
+}
+```
 ## 数据结构
 
 ### 线段树
