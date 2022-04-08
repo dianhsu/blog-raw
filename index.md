@@ -6,7 +6,7 @@ title: 首页 - dianhsu.top
 
 
 <div style="">
-<img src="https://cdn.dianhsu.top/image/takagi2.jpeg" style="border-radius:50%;" width=200px title="my avatar" alt="my avatar" />
+<img src="https://cdn.dianhsu.top/image/takagi.png" style="border-radius:50%;" width=200px title="my avatar" alt="my avatar" />
 </div>
 本博客由<a href="https://shd101wyy.github.io/markdown-preview-enhanced/#/" target="_blank">MPE</a>和<a href="https://github.com/features/actions" target="_blank">GitHub Actions</a>强力驱动。
 
