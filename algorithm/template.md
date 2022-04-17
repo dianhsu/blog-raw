@@ -638,7 +638,72 @@ vector<int> OddFilter() {
     return prime;
 }
 ```
+### 类欧几里得算法
+$$
+    f(N, a, b, c) = \sum_{i = 0}^N \lfloor \frac{a \times i + b}{c} \rfloor \\
+    g(N, a, b, c) = \sum_{i = 0}^N \lfloor \frac{a \times i + b}{c} \rfloor ^2 \\
+    h(N, a, b, c) = \sum_{i = 0}^N i \times \lfloor \frac{a \times i + b}{c} \rfloor
+$$
 
+```cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int MOD = 998244353;
+int qPow(int b, int p){
+    int ret = 1;
+    while(p){
+        if(p & 1) ret = 1ll * ret * b % MOD;
+        b = 1ll * b * b % MOD;
+        p >>= 1;
+    }
+    return ret;
+}
+const int inv2 = qPow(2, MOD - 2);
+const int inv6 = qPow(6, MOD - 2);
+template<typename T>
+tuple<T, T, T> euclidean(T n, T a, T b, T c){
+    T ac = a / c, bc = b / c, m = (a * n + b) / c, n1 = n + 1, n21 = n * 2 + 1;
+    if(a == 0){
+        return {
+            bc * n1 % MOD, 
+            bc * n % MOD * n1 % MOD * inv2 % MOD,
+            bc * bc % MOD * n1 % MOD
+        };
+    }
+    if(a >= c or b >= c){
+        T f = n * n1 % MOD * inv2 % MOD * ac % MOD + bc * n1 % MOD;
+        T g = ac * n % MOD * n1 % MOD * n21 % MOD * inv6 % MOD + bc * n % MOD * n1 % MOD * inv2 % MOD;
+        T h = ac * ac % MOD * n % MOD * n1 % MOD * n21 % MOD * inv6 % MOD + bc * bc % MOD * n1 % MOD + ac * bc % MOD * n % MOD * n1 % MOD;
+        f %= MOD, g %= MOD, h %= MOD;
+        auto [tf, tg, th] = euclidean(n, a % c, b % c, c);
+        h += th + 2 * bc % MOD * tf % MOD + 2 * ac % MOD * tg % MOD;
+        g += tg;
+        f += tf;
+        return {f % MOD, g % MOD, h % MOD};
+    }
+    auto [tf, tg, th] = euclidean(m - 1, c, c - b - 1, a);
+    T f = (n * m % MOD + MOD - tf) % MOD;
+    T g = (n * m % MOD * n1 % MOD + MOD - th + MOD - tf) % MOD * inv2 % MOD;
+    T h = (n * m % MOD * (m + 1) % MOD + 2 * (MOD - tg) + 2 * (MOD - tf) + MOD - f) % MOD;
+    return {f, g, h};
+}
+typedef long long ll;
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        ll n, a, b, c;
+        cin >> n >> a >> b >> c;
+        auto [f, g, h] = euclidean(n, a, b, c);
+        cout << f << " " << h << " " << g << endl;
+    }
+    return 0;
+}
+
+```
 ### 拓展欧几里得
 
 ```cpp
