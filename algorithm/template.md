@@ -1367,6 +1367,74 @@ bool same(const Point& a, const Point& b) {
 }
 
 ```
+
+### 凸包
+
+```cpp
+// 基本数据类型，面积和边长的数据
+template<typename T, typename AFT>
+class Andrew{
+    typedef pair<T, T> PTT;
+    PTT reduce(PTT a, PTT b){
+        return PTT{a.first - b.first, a.second - b.second};
+    }
+    T cross(PTT a, PTT b){
+        return a.first * b.second - a.second * b.first;
+    }
+    T area(PTT a, PTT b, PTT c){
+        return cross(reduce(b , a), reduce(c , a));
+    }
+    AFT dist(PTT a, PTT b){
+        AFT dx = a.first - b.first;
+        AFT dy = a.second - b.second;
+        return sqrt(dx * dx + dy * dy);
+    }
+public:
+    Andrew()= default;
+    Andrew(const vector<PTT>& argv): vec(argv){}
+    void addPoint(PTT p){
+        vec.push_back(p);
+    }
+    // 边长， 面积， 按节点顺序的边缘节点序列（第一个点和最后一个点是一样的）
+    // 注意：如果考虑凸包上点的数目最少，需要将while循环允许面积等于0
+    tuple<T, T, vector<PTT>> run(){
+        sort(vec.begin(), vec.end());
+        vector<int> st;
+        // vis是用来记录第一遍访问的节点，而不是最终在凸包上面的点
+        vector<bool> vis(vec.size(), false);
+        for(int i = 0; i < vec.size(); ++i){
+            while(st.size() >= 2 and area(vec[*next(st.rbegin(), 1)], vec[*st.rbegin()], vec[i]) < 0){
+                if(area(vec[*next(st.rbegin(), 1)], vec[*st.rbegin()], vec[i]) < 0){
+                    vis[st.back()] = false;
+                }
+                st.pop_back();
+            }
+            st.push_back(i);
+            vis[st.back()] = true;
+        }
+        vis[0] = false;
+        for(int i = (int)vec.size() - 1; i >= 0; --i){
+            if(vis[i]) continue;
+            while(st.size() >= 2 and area(vec[*next(st.rbegin(), 1)], vec[*st.rbegin()], vec[i]) < 0){
+                st.pop_back();
+            }
+            st.push_back(i);
+        }
+        AFT dis = 0;
+        AFT ars = 0;
+        vector<PTT> res;
+        for(auto& it: st) res.push_back(vec[it]);
+        for(int i = 1; i < st.size(); ++i){
+            dis += dist(vec[st[i - 1]], vec[st[i]]);
+            ars += area(vec[0], vec[st[i - 1]], vec[st[i]]);
+        }
+        return {dis, ars, res};
+    }
+private:
+    vector<PTT> vec;
+};
+
+```
 ## 数据结构
 
 ### 线段树
