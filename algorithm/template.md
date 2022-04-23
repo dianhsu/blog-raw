@@ -1332,6 +1332,41 @@ void fft(vector<complex<T>>& vec, int on){
     }
 }
 ```
+## 计算几何
+
+### 极角排序
+
+```cpp
+
+struct Point{
+    ll x, y;
+    Point() = default;
+    Point(int argx, int argy): x(argx), y(argy){}
+    bool up() const{
+        return y > 0 or (y == 0 and x >= 0);
+    }
+};
+ll det(const Point& a, const Point& b) {
+    return a.x * b.y - b.x * a.y;
+}
+ 
+ll dot(const Point& a, const Point& b) {
+    return a.x * b.x + a.y * b.y;
+}
+ 
+bool cmp(const Point& a, const Point& b) {
+    if (a.up() ^ b.up()) return a.up() > b.up();
+    return det(a, b) > 0;
+}
+ 
+bool same(const Point& a, const Point& b) {
+    ll d = det (a, b);
+    if (d > 0) return true;
+    if (d < 0) return false;
+    return dot (a, b) > 0;
+}
+
+```
 ## 数据结构
 
 ### 线段树
