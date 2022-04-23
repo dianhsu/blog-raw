@@ -690,7 +690,7 @@ void tarjan(int cur){
 
 ### 模数(int)
 ```cpp
-class ModNum{
+class MInt{
 public:
     static int selfPow(int base, int p){
         int ret = 1;
@@ -701,76 +701,76 @@ public:
         }
         return ret;
     }
-    ModNum(): val(0) {}
-    ModNum(int tv): val(tv) {}
-    ModNum operator + (const ModNum& arg){ return ModNum((val * 1ll + arg.val) % MOD); }
-    ModNum operator - (const ModNum& arg){ return ModNum((val * 1ll + MOD - arg.val) % MOD); }
-    ModNum operator * (const ModNum& arg){ return ModNum((val * 1ll * arg.val) % MOD); }
-    ModNum operator / (const ModNum& arg){ return ModNum((val * 1ll * selfPow(arg.val, MOD - 2)) % MOD); }
-    ModNum operator + (const int argv){ return ModNum((val * 1ll + argv) % MOD); }
-    ModNum operator - (const int argv){ return ModNum((val * 1ll + MOD - argv) % MOD); }
-    ModNum operator * (const int argv){ return ModNum((val * 1ll * argv) % MOD); }
-    ModNum operator / (const int argv){ return ModNum((val * 1ll * selfPow(argv, MOD - 2)) % MOD); }
-    ModNum& operator += (const ModNum& arg){
+    MInt(): val(0) {}
+    MInt(int tv): val(tv) {}
+    MInt operator + (const MInt& arg){ return MInt((val * 1ll + arg.val) % MOD); }
+    MInt operator - (const MInt& arg){ return MInt((val * 1ll + MOD - arg.val) % MOD); }
+    MInt operator * (const MInt& arg){ return MInt((val * 1ll * arg.val) % MOD); }
+    MInt operator / (const MInt& arg){ return MInt((val * 1ll * selfPow(arg.val, MOD - 2)) % MOD); }
+    MInt operator + (const int argv){ return MInt((val * 1ll + argv) % MOD); }
+    MInt operator - (const int argv){ return MInt((val * 1ll + MOD - argv) % MOD); }
+    MInt operator * (const int argv){ return MInt((val * 1ll * argv) % MOD); }
+    MInt operator / (const int argv){ return MInt((val * 1ll * selfPow(argv, MOD - 2)) % MOD); }
+    MInt& operator += (const MInt& arg){
         this->val = (this->val * 1ll + arg.val) % MOD;
         return *this;
     }
-    ModNum& operator -= (const ModNum& arg){
+    MInt& operator -= (const MInt& arg){
         this->val = (this->val * 1ll + MOD - arg.val) % MOD;
         return *this;
     }
-    ModNum& operator *= (const ModNum& arg){
+    MInt& operator *= (const MInt& arg){
         this->val = (this->val * 1ll * arg.val) % MOD;
         return *this;
     }
-    ModNum& operator /= (const ModNum& arg){
+    MInt& operator /= (const MInt& arg){
         this->val = (this->val * 1ll * selfPow(arg.val, MOD - 2)) % MOD;
         return *this;
     }
-    ModNum& operator += (const int argv){
+    MInt& operator += (const int argv){
         this->val = (this->val * 1ll + argv) % MOD;
         return *this;
     }
-    ModNum& operator -= (const int argv){
+    MInt& operator -= (const int argv){
         this->val = (this->val * 1ll + MOD - argv) % MOD;
         return *this;
     }
-    ModNum& operator *= (const int argv){
+    MInt& operator *= (const int argv){
         this->val = (this->val * 1ll * argv) % MOD;
         return *this;
     }
-    ModNum& operator /= (const int argv){
+    MInt& operator /= (const int argv){
         this->val = (this->val * 1ll * selfPow(argv, MOD - 2)) % MOD;
         return *this;
     }
-    ModNum& operator = (const ModNum& arg){
+    MInt& operator = (const MInt& arg){
         this->val = arg.val % MOD;
         return *this;
     }
-    ModNum& operator = (const int argv){
+    MInt& operator = (const int argv){
         this->val = argv % MOD;
         return *this;
     }
     int get(){
         return this->val;
     }
-    friend ModNum operator + (const int argv, const ModNum& arg){
-        return ModNum((arg.val * 1ll + argv) % MOD);
+    friend MInt operator + (const int argv, const MInt& arg){
+        return MInt((arg.val * 1ll + argv) % MOD);
     }
-    friend ModNum operator - (const int argv, const ModNum& arg){
-        return ModNum((argv * 1ll + MOD - arg.val) % MOD);
+    friend MInt operator - (const int argv, const MInt& arg){
+        return MInt((argv * 1ll + MOD - arg.val) % MOD);
     }
-    friend ModNum operator * (const int argv, const ModNum& arg){
-        return ModNum((arg.val * 1ll * argv) % MOD);
+    friend MInt operator * (const int argv, const MInt& arg){
+        return MInt((arg.val * 1ll * argv) % MOD);
     }
-    friend ModNum operator / (const int argv, const ModNum& arg){
-        return ModNum((argv * 1ll * ModNum::selfPow(arg.val, MOD - 2))% MOD);
+    friend MInt operator / (const int argv, const MInt& arg){
+        return MInt((argv * 1ll * MInt::selfPow(arg.val, MOD - 2))% MOD);
     }
-    friend istream& operator >> (istream& its, ModNum& arg){
+    friend istream& operator >> (istream& its, MInt& arg){
         its >> arg.val;
         return its;
     }
-    friend ostream& operator << (ostream& ots, const ModNum& arg){
+    friend ostream& operator << (ostream& ots, const MInt& arg){
         ots << arg.val;
         return ots;
     }
