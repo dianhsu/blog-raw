@@ -1435,6 +1435,63 @@ private:
 };
 
 ```
+
+### 方阵的三维操作模板
+> 翻转，旋转和转置
+```cpp
+class Rectangle{
+public:
+    typedef pair<int, int> Point;
+    Rectangle(int sx, int sy) : dx({1, 0}), dy({0, 1}), vec({Point{0, 0}, Point{0, sy - 1}, Point{sx - 1, 0}, Point{sx - 1, sy - 1}}){}
+    void mirror(int dr = 1){
+        if(dr == 1){
+            // 沿着x轴翻转
+            swap(vec[0], vec[1]);
+            swap(vec[2], vec[3]);
+        }else{
+            // 沿着y轴翻转
+            swap(vec[0], vec[2]);
+            swap(vec[1], vec[3]);
+        }
+        update();
+    }
+    void transpose(int dr = 1){
+        if(dr == 1){
+            // 沿着y = x 翻转
+            swap(vec[1], vec[2]);
+        }else{
+            // 沿着x + y = n 翻转
+            swap(vec[0], vec[3]);
+        }
+        update();
+    }
+    void rotate(int dr = 1){
+        transpose();
+        if(dr == 1){
+            // 顺时针
+            mirror(1);
+        }else{
+            // 逆时针
+            mirror(0);
+        }
+        update();
+    }
+    Point mapping(Point p){
+        return {vec[0].first + dx.first * p.first + dy.first * p.second, vec[0].second + dx.second * p.first + dy.second * p.second};
+    }
+    Point dx, dy;
+    array<Point, 4> vec;
+private:
+    void update(){
+        int xlim = abs(vec[2].first - vec[0].first) + abs(vec[2].second - vec[0].second);
+        int ylim = abs(vec[1].first - vec[0].first) + abs(vec[1].second - vec[0].second);
+        assert(xlim > 0 and ylim > 0);
+        dx = Point{(vec[2].first - vec[0].first) / xlim, (vec[2].second - vec[0].second) / xlim};
+        dy = Point{(vec[1].first - vec[0].first) / ylim, (vec[1].second - vec[0].second) / ylim};
+    }
+};
+```
+
 ## 数据结构
 
 ### 线段树
