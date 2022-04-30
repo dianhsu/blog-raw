@@ -65,9 +65,9 @@ public:
         std::vector<int> Mp(len, 0);
         int mx = 0, id = 0;
         int maxPos = 0;
-        for (int i = 0; i < len - 1; ++i) {
+        for (int i = 1; i < len - 1; ++i) {
             Mp[i] = mx > i ? std::min(Mp[(id << 1) - i], mx - i) : 1;
-            while (i - Mp[i] >= 0 and i + Mp[i] < (int)Ma.size() and Ma[i + Mp[i]] == Ma[i - Mp[i]]) Mp[i]++;
+            while (Ma[i + Mp[i]] == Ma[i - Mp[i]]) Mp[i]++;
             if (Mp[i] > Mp[maxPos]) {
                 maxPos = i;
             }
