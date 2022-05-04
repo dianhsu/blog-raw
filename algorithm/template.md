@@ -2303,20 +2303,33 @@ int main() {
 ```
 
 ## Tricks
-### Fast Input
+### Fast I/O
 ```cpp
 template<typename T = int>
-inline T fastRead() {
+inline T fRead() {
     T x = 0, w = 1; char c = getchar();
     while (c < '0' || c>'9') { if (c == '-') w = -1; c = getchar(); }
     while (c <= '9' && c >= '0') { x = (x << 1) + (x << 3) + c - '0'; c = getchar(); }
     return w == 1 ? x : -x;
 }
 template<typename T = int>
-inline T read() {
+inline T cRead() {
     T ret;
     cin >> ret;
     return ret;
+}
+template<typename T = int>
+inline void fWrite(T x){
+    if(x < 0){
+        x = -x;
+        putchar('-');
+    }
+    if(x >= 10) fWrite(x / 10);
+    putchar(x % 10 + '0');
+}
+template<typename T = int>
+inline void cWrite(T x){
+    cout << x;
 }
 ```
 ### Y combinator (C++17)
