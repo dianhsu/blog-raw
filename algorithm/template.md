@@ -1203,38 +1203,33 @@ vector<int> LinearReverse(int n, int MOD){
 ### 阶乘逆元（求组合数）
 
 ```cpp
-const int maxn = 200200;
-const int MOD = 1e9 + 7;
-long long divInv[maxn + 1], mulInv[maxn + 1];
-
-ll qPow(ll b, ll k) {
-    if (k == 0) return 1;
-    long long ans = 1;
-    while (k) {
-        if (k & 1) ans = ans * b % MOD;
-        k >>= 1;
-        b = b * b % MOD;
+template<typename T = long long>
+class Combination{
+public:
+    Combination(int n, T p): P(p), div(n + 1, 1), mul(n + 1, 1){
+        for(int i = 1; i <= n; ++i) mul[i] = mul[i - 1] * i % P;
+        div[n] = qPow(mul[n], P - 2);
+        for(int i = n - 1; i > 0; --i) div[i] = div[i + 1] * (i + 1) % P;
     }
-    return ans;
-}
-
-void init() {
-    divInv[0] = 1;
-    mulInv[0] = 1;
-    for (int i = 1; i <= maxn; ++i) {
-        mulInv[i] = (mulInv[i - 1] * i) % MOD;
+    T operator () (int n, int m){
+        if(m < 0) return 0;
+        if(m > n) return 0;
+        return mul[n] * div[m] % P * div[n - m] % P;
     }
-    divInv[maxn] = qPow(mulInv[maxn], MOD - 2) % MOD;
-    for(int i = maxn - 1; i > 0; --i){
-        divInv[i] = divInv[i + 1] * (i + 1) % MOD;
+    
+private:
+    T qPow(T b, T n){
+        T ret = 1;
+        while(n){
+            if(n & 1) ret = ret * b % P;
+            b = b * b % P;
+            n >>= 1;
+        }
+        return ret;
     }
-}
-ll C(int n, int m) {
-    if (m < 0) return 0;
-    if (m > n) return 0;
-    return  mulInv[n] * divInv[m] % MOD * divInv[n - m] % MOD;
-}
-
+    T P;
+    vector<T> div, mul;
+};
 ```
 
 ### 莫比乌斯函数（线性筛）
