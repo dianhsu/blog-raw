@@ -1096,28 +1096,15 @@ T exgcd(T a, T b, T& x, T& y){
 
 ```cpp
 template<typename T>
-class QPow {
-public:
-    /*
-     * @brief 快速幂算法，根据费马小定理
-     * @note 要求p是质数
-     */
-    static T inv(T a, T p) {
-        return step(a, p - 2, p);
+T qPow(T b, T n, T p){
+    T res = 1;
+    while(n){
+        if(n & 1) res = res * b % p;
+        b = b * b % p;
+        n >>= 1;
     }
-
-private:
-    static T step(T a, T n, T p) {
-        T ans = 1;
-        while (n) {
-            if (n & 1)
-                ans = ans % p * a % p;
-            a = a % p * a % p;
-            n >>= 1;
-        }
-        return ans;
-    }
-};
+    return res;
+}
 ```
 
 #### 批量乘法逆元
