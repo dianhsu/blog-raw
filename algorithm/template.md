@@ -1132,33 +1132,16 @@ struct Matrix{
 ### 乘法逆元
 #### 扩展欧几里得算法
 ```cpp
-
 template<typename T>
-class ExGcd {
-public:
-    /*
-     * @brief 拓展欧几里得算法
-     * @note 要求a和p的最大公约数是1
-     */
-    static T inv(T a, T p) {
-        T x, y;
-        if (step(a, p, x, y) != 1) // 无解的情形
-            return -1;
-        return (x % p + p) % p;
+T exgcd(T a, T b, T& x, T& y){
+    if(b == 0){
+        x = 1, y = 0;
+        return a;
     }
-
-private:
-    static T step(T a, T b, T &x, T &y) {
-        if (b == 0) {
-            x = 1, y = 0;
-            return a;
-        }
-        T d = step(b, a % b, y, x);
-        y -= (a / b) * x;
-        return d;
-    }
-};
-
+    T d = exgcd(b, a % b, y, x);
+    y -= (a / b) * x;
+    return d;
+}
 ```
 #### 快速幂算法
 
@@ -1191,7 +1174,7 @@ private:
 #### 批量乘法逆元
 > MOD需要是质数
 ```cpp
-vector<int> LinearReverse(int n, int MOD){
+vector<int> reverse(int n, int MOD){
     std::vector<int> inv(n + 1, 1);
     for (int i = 2; i <= n; ++i) {
         inv[i] = (long long) (MOD - MOD / i) * inv[MOD % i] % MOD;
