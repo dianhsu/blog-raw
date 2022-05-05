@@ -1231,7 +1231,21 @@ private:
     vector<T> div, mul;
 };
 ```
+### 卢卡斯定理
+对于质数$p$，有
+$$
+    \binom{n}{m} \bmod p = \binom{\lfloor n / p \rfloor}{\lfloor m / p \rfloor} \cdot \binom{\lfloor n \bmod p \rfloor}{\lfloor m \bmod p \rfloor} \bmod p 
+$$
+```cpp
 
+template<typename T>
+T lucas(T n, T m, T p, const function<T(T, T)>& C){
+    if(m == 0) return 1;
+    T c = C(n % p, m % p);
+    T res = (c * lucas(n / p, m / p, p, C)) % p;
+    return res;
+}
+```
 ### 莫比乌斯函数（线性筛）
 ```cpp
 template<int N, typename T = int>
