@@ -1015,6 +1015,56 @@ vector<int> SieveOfEuler(int n){
     return ret;
 }
 ```
+### 中国剩余定理 & 扩展中国剩余定理
+```cpp
+template<typename T>
+T exgcd(T a, T b, T& x, T& y){
+    if(b == 0){
+        x = 1, y = 0;
+        return a;
+    }
+    T d = exgcd(b, a % b, y, x);
+    y -= (a / b) * x;
+    return d;
+}
+template<typename T>
+T mul(T b, T n, T p){
+    T ans = 0;
+    while(n){
+        if(n & 1) ans = (ans + b % p) % p;
+        b = (b + b) % p;
+        n >>= 1;
+    }
+    return ans;
+}
+template<typename T>
+T crt(vector<pair<T, T>>& args){
+    T M = 1, ans = 0, x, y;
+    for(auto& it: args) M *= it.first;
+    for(auto& it: args){
+        T b = M / it.first;
+        exgcd(it.first, b, x, y);
+        y = (y % it.first + it.first) % it.first;
+        ans = (ans + mul(mul(it.second, b, M), y, M)) % M;
+    }
+    return ans;
+}
+template<typename T>
+bool excrt(pair<T, T>& res, vector<pair<T, T>>& args){
+    res = args.front();
+    for(int i = 1; i < args.size(); ++i){
+        T c = (args[i].second - res.second % args[i].first + args[i].first) % args[i].first;   
+        T x, y;
+        T v = exgcd(res.first, args[i].first, x, y);
+        if(c % v) return false;
+        x = mul(x, c / v, args[i].first / v);
+        res.second = (res.second + x * res.first);
+        res.first *= args[i].first / v;
+        res.second = (res.second % res.first + res.first) % res.first;
+    }
+    return true;
+}
+```
 ### 矩阵
 >  矩阵模板，搭配模数可以当成矩阵快速幂。
 ```cpp
