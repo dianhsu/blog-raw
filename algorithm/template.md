@@ -1155,13 +1155,50 @@ $$
     \binom{n}{m} \bmod p = \binom{\lfloor n / p \rfloor}{\lfloor m / p \rfloor} \cdot \binom{\lfloor n \bmod p \rfloor}{\lfloor m \bmod p \rfloor} \bmod p 
 $$
 ```cpp
-
 template<typename T>
 T lucas(T n, T m, T p, const function<T(T, T)>& C){
     if(m == 0) return 1;
     T c = C(n % p, m % p);
     T res = (c * lucas(n / p, m / p, p, C)) % p;
     return res;
+}
+```
+### BSGS
+在$a$和$p$互质的情况下，求解
+$$
+    a ^ x \equiv b \bmod p
+$$
+```cpp
+template<typename T>
+T qPow(T b, T n, T p){
+    T ret = 1;
+    while(n){
+        if(n & 1) ret = ret * b % p;
+        b = b * b % p;
+        n >>= 1;
+    }
+    return ret;
+}
+template<typename T>
+T BSGS(T a, T b, T p){
+    map<T, T> mp;
+    T t = (T)sqrt(p) + 1;
+    b %= p;
+    ll tmp = 1;
+    for(int i = 0; i < t; ++i){
+        T tv = b * tmp % p;
+        mp[tv] = i;
+        tmp = (tmp * a) % p;
+    }
+    a = qPow(a, t, p);
+    if(a == 0) return b == 0 ? 1 : -1;
+    for(int i = 0; i <= t; ++i){
+        ll tv = qPow(a, i, p);
+        if(mp.count(tv) and i * t - mp[tv] >= 0){
+            return i * t - mp[tv];
+        }
+    }
+    return -1;
 }
 ```
 ### 莫比乌斯函数（线性筛）
