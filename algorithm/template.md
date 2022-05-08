@@ -1180,7 +1180,7 @@ T qPow(T b, T n, T p){
     return ret;
 }
 template<typename T>
-T BSGS(T a, T b, T p){
+T BSGS(T a, T b, T p, T c = 1){
     map<T, T> mp;
     T t = (T)sqrt(p) + 1;
     b %= p;
@@ -1193,12 +1193,81 @@ T BSGS(T a, T b, T p){
     a = qPow(a, t, p);
     if(a == 0) return b == 0 ? 1 : -1;
     for(int i = 0; i <= t; ++i){
-        ll tv = qPow(a, i, p);
+        ll tv = qPow<T>(a, i, p) * c % p;
         if(mp.count(tv) and i * t - mp[tv] >= 0){
             return i * t - mp[tv];
         }
     }
     return -1;
+}
+```
+### exBSGS
+求解
+$$
+    a ^ x \equiv b \bmod p
+$$
+```cpp
+template<typename T>
+T exgcd(T a, T b, T& x, T& y){
+    if(b == 0){
+        x = 1, y = 0;
+        return a;
+    }
+    T d = exgcd(b, a % b, y, x);
+    y -= (a / b) * x;
+    return d;
+}
+template<typename T>
+T qPow(T b, T n, T p){
+    T ret = 1;
+    while(n){
+        if(n & 1) ret = ret * b % p;
+        b = b * b % p;
+        n >>= 1;
+    }
+    return ret;
+}
+template<typename T>
+T BSGS(T a, T b, T p, T c = 1){
+    map<T, T> mp;
+    T t = (T)sqrt(p) + 1;
+    b %= p;
+    ll tmp = 1;
+    for(int i = 0; i < t; ++i){
+        T tv = b * tmp % p;
+        mp[tv] = i;
+        tmp = (tmp * a) % p;
+    }
+    a = qPow(a, t, p);
+    if(a == 0) return b == 0 ? 1 : -1;
+    for(int i = 0; i <= t; ++i){
+        ll tv = qPow<T>(a, i, p) * c % p;
+        if(mp.count(tv) and i * t - mp[tv] >= 0){
+            return i * t - mp[tv];
+        }
+    }
+    return -1;
+}
+template<typename T>
+T exBSGS(T a, T b, T p){
+    a %= p, b %= p;
+    if(b == 1 or p == 1) return 0;
+    T cnt = 0;
+    T d, ad = 1;
+    T na = 1;
+    while((d = gcd(a, p)) != 1){
+        if(b % d) return -1;
+        ++cnt;
+        b /= d, p /= d;
+        ad = ad * (a / d) % p;
+        if(ad == b) return cnt;
+    }
+    T tx, ty;
+    T dv = exgcd<T>(ad, p, tx, ty);
+    tx = (tx % p + p) % p;
+    T ans = BSGS<T>(a, b * tx % p, p);
+    if(ans >= 0) ans += cnt;
+    return ans;
 }
 ```
 ### 莫比乌斯函数（线性筛）
